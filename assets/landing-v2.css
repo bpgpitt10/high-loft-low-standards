@@ -20,6 +20,9 @@
 .season-toggle,.profile-scope{display:inline-flex!important;padding:3px!important;background:#0d150f!important;border:1px solid #344638!important;border-radius:11px!important;box-shadow:none!important}
 .season-toggle button,.profile-scope button{-webkit-appearance:none!important;appearance:none!important;border:0!important;background:transparent!important;color:var(--muted)!important;font:inherit!important;font-size:11px!important;font-weight:900!important;letter-spacing:.07em!important;text-transform:uppercase!important;padding:7px 11px!important;border-radius:8px!important;cursor:pointer!important;box-shadow:none!important;line-height:1.2!important}
 .season-toggle button.active,.profile-scope button.active{background:var(--lime)!important;color:#0b120e!important}
+/* Future season slot: visible now as disabled preview; becomes a real button when Season 2 data exists. */
+.profile-scope:after{content:'Season 2';display:inline-flex;align-items:center;padding:7px 11px;border-radius:8px;color:#566158;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;line-height:1.2;cursor:not-allowed;order:2}
+.profile-scope button[data-profile-scope="season1"]{order:3}.profile-scope button[data-profile-scope="all"]{order:1}
 .season-ranks[hidden]{display:none}.season-ranks .rank{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}.season-ranks .rank:last-child{border-bottom:0}.season-ranks .rank b{font-size:14px}.season-ranks .rank span{font-size:12px}.season-ranks .rank em{font-style:normal;color:#69766d;font-size:10px;margin-left:5px}
 .event{position:relative}
 .season-chip{display:inline-flex;align-items:center;padding:5px 8px;margin-bottom:12px;border:1px solid #3a4b3e;border-radius:999px;background:#0f1711;color:#82917f;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
