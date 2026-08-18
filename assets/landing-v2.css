@@ -19,12 +19,19 @@
 .season-board-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}.season-board-head h3{margin:0;font-size:23px}
 .season-toggle{display:inline-flex;padding:3px;background:#0d150f;border:1px solid #344638;border-radius:11px}.season-toggle button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;padding:7px 11px;border-radius:8px;cursor:pointer}.season-toggle button.active{background:var(--lime);color:#0b120e}
 .season-ranks[hidden]{display:none}.season-ranks .rank{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}.season-ranks .rank:last-child{border-bottom:0}.season-ranks .rank b{font-size:14px}.season-ranks .rank span{font-size:12px}.season-ranks .rank em{font-style:normal;color:#69766d;font-size:10px;margin-left:5px}
-/* SG fingerprint: zero anchored in the center, negatives left, positives right */
-.fingerprint .bar{height:8px;overflow:visible;background:#202c24;border-radius:5px;position:relative}
-.fingerprint .bar:after{content:'';position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:#69766d;opacity:.8;z-index:3}
-.fingerprint .bar i{position:absolute;top:1px;height:6px;border-radius:4px;background:#7f966c;max-width:50%}
-.fingerprint .bar i.sg-pos{left:50%}
-.fingerprint .bar i.sg-neg{right:50%;background:#8b6f57}
-.fingerprint .bar i.sg-zero{left:50%;width:0!important}
-.fingerprint:before{content:'−  STROKES GAINED  +';grid-column:2/3;color:#647168;font-size:9px;letter-spacing:.09em;text-align:center;margin-bottom:-3px}
+/* Archive season tagging */
+.event{position:relative}
+.season-chip{display:inline-flex;align-items:center;padding:5px 8px;margin-bottom:12px;border:1px solid #3a4b3e;border-radius:999px;background:#0f1711;color:#82917f;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+/* SG fingerprint: one clean row per category; zero is the center line */
+.fingerprint{margin-top:24px;display:grid;grid-template-columns:58px minmax(150px,1fr) 48px;gap:11px 12px;align-items:center;font-size:12px;color:var(--muted)}
+.fingerprint:before{content:none!important;display:none!important}
+.fingerprint>span{grid-column:1;text-align:left}
+.fingerprint>.bar{grid-column:2;height:9px;overflow:visible;background:#202c24;border-radius:5px;position:relative}
+.fingerprint>.bar:after{content:'';position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:#78847b;opacity:.9;z-index:3}
+.fingerprint>.bar i{position:absolute;top:1px;height:7px;border-radius:4px;max-width:50%;margin:0}
+.fingerprint>.bar i.sg-pos{left:50%;background:#7f966c}
+.fingerprint>.bar i.sg-neg{right:50%;background:#8b6f57}
+.fingerprint>.bar i.sg-zero{left:50%;width:0!important}
+.fingerprint>b{grid-column:3;font-size:13px;color:#aeb9b1;text-align:right}
 @media(max-width:820px){.latest-intro{align-items:flex-start;flex-direction:column}.landing-page #latest{padding-top:38px}.season-board-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.fingerprint{grid-template-columns:50px minmax(110px,1fr) 42px;gap:10px 8px}}
