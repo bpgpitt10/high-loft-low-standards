@@ -17,14 +17,17 @@
 .season-story ul{margin:0;padding-left:20px}.season-story li{margin:10px 0;color:#d1d9d3}.season-story li::marker{color:var(--lime)}
 .season-board{padding:22px;background:linear-gradient(160deg,#17231a,#101812)}
 .season-board-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}.season-board-head h3{margin:0;font-size:23px}
-.season-toggle,.profile-scope{display:inline-flex;padding:3px;background:#0d150f;border:1px solid #344638;border-radius:11px}.season-toggle button,.profile-scope button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;padding:7px 11px;border-radius:8px;cursor:pointer}.season-toggle button.active,.profile-scope button.active{background:var(--lime);color:#0b120e}
+.season-toggle,.profile-scope{display:inline-flex!important;padding:3px!important;background:#0d150f!important;border:1px solid #344638!important;border-radius:11px!important;box-shadow:none!important}
+.season-toggle button,.profile-scope button{-webkit-appearance:none!important;appearance:none!important;border:0!important;background:transparent!important;color:var(--muted)!important;font:inherit!important;font-size:11px!important;font-weight:900!important;letter-spacing:.07em!important;text-transform:uppercase!important;padding:7px 11px!important;border-radius:8px!important;cursor:pointer!important;box-shadow:none!important;line-height:1.2!important}
+.season-toggle button.active,.profile-scope button.active{background:var(--lime)!important;color:#0b120e!important}
 .season-ranks[hidden]{display:none}.season-ranks .rank{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}.season-ranks .rank:last-child{border-bottom:0}.season-ranks .rank b{font-size:14px}.season-ranks .rank span{font-size:12px}.season-ranks .rank em{font-style:normal;color:#69766d;font-size:10px;margin-left:5px}
-/* Archive season tagging */
 .event{position:relative}
 .season-chip{display:inline-flex;align-items:center;padding:5px 8px;margin-bottom:12px;border:1px solid #3a4b3e;border-radius:999px;background:#0f1711;color:#82917f;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
-/* Scouting files are lifetime-first. Season filters become richer once another season exists. */
-.scouting-head{align-items:flex-start}.scouting-meta{display:flex;align-items:flex-start;gap:18px;max-width:700px}.scouting-meta .sectionlead{margin:0;max-width:500px;font-size:17px}.profile-scope{flex:0 0 auto;margin-top:2px}
-/* SG fingerprint: flat 3-column flow. Markup repeats label / bar / value, so let CSS auto-place each trio into one row. */
+/* Scouting files are lifetime-first. */
+.scouting-head{align-items:flex-start}.scouting-meta{display:flex;align-items:flex-start;gap:22px;max-width:760px}.scouting-meta .sectionlead{margin:2px 0 0;max-width:500px;font-size:17px}.scope-block{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:7px}.profile-scope{margin:0}.scope-status{font-size:9px;line-height:1.25;color:#748177;text-transform:uppercase;letter-spacing:.07em;font-weight:800;white-space:nowrap}
+/* kill any legacy generated scouting badge/text */
+#players .sectionlead:before,#players .sectionlead:after,#players .eyebrow:after{content:none!important;display:none!important}
+/* SG fingerprint */
 .landing-page .fingerprint{margin-top:24px;display:grid!important;grid-template-columns:58px minmax(0,1fr) 48px!important;grid-auto-flow:row!important;gap:10px 12px!important;align-items:center!important;font-size:12px!important;color:var(--muted)!important}
 .landing-page .fingerprint:before{content:none!important;display:none!important}
 .landing-page .fingerprint>span{grid-column:auto!important;grid-row:auto!important;text-align:left!important;justify-self:start!important;margin:0!important}
