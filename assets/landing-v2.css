@@ -43,5 +43,10 @@
 .landing-page .fingerprint>.bar i.sg-neg{right:50%!important;left:auto!important;background:#8b6f57!important}
 .landing-page .fingerprint>.bar i.sg-zero{left:50%!important;right:auto!important;width:0!important}
 .landing-page .fingerprint>b{grid-column:auto!important;grid-row:auto!important;font-size:13px!important;color:#aeb9b1!important;text-align:right!important;justify-self:end!important;margin:0!important}
+/* Keep the scouting heading intact; let the metadata side compress/stack instead. */
+.scouting-head>div:first-child{flex:0 0 auto;min-width:max-content}
+.scouting-head h2{white-space:nowrap}
+.scouting-meta{flex:1 1 auto;min-width:0;max-width:650px;justify-content:flex-end}
+@media(max-width:1050px){.scouting-head{flex-direction:column}.scouting-meta{max-width:none;justify-content:flex-start}}
 @media(max-width:820px){.latest-intro{align-items:flex-start;flex-direction:column}.landing-page #latest{padding-top:38px}.season-board-head{align-items:flex-start;flex-direction:column}.scouting-head{flex-direction:column}.scouting-meta{flex-direction:column;gap:12px;max-width:none}}
 @media(max-width:520px){.landing-page .fingerprint{grid-template-columns:50px minmax(0,1fr) 42px!important;gap:9px 8px!important}}
