@@ -1,4 +1,5 @@
 /* Season 1 landing page refinements */
+.landing-page main{display:flex;flex-direction:column}
 .landing-page .hero{display:none}
 .landing-page #latest{order:0;padding-top:54px;background:radial-gradient(circle at 86% 0,rgba(182,243,74,.07),transparent 27%),linear-gradient(180deg,#0d1710 0,#0b120e 100%)}
 .landing-page #season{order:1}
