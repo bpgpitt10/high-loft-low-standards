@@ -22,6 +22,12 @@
 /* Archive season tagging */
 .event{position:relative}
 .season-chip{display:inline-flex;align-items:center;padding:5px 8px;margin-bottom:12px;border:1px solid #3a4b3e;border-radius:999px;background:#0f1711;color:#82917f;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+/* Scouting files are lifetime-first. Season filters become live once another season exists. */
+#players .sectionhead>div .eyebrow{font-size:0}
+#players .sectionhead>div .eyebrow:after{content:'Scouting files';font-size:13px}
+#players .sectionlead{font-size:0;max-width:500px}
+#players .sectionlead:before{content:'The numbers change. The tendencies linger. This is the closest thing we have to each player’s golfing DNA.';display:block;font-size:17px;line-height:1.55;color:var(--muted)}
+#players .sectionlead:after{content:'ALL DATA';display:inline-flex;margin-top:14px;padding:7px 11px;border-radius:10px;background:#18231a;border:1px solid #465b49;color:#a9bf91;font-size:10px;font-weight:900;letter-spacing:.09em}
 /* Player cards stay structurally consistent. Dan's distance figures remain in prose, not extra stat boxes. */
 #dan94>.chips:nth-of-type(2){display:none}
 /* SG fingerprint: flat 3-column flow. Markup repeats label / bar / value, so let CSS auto-place each trio into one row. */
