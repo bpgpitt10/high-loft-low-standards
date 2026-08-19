@@ -1,0 +1,164 @@
+name: High Loft automated publisher
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: "Rebuild even if no newly completed tournament exists"
+        required: true
+        type: boolean
+        default: true
+  schedule:
+    - cron: "17 */6 * * *"
+
+concurrency:
+  group: high-loft-automated-publisher
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out High Loft preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: automation-preview
+          path: production
+          fetch-depth: 0
+
+      - name: Check out recap engine
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: main
+          path: engine
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
+
+      - name: Discover High Loft and rebuild deterministic history
+        working-directory: engine
+        run: python src/process_tour.py
+
+      - name: Decide whether AI/site rebuild is needed
+        id: change
+        env:
+          FORCE_REBUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.force_rebuild || false }}
+        run: |
+          LATEST=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          h = json.loads(Path('engine/data/history.json').read_text())
+          print(h['completedEvents'][0]['id'])
+          PY
+          )
+          PREVIOUS=""
+          if [ -f production/.automation/last-published-event.txt ]; then
+            PREVIOUS=$(cat production/.automation/last-published-event.txt)
+          fi
+          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
+          if [ "$FORCE_REBUILD" = "true" ] || [ "$LATEST" != "$PREVIOUS" ]; then
+            echo "rebuild=true" >> "$GITHUB_OUTPUT"
+            echo "Rebuild required: latest=$LATEST previous=$PREVIOUS force=$FORCE_REBUILD"
+          else
+            echo "rebuild=false" >> "$GITHUB_OUTPUT"
+            echo "No newly completed tournament. Nothing to publish."
+          fi
+
+      - name: Require OpenAI API key only when rebuilding
+        if: steps.change.outputs.rebuild == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY is missing from the high-loft-low-standards repository secrets."
+            exit 1
+          fi
+
+      - name: Write rolling League Snapshot and Scouting Files
+        if: steps.change.outputs.rebuild == 'true'
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+        run: python src/write_league_copy.py data/history.json
+
+      - name: Write all tournament recaps with as-of-event history
+        if: steps.change.outputs.rebuild == 'true'
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+        run: python src/write_all_recaps.py
+
+      - name: Render High Loft site
+        if: steps.change.outputs.rebuild == 'true'
+        working-directory: engine
+        run: python src/render_site.py --output site
+
+      - name: Validate generated site before publication
+        if: steps.change.outputs.rebuild == 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('engine')
+          history = json.loads((root / 'data/history.json').read_text())
+          site = root / 'site'
+          assert (site / 'index.html').exists(), 'Missing landing page'
+          latest = int(history['completedEvents'][0]['id'])
+          assert (site / 'recaps' / f'{latest}.html').exists(), 'Missing latest recap'
+          for event in history['completedEvents']:
+              event_id = int(event['id'])
+              assert (site / 'recaps' / f'{event_id}.html').exists(), f'Missing recap {event_id}'
+          assert 59463 not in history['scopes']['all']['eventIds'], 'Best-ball event leaked into player profiles'
+          assert history['defaultScope'] == '10'
+          html = (site / 'index.html').read_text()
+          for required in ('League Snapshot', 'Scouting Files', 'Last 5', 'Last 10', 'Last 20'):
+              assert required in html, required
+          print('HIGH LOFT SITE VALIDATION PASSED')
+          print('Latest completed event:', latest)
+          print('Archive events:', len(history['completedEvents']))
+          print('Profile-eligible events:', len(history['profileEligibleEvents']))
+          PY
+
+      - name: Replace preview site with validated build
+        if: steps.change.outputs.rebuild == 'true'
+        run: |
+          rm -rf production/assets production/recaps production/index.html
+          cp -R engine/site/assets production/assets
+          cp -R engine/site/recaps production/recaps
+          cp engine/site/index.html production/index.html
+          mkdir -p production/.automation
+          printf '%s\n' '${{ steps.change.outputs.latest }}' > production/.automation/last-published-event.txt
+
+      - name: Commit preview publication
+        if: steps.change.outputs.rebuild == 'true'
+        working-directory: production
+        run: |
+          git config user.name "high-loft-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html assets/ recaps/ .automation/
+          if git diff --cached --quiet; then
+            echo "Validated build produced no file changes."
+            exit 0
+          fi
+          git commit -m "Automated High Loft site update for SGT ${{ steps.change.outputs.latest }}"
+          git push origin HEAD:automation-preview
+
+      - name: Summary
+        run: |
+          echo "Latest SGT event: ${{ steps.change.outputs.latest }}"
+          echo "Previously published: ${{ steps.change.outputs.previous }}"
+          echo "Rebuilt: ${{ steps.change.outputs.rebuild }}"
+          echo "Target branch: automation-preview"
