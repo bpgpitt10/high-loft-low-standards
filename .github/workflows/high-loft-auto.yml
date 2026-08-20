@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-publish-preview:
+  build-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -28,9 +28,6 @@ jobs:
           ref: main
           path: production
           fetch-depth: 0
-
-      - name: Reset disposable preview branch from production
-        run: git -C production switch -C automation-preview origin/main
 
       - name: Check out recap engine
         uses: actions/checkout@v4
@@ -63,7 +60,7 @@ jobs:
           print(h['completedEvents'][0]['id'])
           PY
           )
-          PREVIOUS=$(git -C production show origin/automation-preview:.automation/last-published-event.txt 2>/dev/null || true)
+          PREVIOUS=$(git -C production show origin/main:.automation/last-published-event.txt 2>/dev/null || true)
           echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
           echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
           if [ "$FORCE_REBUILD" = "true" ] || [ "$LATEST" != "$PREVIOUS" ]; then
@@ -134,7 +131,6 @@ jobs:
           for required in ('assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"', 'Carnage Board', 'Player by player', 'State of the league'):
               assert required.lower() in recap.lower(), f'Missing recap requirement: {required}'
 
-          # The seven already-published historical pages must remain present in the production baseline.
           historical = [
               'bay-hill.html', 'tpc-sawgrass.html', 'alpine-valley.html', 'tobacco-road-major.html',
               'caledonia.html', 'copperhead-playoff.html', 'sage-valley-championship.html'
@@ -156,7 +152,8 @@ jobs:
           cp engine/site-high-loft/recaps/*.html production/recaps/
           printf '%s\n' '${{ steps.change.outputs.latest }}' > production/.automation/last-published-event.txt
 
-      - name: Commit preview publication
+      - name: Commit production publication
+        id: publish
         if: steps.change.outputs.rebuild == 'true'
         working-directory: production
         run: |
@@ -164,16 +161,99 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add index.html recaps/ .automation/
           if git diff --cached --quiet; then
+            echo "published=false" >> "$GITHUB_OUTPUT"
             echo "Validated build produced no file changes."
             exit 0
           fi
-          git commit -m "Automated High Loft preview for SGT ${{ steps.change.outputs.latest }}"
-          git push --force-with-lease origin HEAD:automation-preview
+          git commit -m "Automated High Loft site update for SGT ${{ steps.change.outputs.latest }}"
+          git push origin HEAD:main
+          echo "published=true" >> "$GITHUB_OUTPUT"
+
+      - name: Post new tournament recap to Discord
+        if: steps.publish.outputs.published == 'true' && steps.change.outputs.latest != steps.change.outputs.previous
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          LATEST: ${{ steps.change.outputs.latest }}
+        working-directory: engine
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not configured; site published successfully and Discord was skipped."
+            exit 0
+          fi
+          sleep 30
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import urllib.request
+          from pathlib import Path
+
+          latest = int(os.environ['LATEST'])
+          webhook = os.environ['DISCORD_WEBHOOK_URL']
+          analysis = json.loads(Path(f'data/analysis/{latest}.json').read_text())
+          copy = json.loads(Path(f'data/copy/{latest}.json').read_text())
+          history = json.loads(Path('data/history.json').read_text())
+          cfg = json.loads(Path('config.json').read_text())
+
+          event = next(e for e in history['completedEvents'] if int(e['id']) == latest)
+          mapped = ((cfg.get('site') or {}).get('recapSlugs') or {}).get(str(latest))
+          slug = mapped or re.sub(r'[^a-z0-9]+', '-', (event.get('tourName') or event.get('name') or f'event-{latest}').lower()).strip('-')
+          recap_url = f'https://bpgpitt10.github.io/high-loft-low-standards/recaps/{slug}.html'
+
+          net = analysis.get('leaderboard', {}).get('net', [])
+          gross = analysis.get('leaderboard', {}).get('gross', [])
+          taglines = {p['name']: p.get('tagline', '') for p in copy.get('players', [])}
+
+          def score(v):
+              if v is None:
+                  return '—'
+              s = str(v)
+              return 'E' if s in {'0', '+0', '-0', 'E'} else s
+
+          champ = net[0] if net else {}
+          gross_winner = gross[0] if gross else {}
+          title = event.get('tourName') or event.get('name') or f'SGT {latest}'
+          teaser = copy.get('latestTournamentTeaser') or copy.get('thirtySeconds') or ''
+
+          summary = (
+              f'🏆 **New High Loft recap is live**\n'
+              f'**{title}**\n{teaser}\n\n'
+              f'**NET:** {champ.get("name", "—")} · {score(champ.get("total"))}\n'
+              f'**GROSS:** {gross_winner.get("name", "—")} · {score(gross_winner.get("total"))}\n\n'
+              f'**Read the full carnage →** {recap_url}'
+          )
+
+          ranking_lines = ['**NET RANKING**']
+          for i, row in enumerate(net, 1):
+              name = row.get('name', '—')
+              roast = taglines.get(name, '').strip()
+              ranking_lines.append(f'**{i}. {name} · {score(row.get("total"))}** — {roast}')
+
+          messages = [summary]
+          current = ranking_lines[0]
+          for line in ranking_lines[1:]:
+              candidate = current + '\n' + line
+              if len(candidate) > 1850:
+                  messages.append(current)
+                  current = '**NET RANKING · CONTINUED**\n' + line
+              else:
+                  current = candidate
+          messages.append(current)
+
+          for message in messages:
+              payload = json.dumps({'content': message}).encode('utf-8')
+              req = urllib.request.Request(webhook, data=payload, headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'})
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  if response.status not in (200, 204):
+                      raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
+          print(f'Posted {len(messages)} Discord message(s) for SGT {latest}.')
+          PY
 
       - name: Summary
         run: |
           echo "Latest SGT event: ${{ steps.change.outputs.latest }}"
-          echo "Previously previewed: ${{ steps.change.outputs.previous }}"
+          echo "Previously published: ${{ steps.change.outputs.previous }}"
           echo "Rebuilt: ${{ steps.change.outputs.rebuild }}"
-          echo "Target branch: automation-preview"
+          echo "Production published: ${{ steps.publish.outputs.published }}"
+          echo "Target branch: main"
           echo "Historical tournament recaps are frozen and not regenerated."
