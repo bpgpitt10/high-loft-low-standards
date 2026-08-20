@@ -1,0 +1,85 @@
+name: Undo last High Loft publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Restore the site to the state before the most recent index/recap publish"
+        required: true
+        type: boolean
+        default: false
+
+concurrency:
+  group: high-loft-site-rollback
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    if: inputs.confirm == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out production
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Identify most recent site publication
+        id: target
+        run: |
+          TARGET=$(git log -1 --format=%H -- index.html recaps/)
+          if [ -z "$TARGET" ]; then
+            echo "No prior site publication commit found."
+            exit 1
+          fi
+          echo "sha=$TARGET" >> "$GITHUB_OUTPUT"
+          echo "Rolling back site publication commit: $TARGET"
+          git show --stat --oneline "$TARGET"
+
+      - name: Preserve current published-event marker
+        id: marker
+        run: |
+          if [ -f .automation/last-published-event.txt ]; then
+            EVENT_ID=$(tr -d '\r\n' < .automation/last-published-event.txt)
+            echo "event_id=$EVENT_ID" >> "$GITHUB_OUTPUT"
+            echo "Preserving handled event marker: $EVENT_ID"
+          else
+            echo "event_id=" >> "$GITHUB_OUTPUT"
+            echo "No published-event marker exists."
+          fi
+
+      - name: Revert site publication
+        env:
+          TARGET: ${{ steps.target.outputs.sha }}
+          EVENT_ID: ${{ steps.marker.outputs.event_id }}
+        run: |
+          git config user.name "high-loft-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git revert --no-edit "$TARGET"
+
+          # Keep the event marked as handled so the scheduler does not immediately
+          # republish the same bad event. A later manual Force rebuild can retry it.
+          if [ -n "$EVENT_ID" ]; then
+            mkdir -p .automation
+            printf '%s\n' "$EVENT_ID" > .automation/last-published-event.txt
+            git add .automation/last-published-event.txt
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+          fi
+
+      - name: Push rollback
+        run: git push origin HEAD:main
+
+      - name: Summary
+        env:
+          TARGET: ${{ steps.target.outputs.sha }}
+          EVENT_ID: ${{ steps.marker.outputs.event_id }}
+        run: |
+          echo "Restored the website to the state before publication commit $TARGET."
+          echo "Published-event marker preserved as: ${EVENT_ID:-none}."
+          echo "Discord was not touched."
+          echo "To regenerate this same event later, manually run High Loft automated publisher with Force rebuild = true."
