@@ -1,0 +1,57 @@
+name: Delete Heckler post
+
+on:
+  workflow_dispatch:
+    inputs:
+      message_url:
+        description: "Discord message link from The Heckler Bot"
+        required: true
+        type: string
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete selected Heckler message
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MESSAGE_URL: ${{ inputs.message_url }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not configured."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import os
+          import re
+          import urllib.error
+          import urllib.request
+
+          webhook = os.environ['DISCORD_WEBHOOK_URL'].rstrip('/')
+          message_url = os.environ['MESSAGE_URL'].strip()
+
+          match = re.search(r'/channels/\d+/\d+/(\d+)(?:\?.*)?$', message_url)
+          if not match:
+              raise RuntimeError('Could not parse a Discord message ID from that link. Use Copy Message Link on the Heckler post.')
+
+          message_id = match.group(1)
+          delete_url = f'{webhook}/messages/{message_id}'
+          request = urllib.request.Request(
+              delete_url,
+              method='DELETE',
+              headers={'User-Agent': 'high-loft-auto-bot'},
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  if response.status not in (200, 204):
+                      raise RuntimeError(f'Discord returned HTTP {response.status}')
+          except urllib.error.HTTPError as exc:
+              if exc.code == 404:
+                  raise RuntimeError('Discord could not find that message for this webhook. Make sure the link is from The Heckler Bot.') from exc
+              raise
+
+          print(f'Deleted Heckler message {message_id}.')
+          PY
