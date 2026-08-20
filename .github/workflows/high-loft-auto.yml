@@ -96,7 +96,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-luna
           LATEST: ${{ steps.change.outputs.latest }}
-        run: python src/write_recap.py "data/analysis/${LATEST}.json" --output "data/copy/${LATEST}.json" --facts-output "data/facts/${LATEST}.json"
+        run: python src/write_high_loft_recap.py "data/analysis/${LATEST}.json" --output "data/copy/${LATEST}.json" --facts-output "data/facts/${LATEST}.json"
 
       - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
