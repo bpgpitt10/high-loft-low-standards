@@ -195,67 +195,42 @@ jobs:
           import json
           import os
           import re
+          import subprocess
           import urllib.request
           from pathlib import Path
 
-          MAX_DISCORD_CHARS = 1900
           latest = int(os.environ['LATEST'])
           webhook = os.environ['DISCORD_WEBHOOK_URL']
-          analysis = json.loads(Path(f'data/analysis/{latest}.json').read_text())
-          copy = json.loads(Path(f'data/copy/{latest}.json').read_text())
           history = json.loads(Path('data/history.json').read_text())
           cfg = json.loads(Path('config.json').read_text())
-
           event = next(e for e in history['completedEvents'] if int(e['id']) == latest)
           mapped = ((cfg.get('site') or {}).get('recapSlugs') or {}).get(str(latest))
           slug = mapped or re.sub(r'[^a-z0-9]+', '-', (event.get('tourName') or event.get('name') or f'event-{latest}').lower()).strip('-')
           recap_url = f'https://bpgpitt10.github.io/high-loft-low-standards/recaps/{slug}.html'
 
-          net = analysis.get('leaderboard', {}).get('net', [])
-          gross = analysis.get('leaderboard', {}).get('gross', [])
-          taglines = {p['name']: p.get('tagline', '') for p in copy.get('players', [])}
+          cmd = [
+              'python', 'src/build_discord_payload.py',
+              f'data/analysis/{latest}.json',
+              f'data/copy/{latest}.json',
+              '--raw', f'data/work/tournaments/{latest}.json',
+              '--recap-url', recap_url,
+              '--output', 'data/discord-payload.json',
+          ]
+          subprocess.run(cmd, check=True)
+          payload = json.loads(Path('data/discord-payload.json').read_text())
+          messages = payload['messages']
 
-          def score(v):
-              if v is None:
-                  return '—'
-              s = str(v)
-              return 'E' if s in {'0', '+0', '-0', 'E'} else s
-
-          champ = net[0] if net else {}
-          gross_winner = gross[0] if gross else {}
-          title = event.get('tourName') or event.get('name') or f'SGT {latest}'
-          teaser = copy.get('latestTournamentTeaser') or copy.get('thirtySeconds') or ''
-
-          header = (
-              f'🏆 **New High Loft recap is live**\n'
-              f'**{title}**\n{teaser}\n\n'
-              f'**NET:** {champ.get("name", "—")} · {score(champ.get("total"))}\n'
-              f'**GROSS:** {gross_winner.get("name", "—")} · {score(gross_winner.get("total"))}\n\n'
-              f'**NET RANKING**'
-          )
-          footer = f'\n\n**Read the full carnage →** {recap_url}'
-
-          message = header
-          included = 0
-          for i, row in enumerate(net, 1):
-              name = row.get('name', '—')
-              roast = taglines.get(name, '').strip()
-              line = f'\n**{i}. {name} · {score(row.get("total"))}** — {roast}'
-              if len(message + line + footer) > MAX_DISCORD_CHARS:
-                  break
-              message += line
-              included += 1
-          message += footer
-
-          if len(message) > MAX_DISCORD_CHARS:
-              raise RuntimeError(f'Discord post exceeded {MAX_DISCORD_CHARS} characters: {len(message)}')
-
-          payload = json.dumps({'content': message}).encode('utf-8')
-          req = urllib.request.Request(webhook, data=payload, headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'})
-          with urllib.request.urlopen(req, timeout=20) as response:
-              if response.status not in (200, 204):
-                  raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
-          print(f'Posted one Discord message for SGT {latest}: {len(message)} chars, {included}/{len(net)} complete roast lines included.')
+          for message in messages:
+              body = json.dumps({'content': message}).encode('utf-8')
+              req = urllib.request.Request(
+                  webhook,
+                  data=body,
+                  headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'},
+              )
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  if response.status not in (200, 204):
+                      raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
+          print(f"Posted {len(messages)} Heckler post(s); character counts={payload.get('characterCounts')}")
           PY
 
       - name: Summary
