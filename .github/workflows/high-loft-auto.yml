@@ -104,7 +104,7 @@ jobs:
       - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
-        run: python src/render_high_loft.py --production-root ../production --output site-high-loft
+        run: python src/render_high_loft_safe.py --production-root ../production --output site-high-loft
 
       - name: Validate High Loft build before publication
         if: steps.change.outputs.rebuild == 'true'
