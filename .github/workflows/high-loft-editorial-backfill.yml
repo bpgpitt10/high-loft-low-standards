@@ -45,7 +45,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-luna
-        run: python src/backfill_high_loft_archive.py --production-root ../production --output site-high-loft-backfill
+        run: python src/backfill_high_loft_archive_safe.py --production-root ../production --output site-high-loft-backfill
 
       - name: Validate backfill before publication
         run: |
