@@ -22,12 +22,15 @@ jobs:
       contents: write
 
     steps:
-      - name: Check out High Loft preview branch
+      - name: Check out current High Loft production site
         uses: actions/checkout@v4
         with:
-          ref: automation-preview
+          ref: main
           path: production
           fetch-depth: 0
+
+      - name: Reset disposable preview branch from production
+        run: git -C production switch -C automation-preview origin/main
 
       - name: Check out recap engine
         uses: actions/checkout@v4
@@ -60,10 +63,7 @@ jobs:
           print(h['completedEvents'][0]['id'])
           PY
           )
-          PREVIOUS=""
-          if [ -f production/.automation/last-published-event.txt ]; then
-            PREVIOUS=$(cat production/.automation/last-published-event.txt)
-          fi
+          PREVIOUS=$(git -C production show origin/automation-preview:.automation/last-published-event.txt 2>/dev/null || true)
           echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
           echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
           if [ "$FORCE_REBUILD" = "true" ] || [ "$LATEST" != "$PREVIOUS" ]; then
@@ -92,20 +92,21 @@ jobs:
           OPENAI_MODEL: gpt-5.6-luna
         run: python src/write_league_copy.py data/history.json
 
-      - name: Write all tournament recaps with as-of-event history
+      - name: Write latest tournament recap with as-of-event history
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-luna
-        run: python src/write_all_recaps.py
+          LATEST: ${{ steps.change.outputs.latest }}
+        run: python src/write_recap.py "data/analysis/${LATEST}.json" --output "data/copy/${LATEST}.json" --facts-output "data/facts/${LATEST}.json"
 
-      - name: Render High Loft site
+      - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
-        run: python src/render_site.py --output site
+        run: python src/render_high_loft.py --production-root ../production --output site-high-loft
 
-      - name: Validate generated site before publication
+      - name: Validate High Loft build before publication
         if: steps.change.outputs.rebuild == 'true'
         run: |
           python - <<'PY'
@@ -113,31 +114,46 @@ jobs:
           from pathlib import Path
 
           root = Path('engine')
+          site = root / 'site-high-loft'
+          production = Path('production')
           history = json.loads((root / 'data/history.json').read_text())
-          site = root / 'site'
-          assert (site / 'index.html').exists(), 'Missing landing page'
           latest = int(history['completedEvents'][0]['id'])
-          assert (site / 'recaps' / f'{latest}.html').exists(), 'Missing latest recap'
-          for event in history['completedEvents']:
-              event_id = int(event['id'])
-              assert (site / 'recaps' / f'{event_id}.html').exists(), f'Missing recap {event_id}'
+
+          assert (site / 'index.html').exists(), 'Missing landing page'
+          recap_files = list((site / 'recaps').glob('*.html'))
+          assert len(recap_files) == 1, f'High Loft renderer must create only the latest recap, got {len(recap_files)}'
           assert 59463 not in history['scopes']['all']['eventIds'], 'Best-ball event leaked into player profiles'
           assert history['defaultScope'] == '10'
-          html = (site / 'index.html').read_text()
-          for required in ('League Snapshot', 'Scouting Files', 'Last 5', 'Last 10', 'Last 20'):
-              assert required in html, required
-          print('HIGH LOFT SITE VALIDATION PASSED')
+          assert len(history['profileEligibleEvents']) == 7
+
+          landing = (site / 'index.html').read_text()
+          for required in ('assets/site.css', 'assets/landing-v2.css', 'League Snapshot', 'Scouting files', 'Last 5', 'Last 10', 'Last 20', 'Tournament archive'):
+              assert required.lower() in landing.lower(), f'Missing landing requirement: {required}'
+
+          recap = recap_files[0].read_text()
+          for required in ('assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"', 'Carnage Board', 'Player by player', 'State of the league'):
+              assert required.lower() in recap.lower(), f'Missing recap requirement: {required}'
+
+          # The seven already-published historical pages must remain present in the production baseline.
+          historical = [
+              'bay-hill.html', 'tpc-sawgrass.html', 'alpine-valley.html', 'tobacco-road-major.html',
+              'caledonia.html', 'copperhead-playoff.html', 'sage-valley-championship.html'
+          ]
+          for filename in historical:
+              assert (production / 'recaps' / filename).exists(), f'Missing frozen historical recap: {filename}'
+
+          print('HIGH LOFT PRODUCTION-DESIGN VALIDATION PASSED')
           print('Latest completed event:', latest)
-          print('Archive events:', len(history['completedEvents']))
+          print('Historical recaps frozen:', len(historical))
           print('Profile-eligible events:', len(history['profileEligibleEvents']))
           PY
 
-      - name: Replace preview site with validated build
+      - name: Apply validated landing page and latest recap only
         if: steps.change.outputs.rebuild == 'true'
         run: |
-          rm -rf production/assets production/recaps production/index.html
-          cp -R engine/site/. production/
-          mkdir -p production/.automation
+          cp engine/site-high-loft/index.html production/index.html
+          mkdir -p production/recaps production/.automation
+          cp engine/site-high-loft/recaps/*.html production/recaps/
           printf '%s\n' '${{ steps.change.outputs.latest }}' > production/.automation/last-published-event.txt
 
       - name: Commit preview publication
@@ -146,17 +162,18 @@ jobs:
         run: |
           git config user.name "high-loft-auto-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -A
+          git add index.html recaps/ .automation/
           if git diff --cached --quiet; then
             echo "Validated build produced no file changes."
             exit 0
           fi
-          git commit -m "Automated High Loft site update for SGT ${{ steps.change.outputs.latest }}"
-          git push origin HEAD:automation-preview
+          git commit -m "Automated High Loft preview for SGT ${{ steps.change.outputs.latest }}"
+          git push --force-with-lease origin HEAD:automation-preview
 
       - name: Summary
         run: |
           echo "Latest SGT event: ${{ steps.change.outputs.latest }}"
-          echo "Previously published: ${{ steps.change.outputs.previous }}"
+          echo "Previously previewed: ${{ steps.change.outputs.previous }}"
           echo "Rebuilt: ${{ steps.change.outputs.rebuild }}"
           echo "Target branch: automation-preview"
+          echo "Historical tournament recaps are frozen and not regenerated."
