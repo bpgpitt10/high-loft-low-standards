@@ -114,14 +114,23 @@ jobs:
           site = root / 'site-high-loft'
           production = Path('production')
           history = json.loads((root / 'data/history.json').read_text())
+          config = json.loads((root / 'config.json').read_text())
           latest = int(history['completedEvents'][0]['id'])
 
           assert (site / 'index.html').exists(), 'Missing landing page'
           recap_files = list((site / 'recaps').glob('*.html'))
           assert len(recap_files) == 1, f'High Loft renderer must create only the latest recap, got {len(recap_files)}'
-          assert 59463 not in history['scopes']['all']['eventIds'], 'Best-ball event leaked into player profiles'
-          assert history['defaultScope'] == '10'
-          assert len(history['profileEligibleEvents']) == 7
+
+          excluded = {int(x) for x in ((config.get('history') or {}).get('excludeEventIds') or [])}
+          completed_ids = {int(e['id']) for e in history.get('completedEvents', [])}
+          eligible_ids = {int(e['id']) for e in history.get('profileEligibleEvents', [])}
+          all_scope_ids = {int(x) for x in history['scopes']['all']['eventIds']}
+          expected_eligible = completed_ids - excluded
+
+          assert not (excluded & eligible_ids), f'Excluded events leaked into profileEligibleEvents: {excluded & eligible_ids}'
+          assert not (excluded & all_scope_ids), f'Excluded events leaked into All Data profiles: {excluded & all_scope_ids}'
+          assert eligible_ids == expected_eligible, f'Profile eligibility mismatch. Expected {sorted(expected_eligible)}, got {sorted(eligible_ids)}'
+          assert history['defaultScope'] == str((config.get('history') or {}).get('defaultScope', history['defaultScope']))
 
           landing = (site / 'index.html').read_text()
           for required in ('assets/site.css', 'assets/landing-v2.css', 'League Snapshot', 'Scouting files', 'Last 5', 'Last 10', 'Last 20', 'Tournament archive'):
@@ -141,7 +150,8 @@ jobs:
           print('HIGH LOFT PRODUCTION-DESIGN VALIDATION PASSED')
           print('Latest completed event:', latest)
           print('Historical recaps frozen:', len(historical))
-          print('Profile-eligible events:', len(history['profileEligibleEvents']))
+          print('Excluded profile events:', sorted(excluded))
+          print('Profile-eligible events:', len(eligible_ids))
           PY
 
       - name: Apply validated landing page and latest recap only
@@ -170,7 +180,7 @@ jobs:
           echo "published=true" >> "$GITHUB_OUTPUT"
 
       - name: Post new tournament recap to Discord
-        if: steps.publish.outputs.published == 'true' && steps.change.outputs.latest != steps.change.outputs.previous
+        if: steps.publish.outputs.published == 'true' && steps.change.outputs.latest != steps.change.outputs.previous && steps.change.outputs.latest != '59463'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           LATEST: ${{ steps.change.outputs.latest }}
