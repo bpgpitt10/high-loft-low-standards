@@ -1,0 +1,157 @@
+name: Correct scratch event 66943
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: high-loft-automated-publisher
+  cancel-in-progress: false
+
+jobs:
+  correct-and-repost:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out current High Loft production site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: production
+          fetch-depth: 0
+
+      - name: Check out current recap engine
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: main
+          path: engine
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
+
+      - name: Rebuild deterministic High Loft history
+        working-directory: engine
+        run: python src/process_tour.py
+
+      - name: Confirm correction target
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          history = json.loads(Path('engine/data/history.json').read_text())
+          latest = int(history['completedEvents'][0]['id'])
+          cfg = json.loads(Path('engine/config.json').read_text())
+          mode = (cfg.get('competitionOverrides') or {}).get(str(latest))
+          assert latest == 66943, f'Expected latest event 66943, got {latest}'
+          assert mode == 'gross', f'Expected 66943 competition override gross, got {mode!r}'
+          print('Confirmed SGT 66943 gross-primary correction')
+          PY
+
+      - name: Require OpenAI API key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY is missing" && exit 1)
+
+      - name: Rewrite rolling league copy
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+        run: python src/write_league_copy.py data/history.json
+
+      - name: Rewrite 66943 as gross-primary scratch recap
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+        run: python src/write_high_loft_recap.py data/analysis/66943.json --output data/copy/66943.json --facts-output data/facts/66943.json
+
+      - name: Render corrected High Loft site
+        working-directory: engine
+        run: python src/render_high_loft_safe.py --production-root ../production --output site-high-loft
+
+      - name: Validate gross-primary correction
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          site = Path('engine/site-high-loft')
+          landing = (site / 'index.html').read_text()
+          recaps = list((site / 'recaps').glob('*.html'))
+          assert len(recaps) == 1, f'Expected one latest recap, got {len(recaps)}'
+          recap = recaps[0].read_text()
+          for text in ('🏆 Gross champion', 'Gross challenger', 'The gross race first.', 'Gross order. Net context.'):
+              assert text in recap, f'Missing corrected scratch-event text: {text}'
+          assert '🏆 Gross champion' in landing, 'Landing page did not switch latest tournament to gross-primary'
+          print('Gross-primary site correction validated')
+          PY
+
+      - name: Publish corrected landing and recap
+        working-directory: production
+        run: |
+          cp ../engine/site-high-loft/index.html index.html
+          mkdir -p recaps .automation
+          cp ../engine/site-high-loft/recaps/*.html recaps/
+          printf '%s\n' '66943' > .automation/last-published-event.txt
+          git config user.name "high-loft-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html recaps/ .automation/
+          if git diff --cached --quiet; then
+            echo "Corrected renderer produced no site changes."
+          else
+            git commit -m "Correct SGT 66943 scratch-event scoring"
+            git push origin HEAD:main
+          fi
+
+      - name: Repost corrected Heckler recap
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        working-directory: engine
+        run: |
+          test -n "$DISCORD_WEBHOOK_URL" || (echo "DISCORD_WEBHOOK_URL is missing" && exit 1)
+          sleep 30
+          python - <<'PY'
+          import json
+          import re
+          import subprocess
+          import urllib.request
+          from pathlib import Path
+
+          latest = 66943
+          webhook = __import__('os').environ['DISCORD_WEBHOOK_URL']
+          history = json.loads(Path('data/history.json').read_text())
+          cfg = json.loads(Path('config.json').read_text())
+          event = next(e for e in history['completedEvents'] if int(e['id']) == latest)
+          mapped = ((cfg.get('site') or {}).get('recapSlugs') or {}).get(str(latest))
+          slug = mapped or re.sub(r'[^a-z0-9]+', '-', (event.get('tourName') or event.get('name') or f'event-{latest}').lower()).strip('-')
+          recap_url = f'https://bpgpitt10.github.io/high-loft-low-standards/recaps/{slug}.html'
+
+          subprocess.run([
+              'python', 'src/build_high_loft_discord_payload.py',
+              'data/analysis/66943.json',
+              'data/copy/66943.json',
+              '--raw', 'data/work/tournaments/66943.json',
+              '--recap-url', recap_url,
+              '--output', 'data/discord-payload.json',
+          ], check=True)
+
+          payload = json.loads(Path('data/discord-payload.json').read_text())
+          for message in payload['messages']:
+              body = json.dumps({'content': message}).encode('utf-8')
+              req = urllib.request.Request(
+                  webhook,
+                  data=body,
+                  headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'},
+              )
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  if response.status not in (200, 204):
+                      raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
+          print(f"Posted {len(payload['messages'])} corrected Heckler post(s)")
+          PY
