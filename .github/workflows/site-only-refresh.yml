@@ -25,58 +25,64 @@ jobs:
           path: production
           fetch-depth: 0
 
-      - name: Check out current recap engine
-        uses: actions/checkout@v4
-        with:
-          repository: bpgpitt10/sgt-recap-engine-lab
-          ref: main
-          path: engine
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Verify current production target
         run: |
           test "$(cat production/.automation/last-published-event.txt)" = "66943" || (echo "Production marker is no longer 66943; refusing one-off refresh" && exit 1)
           test -f production/recaps/par-3-canyon-run-scratch-tournament.html || (echo "Current Canyon recap is missing" && exit 1)
 
-      - name: Apply new presentation layer to current live HTML
-        env:
-          PYTHONPATH: engine/src
+      - name: Open first row and tighten collapsed cards
         run: |
           python - <<'PY'
           import re
           from pathlib import Path
-          import render_high_loft_safe as ui
 
-          index_path = Path('production/index.html')
-          recap_path = Path('production/recaps/par-3-canyon-run-scratch-tournament.html')
+          path = Path('production/recaps/par-3-canyon-run-scratch-tournament.html')
+          html = path.read_text()
 
-          current_index = index_path.read_text()
-          current_recap = recap_path.read_text()
+          css_replacements = {
+              '.hole-card{padding:18px 20px}': '.hole-card{padding:12px 16px}\n.hole-card.is-open{padding:18px 20px}',
+              '.hole-card>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-bottom:0}': '.hole-card>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;margin:6px 0 0}',
+              '.hole-card.is-open>p{display:block;-webkit-line-clamp:unset;overflow:visible}': '.hole-card.is-open>p{display:block;-webkit-line-clamp:unset;overflow:visible;margin-top:12px}',
+              '.recap-players article{padding:18px 20px}': '.recap-players article{padding:12px 16px;min-height:0}\n.recap-players article.is-open{padding:18px 20px}',
+              '.recap-expand{margin-top:12px}': '.recap-players .player-roast{margin-bottom:8px}\n.recap-expand{margin-top:8px}\n.is-open .recap-expand{margin-top:12px}',
+              'padding:9px 12px;font:inherit;font-size:10px': 'padding:8px 11px;font:inherit;font-size:10px',
+          }
+          for old, new in css_replacements.items():
+              if old in html:
+                  html = html.replace(old, new, 1)
 
-          # Derive field size from the already-published leaderboard itself.
-          views = re.findall(r'<div class="leaderboard-view"[^>]*>(.*?)</div></aside>', current_recap, flags=re.S)
-          max_rows = max((v.count('class="metric-row"') for v in views), default=7)
-          analysis_stub = {"leaderboard": {"net": [{}] * max_rows, "gross": [{}] * max_rows}}
+          # Open the first two Carnage cards.
+          carnage_seen = 0
+          def open_carnage(m):
+              global carnage_seen
+              card = m.group(0)
+              if carnage_seen < 2:
+                  card = re.sub(r'<article data-carnage-card class="([^"]*)">', lambda x: f'<article data-carnage-card class="{x.group(1)} is-open">', card, count=1)
+                  card = card.replace('data-carnage-expand aria-expanded="false">Open crime scene <span>+</span>', 'data-carnage-expand aria-expanded="true">Close crime scene <span>−</span>', 1)
+              carnage_seen += 1
+              return card
+          html = re.sub(r'<article data-carnage-card .*?</article>', open_carnage, html, flags=re.S)
 
-          new_index = ui.scalable_landing_layout(current_index)
-          new_recap = ui.scalable_recap_layout(current_recap, analysis_stub)
+          # Open the first two Player-by-Player cards.
+          player_seen = 0
+          def open_player(m):
+              global player_seen
+              card = m.group(0)
+              if player_seen < 2:
+                  card = card.replace('<article data-player-card>', '<article data-player-card class="is-open">', 1)
+                  card = card.replace('<div class="round-details" hidden>', '<div class="round-details">', 1)
+                  card = card.replace('data-player-expand aria-expanded="false">Read full breakdown <span>+</span>', 'data-player-expand aria-expanded="true">Close breakdown <span>−</span>', 1)
+              player_seen += 1
+              return card
+          html = re.sub(r'<article data-player-card.*?</article>', open_player, html, flags=re.S)
 
-          for needle in ('Read scouting file', 'Math.ceil', 'sgScale'):
-              assert needle in new_index, f'Missing landing presentation feature: {needle}'
-          for needle in ('Tournament in 30 seconds', 'Carnage Board', 'Open crime scene', 'Read full breakdown'):
-              assert needle in new_recap, f'Missing recap presentation feature: {needle}'
+          assert html.count('data-player-expand aria-expanded="true"') >= 2
+          assert html.count('data-carnage-expand aria-expanded="true"') >= 2
+          assert '.recap-players article{padding:12px 16px;min-height:0}' in html
+          assert '.hole-card{padding:12px 16px}' in html
 
-          # Preserve the currently published editorial copy exactly.
-          anchor = 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece'
-          assert anchor in new_index and anchor in new_recap
-
-          index_path.write_text(new_index)
-          recap_path.write_text(new_recap)
-          print(f'Applied presentation-only refresh; detected {max_rows} leaderboard rows')
+          path.write_text(html)
+          print('Opened first two Player and Carnage cards; tightened collapsed state')
           PY
 
       - name: Publish presentation-only refresh
@@ -84,11 +90,11 @@ jobs:
         run: |
           git config user.name "high-loft-auto-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add index.html recaps/par-3-canyon-run-scratch-tournament.html
+          git add recaps/par-3-canyon-run-scratch-tournament.html
           if git diff --cached --quiet; then
             echo "No presentation changes to publish."
           else
-            git commit -m "Refresh High Loft presentation layer"
+            git commit -m "Open first recap row and tighten collapsed cards"
             git push origin HEAD:main
           fi
 
@@ -96,4 +102,4 @@ jobs:
         working-directory: production
         run: |
           test "$(cat .automation/last-published-event.txt)" = "66943"
-          echo "Site refreshed. Event marker unchanged; Discord not touched."
+          echo "Current recap refreshed. Event marker unchanged; Discord not touched."
