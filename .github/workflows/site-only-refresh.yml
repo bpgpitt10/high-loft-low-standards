@@ -1,0 +1,102 @@
+name: Site-only presentation refresh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/site-only-refresh.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: high-loft-automated-publisher
+  cancel-in-progress: false
+
+jobs:
+  refresh-presentation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out current production site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: production
+          fetch-depth: 0
+
+      - name: Check out current recap engine
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: main
+          path: engine
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
+
+      - name: Refresh deterministic analysis only
+        working-directory: engine
+        run: python src/process_tour.py
+
+      - name: Verify current event is still 66943
+        run: |
+          test "$(cat production/.automation/last-published-event.txt)" = "66943" || (echo "Production marker is no longer 66943; refusing one-off refresh" && exit 1)
+          test -f engine/data/analysis/66943.json || (echo "Missing refreshed analysis for 66943" && exit 1)
+          test -f production/recaps/par-3-canyon-run-scratch-tournament.html || (echo "Current Canyon recap is missing" && exit 1)
+
+      - name: Apply new presentation layer to current live HTML
+        env:
+          PYTHONPATH: engine/src
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import render_high_loft_safe as ui
+
+          index_path = Path('production/index.html')
+          recap_path = Path('production/recaps/par-3-canyon-run-scratch-tournament.html')
+          analysis = json.loads(Path('engine/data/analysis/66943.json').read_text())
+
+          current_index = index_path.read_text()
+          current_recap = recap_path.read_text()
+
+          new_index = ui.scalable_landing_layout(current_index)
+          new_recap = ui.scalable_recap_layout(current_recap, analysis)
+
+          # Presentation-only sanity checks. Preserve current copy/data while adding the new UI.
+          for needle in ('Read scouting file', 'Math.ceil', 'sgScale'):
+              assert needle in new_index, f'Missing landing presentation feature: {needle}'
+          for needle in ('Tournament in 30 seconds', 'Carnage Board', 'Open crime scene', 'Read full breakdown'):
+              assert needle in new_recap, f'Missing recap presentation feature: {needle}'
+          assert 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece' in new_index
+          assert 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece' in new_recap
+
+          index_path.write_text(new_index)
+          recap_path.write_text(new_recap)
+          print('Applied presentation-only refresh to current homepage and Canyon recap')
+          PY
+
+      - name: Publish presentation-only refresh
+        working-directory: production
+        run: |
+          git config user.name "high-loft-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html recaps/par-3-canyon-run-scratch-tournament.html
+          if git diff --cached --quiet; then
+            echo "No presentation changes to publish."
+          else
+            git commit -m "Refresh High Loft presentation layer"
+            git push origin HEAD:main
+          fi
+
+      - name: Confirm marker unchanged
+        working-directory: production
+        run: |
+          test "$(cat .automation/last-published-event.txt)" = "66943"
+          echo "Site refreshed. Event marker unchanged; Discord not touched."
