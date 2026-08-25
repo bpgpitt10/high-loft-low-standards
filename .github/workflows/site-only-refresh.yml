@@ -37,17 +37,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install engine dependencies
-        run: python -m pip install -r engine/requirements.txt
-
-      - name: Refresh deterministic analysis only
-        working-directory: engine
-        run: python src/process_tour.py
-
-      - name: Verify current event is still 66943
+      - name: Verify current production target
         run: |
           test "$(cat production/.automation/last-published-event.txt)" = "66943" || (echo "Production marker is no longer 66943; refusing one-off refresh" && exit 1)
-          test -f engine/data/analysis/66943.json || (echo "Missing refreshed analysis for 66943" && exit 1)
           test -f production/recaps/par-3-canyon-run-scratch-tournament.html || (echo "Current Canyon recap is missing" && exit 1)
 
       - name: Apply new presentation layer to current live HTML
@@ -55,31 +47,36 @@ jobs:
           PYTHONPATH: engine/src
         run: |
           python - <<'PY'
-          import json
+          import re
           from pathlib import Path
           import render_high_loft_safe as ui
 
           index_path = Path('production/index.html')
           recap_path = Path('production/recaps/par-3-canyon-run-scratch-tournament.html')
-          analysis = json.loads(Path('engine/data/analysis/66943.json').read_text())
 
           current_index = index_path.read_text()
           current_recap = recap_path.read_text()
 
-          new_index = ui.scalable_landing_layout(current_index)
-          new_recap = ui.scalable_recap_layout(current_recap, analysis)
+          # Derive field size from the already-published leaderboard itself.
+          views = re.findall(r'<div class="leaderboard-view"[^>]*>(.*?)</div></aside>', current_recap, flags=re.S)
+          max_rows = max((v.count('class="metric-row"') for v in views), default=7)
+          analysis_stub = {"leaderboard": {"net": [{}] * max_rows, "gross": [{}] * max_rows}}
 
-          # Presentation-only sanity checks. Preserve current copy/data while adding the new UI.
+          new_index = ui.scalable_landing_layout(current_index)
+          new_recap = ui.scalable_recap_layout(current_recap, analysis_stub)
+
           for needle in ('Read scouting file', 'Math.ceil', 'sgScale'):
               assert needle in new_index, f'Missing landing presentation feature: {needle}'
           for needle in ('Tournament in 30 seconds', 'Carnage Board', 'Open crime scene', 'Read full breakdown'):
               assert needle in new_recap, f'Missing recap presentation feature: {needle}'
-          assert 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece' in new_index
-          assert 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece' in new_recap
+
+          # Preserve the currently published editorial copy exactly.
+          anchor = 'KeithK75 wins scratch while IUDoc92 turns a +9 gross round into a net masterpiece'
+          assert anchor in new_index and anchor in new_recap
 
           index_path.write_text(new_index)
           recap_path.write_text(new_recap)
-          print('Applied presentation-only refresh to current homepage and Canyon recap')
+          print(f'Applied presentation-only refresh; detected {max_rows} leaderboard rows')
           PY
 
       - name: Publish presentation-only refresh
