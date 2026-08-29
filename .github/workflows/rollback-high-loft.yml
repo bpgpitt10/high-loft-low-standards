@@ -1,21 +1,17 @@
-name: Undo last High Loft publish
+name: Restore Canyon Run production history
 
 on:
-  workflow_dispatch:
-    inputs:
-      confirm:
-        description: "Restore the site to the state before the most recent index/recap publish"
-        required: true
-        type: boolean
-        default: false
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/rollback-high-loft.yml"
 
 concurrency:
   group: high-loft-site-rollback
   cancel-in-progress: false
 
 jobs:
-  rollback:
-    if: inputs.confirm == true
+  restore:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,59 +23,30 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Identify most recent site publication
-        id: target
-        run: |
-          TARGET=$(git log -1 --format=%H -- index.html recaps/)
-          if [ -z "$TARGET" ]; then
-            echo "No prior site publication commit found."
-            exit 1
-          fi
-          echo "sha=$TARGET" >> "$GITHUB_OUTPUT"
-          echo "Rolling back site publication commit: $TARGET"
-          git show --stat --oneline "$TARGET"
-
-      - name: Preserve current published-event marker
-        id: marker
-        run: |
-          if [ -f .automation/last-published-event.txt ]; then
-            EVENT_ID=$(tr -d '\r\n' < .automation/last-published-event.txt)
-            echo "event_id=$EVENT_ID" >> "$GITHUB_OUTPUT"
-            echo "Preserving handled event marker: $EVENT_ID"
-          else
-            echo "event_id=" >> "$GITHUB_OUTPUT"
-            echo "No published-event marker exists."
-          fi
-
-      - name: Revert site publication
-        env:
-          TARGET: ${{ steps.target.outputs.sha }}
-          EVENT_ID: ${{ steps.marker.outputs.event_id }}
+      - name: Restore last known-good Canyon Run landing page
         run: |
           git config user.name "high-loft-auto-bot"
           git config user.email "actions@users.noreply.github.com"
-          git revert --no-edit "$TARGET"
 
-          # Keep the event marked as handled so the scheduler does not immediately
-          # republish the same bad event. A later manual Force rebuild can retry it.
-          if [ -n "$EVENT_ID" ]; then
-            mkdir -p .automation
-            printf '%s\n' "$EVENT_ID" > .automation/last-published-event.txt
-            git add .automation/last-published-event.txt
-            if ! git diff --cached --quiet; then
-              git commit --amend --no-edit
-            fi
+          # 66609cde is the last verified production state with SGT 66943
+          # present as the Aug 20 latest tournament and in rolling history.
+          git show 66609cde033e4517b359cc32e5dae729fb5dfcf3:index.html > index.html
+          mkdir -p .automation
+          printf '%s\n' '66943' > .automation/last-published-event.txt
+
+          grep -q 'Par 3 Canyon Run Scratch Tournament' index.html
+          grep -q '"id": 66943' index.html
+          test -f recaps/par-3-canyon-run-scratch-tournament.html
+
+          git add index.html .automation/last-published-event.txt
+          if git diff --cached --quiet; then
+            echo "Production already matches the Canyon Run build."
+            exit 0
           fi
-
-      - name: Push rollback
-        run: git push origin HEAD:main
+          git commit -m "Restore Canyon Run as latest completed tournament"
+          git push origin HEAD:main
 
       - name: Summary
-        env:
-          TARGET: ${{ steps.target.outputs.sha }}
-          EVENT_ID: ${{ steps.marker.outputs.event_id }}
         run: |
-          echo "Restored the website to the state before publication commit $TARGET."
-          echo "Published-event marker preserved as: ${EVENT_ID:-none}."
-          echo "Discord was not touched."
-          echo "To regenerate this same event later, manually run High Loft automated publisher with Force rebuild = true."
+          echo "Canyon Run (SGT 66943) restored to Latest, archive, and rolling player history."
+          echo "Published-event marker restored to 66943."
