@@ -142,7 +142,8 @@ jobs:
 
           historical = [
               'bay-hill.html', 'tpc-sawgrass.html', 'alpine-valley.html', 'tobacco-road-major.html',
-              'caledonia.html', 'copperhead-playoff.html', 'sage-valley-championship.html'
+              'caledonia.html', 'copperhead-playoff.html', 'sage-valley-championship.html',
+              'par-3-canyon-run-scratch-tournament.html'
           ]
           for filename in historical:
               assert (production / 'recaps' / filename).exists(), f'Missing frozen historical recap: {filename}'
