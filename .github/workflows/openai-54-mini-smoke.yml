@@ -1,6 +1,6 @@
 name: GPT-5.4 mini smoke test
 
-# Isolated API availability test. Does not build or publish the website.
+# Isolated integration test. Does not build, publish, or post to Discord.
 on:
   workflow_dispatch:
   push:
@@ -11,29 +11,40 @@ on:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     permissions:
       contents: read
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: gpt-5.4-mini-2026-03-17
+      OPENAI_FALLBACK_MODEL: gpt-5.6-luna
+      OPENAI_TRANSIENT_ATTEMPTS: "6"
+      OPENAI_REQUEST_TIMEOUT_SECONDS: "120"
+
     steps:
+      - name: Check out current recap engine
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: main
+          path: engine
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install OpenAI SDK
-        run: python -m pip install "openai>=2.0.0,<3.0.0"
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
 
       - name: Require existing OpenAI API key
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           if [ -z "$OPENAI_API_KEY" ]; then
             echo "OPENAI_API_KEY is missing from repository secrets."
             exit 1
           fi
 
-      - name: Call pinned GPT-5.4 mini once
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Tiny structured-output availability call
         run: |
           python - <<'PY'
           import json
@@ -49,34 +60,65 @@ jobs:
               },
               "required": ["ok", "message"],
           }
-
           client = OpenAI(timeout=60.0, max_retries=0)
           response = client.responses.create(
               model=model,
               reasoning={"effort": "low"},
               instructions="Return the requested JSON only. This is an API availability smoke test.",
               input="Set ok=true and message='High Loft GPT-5.4 mini smoke test passed'.",
-              text={
-                  "format": {
-                      "type": "json_schema",
-                      "name": "high_loft_smoke_test",
-                      "schema": schema,
-                      "strict": True,
-                  }
-              },
+              text={"format": {"type": "json_schema", "name": "high_loft_smoke_test", "schema": schema, "strict": True}},
           )
-
-          if not response.output_text:
-              raise RuntimeError("GPT-5.4 mini returned no output_text")
           payload = json.loads(response.output_text)
-          if payload.get("ok") is not True:
-              raise RuntimeError(f"Unexpected structured result: {payload}")
-
+          assert payload.get("ok") is True, payload
           print("GPT-5.4 MINI API SMOKE TEST PASSED")
-          print("Model requested:", model)
           print("Response model:", getattr(response, "model", None))
-          print("Structured result:", json.dumps(payload))
-          usage = getattr(response, "usage", None)
-          if usage is not None:
-              print("Usage:", usage)
+          print("Usage:", getattr(response, "usage", None))
           PY
+
+      - name: Rebuild deterministic High Loft history
+        working-directory: engine
+        run: python src/process_tour.py
+
+      - name: Run real latest recap writer without publishing
+        working-directory: engine
+        run: |
+          LATEST=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          h = json.loads(Path('data/history.json').read_text())
+          print(h['completedEvents'][0]['id'])
+          PY
+          )
+          echo "Testing latest completed event: $LATEST"
+          python src/run_resilient_high_loft_recap.py "data/analysis/${LATEST}.json" \
+            --output /tmp/high-loft-recap.json \
+            --facts-output /tmp/high-loft-facts.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          copy = json.loads(Path('/tmp/high-loft-recap.json').read_text())
+          print('Validated recap players:', len(copy['players']))
+          print('Validated Carnage entries:', len(copy['carnage']))
+          print('Teaser:', copy['latestTournamentTeaser'])
+          PY
+
+      - name: Run real league-copy writer without publishing
+        working-directory: engine
+        run: |
+          python src/run_resilient_league_copy.py data/history.json \
+            --output /tmp/high-loft-league-copy.json \
+            --facts-output /tmp/high-loft-league-facts.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          copy = json.loads(Path('/tmp/high-loft-league-copy.json').read_text())
+          print('Validated league scopes:', copy['availableScopes'])
+          for scope_name, scope in copy['scopes'].items():
+              print(scope_name, 'profiles=', len(scope['profiles']))
+          PY
+
+      - name: Integration test summary
+        run: |
+          echo "GPT-5.4 mini primary writer test passed."
+          echo "Emergency fallback is configured as gpt-5.6-luna."
+          echo "No production files were written by this workflow."
