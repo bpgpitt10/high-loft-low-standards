@@ -1,0 +1,81 @@
+name: GPT-5.4 mini smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/openai-54-mini-smoke.yml"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install OpenAI SDK
+        run: python -m pip install "openai>=2.0.0,<3.0.0"
+
+      - name: Require existing OpenAI API key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY is missing from repository secrets."
+            exit 1
+          fi
+
+      - name: Call pinned GPT-5.4 mini once
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          from openai import OpenAI
+
+          model = "gpt-5.4-mini-2026-03-17"
+          schema = {
+              "type": "object",
+              "additionalProperties": False,
+              "properties": {
+                  "ok": {"type": "boolean"},
+                  "message": {"type": "string"},
+              },
+              "required": ["ok", "message"],
+          }
+
+          client = OpenAI(timeout=60.0, max_retries=0)
+          response = client.responses.create(
+              model=model,
+              reasoning={"effort": "low"},
+              instructions="Return the requested JSON only. This is an API availability smoke test.",
+              input="Set ok=true and message='High Loft GPT-5.4 mini smoke test passed'.",
+              text={
+                  "format": {
+                      "type": "json_schema",
+                      "name": "high_loft_smoke_test",
+                      "schema": schema,
+                      "strict": True,
+                  }
+              },
+          )
+
+          if not response.output_text:
+              raise RuntimeError("GPT-5.4 mini returned no output_text")
+          payload = json.loads(response.output_text)
+          if payload.get("ok") is not True:
+              raise RuntimeError(f"Unexpected structured result: {payload}")
+
+          print("GPT-5.4 MINI API SMOKE TEST PASSED")
+          print("Model requested:", model)
+          print("Response model:", getattr(response, "model", None))
+          print("Structured result:", json.dumps(payload))
+          usage = getattr(response, "usage", None)
+          if usage is not None:
+              print("Usage:", usage)
+          PY
