@@ -1,12 +1,8 @@
 name: GPT-5.4 mini smoke test
 
-# Isolated integration test. Does not build, publish, or post to Discord.
+# Isolated manual integration test. Does not build, publish, or post to Discord.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/openai-54-mini-smoke.yml"
 
 jobs:
   smoke:
