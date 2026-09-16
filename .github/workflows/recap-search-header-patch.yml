@@ -1,0 +1,34 @@
+name: One-time published recap search header patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/recap-search-header-patch.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Patch existing recap pages
+        run: python tools/patch_recap_search_headers.py
+      - name: Validate recap search headers
+        run: |
+          python -m py_compile tools/patch_recap_search_headers.py
+          grep -R -q 'data-carnage-search' recaps
+          grep -R -q 'data-round-player-search' recaps
+          grep -R -q 'recap-header-search-runtime' recaps
+      - name: Publish recap UI update
+        run: |
+          git config user.name "high-loft-ui-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add recaps/
+          git commit -m "Add player search to tournament recap sections"
+          git push origin HEAD:main
