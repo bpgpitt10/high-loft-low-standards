@@ -1,4 +1,4 @@
-# Trigger one-time archive patch against current scalable UI
+# One-time archive patch against current scalable UI
 name: One-time archive progressive reveal patch
 
 on:
@@ -26,33 +26,15 @@ jobs:
           s = p.read_text()
           old = "  const ARCHIVE_INITIAL=24;\n  const SEASON_BOARD_VISIBLE=15;\n  let profileVisible=PROFILE_PAGE_SIZE;\n  let archiveExpanded=false;"
           new = "  const ARCHIVE_INITIAL=6;\n  const ARCHIVE_PAGE_SIZE=10;\n  const SEASON_BOARD_VISIBLE=15;\n  let profileVisible=PROFILE_PAGE_SIZE;\n  let archiveVisible=ARCHIVE_INITIAL;"
-          if old not in s:
-              raise SystemExit('Current archive constants/state target not found')
+          if old not in s: raise SystemExit('Current archive constants/state target not found')
           s = s.replace(old, new, 1)
-
-          old = """    const total=cards.length;
-    const large=total>ARCHIVE_INITIAL;
-    footer.hidden=!large;
-    cards.forEach((card,i)=>card.hidden=large&&!archiveExpanded&&i>=ARCHIVE_INITIAL);
-    if(large)button.textContent=archiveExpanded?'Show fewer tournaments':`Show older tournaments · ${total-ARCHIVE_INITIAL} more`;"""
-          new = """    const total=cards.length;
-    const large=total>ARCHIVE_INITIAL;
-    const visible=Math.min(archiveVisible,total);
-    cards.forEach((card,i)=>card.hidden=large&&i>=visible);
-    const remaining=Math.max(0,total-visible);
-    footer.hidden=!large||remaining===0;
-    if(remaining>0){
-      const step=Math.min(ARCHIVE_PAGE_SIZE,remaining);
-      button.textContent='Show '+step+' more tournament'+(step===1?'':'s')+' · '+remaining+' remaining';
-    }"""
-          if old not in s:
-              raise SystemExit('Current archive body target not found')
+          old = "    const total=cards.length;\n    const large=total>ARCHIVE_INITIAL;\n    footer.hidden=!large;\n    cards.forEach((card,i)=>card.hidden=large&&!archiveExpanded&&i>=ARCHIVE_INITIAL);\n    if(large)button.textContent=archiveExpanded?'Show fewer tournaments':`Show older tournaments · ${total-ARCHIVE_INITIAL} more`;"
+          new = "    const total=cards.length;\n    const large=total>ARCHIVE_INITIAL;\n    const visible=Math.min(archiveVisible,total);\n    cards.forEach((card,i)=>card.hidden=large&&i>=visible);\n    const remaining=Math.max(0,total-visible);\n    footer.hidden=!large||remaining===0;\n    if(remaining>0){\n      const step=Math.min(ARCHIVE_PAGE_SIZE,remaining);\n      button.textContent='Show '+step+' more tournament'+(step===1?'':'s')+' · '+remaining+' remaining';\n    }"
+          if old not in s: raise SystemExit('Current archive body target not found')
           s = s.replace(old, new, 1)
-
           old = "    if(e.target.closest('[data-archive-more]')){archiveExpanded=!archiveExpanded;applyArchive();return;}"
           new = "    if(e.target.closest('[data-archive-more]')){archiveVisible+=ARCHIVE_PAGE_SIZE;applyArchive();return;}"
-          if old not in s:
-              raise SystemExit('Current archive click target not found')
+          if old not in s: raise SystemExit('Current archive click target not found')
           s = s.replace(old, new, 1)
           p.write_text(s)
           PY
