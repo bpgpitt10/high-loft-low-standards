@@ -1,3 +1,4 @@
+# Trigger one-time archive patch
 name: One-time archive progressive reveal patch
 
 on:
