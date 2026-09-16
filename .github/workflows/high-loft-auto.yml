@@ -103,7 +103,34 @@ jobs:
           OPENAI_TRANSIENT_ATTEMPTS: "6"
           OPENAI_REQUEST_TIMEOUT_SECONDS: "120"
           LATEST: ${{ steps.change.outputs.latest }}
-        run: python src/run_resilient_high_loft_recap.py "data/analysis/${LATEST}.json" --output "data/copy/${LATEST}.json" --facts-output "data/facts/${LATEST}.json"
+        run: |
+          python src/run_batched_high_loft_recap.py "data/analysis/${LATEST}.json" \
+            --output "data/copy/${LATEST}.json" \
+            --facts-output "data/facts/${LATEST}.json" \
+            --checkpoint-dir "../production/.automation/ai-checkpoints/recap" \
+            --batch-size 6
+
+      - name: Persist validated recap AI checkpoints
+        if: always() && steps.change.outputs.rebuild == 'true'
+        working-directory: production
+        env:
+          LATEST: ${{ steps.change.outputs.latest }}
+        run: |
+          CHECKPOINT_DIR=".automation/ai-checkpoints/recap/$LATEST"
+          if [ ! -d "$CHECKPOINT_DIR" ]; then
+            echo "No validated recap checkpoints to persist."
+            exit 0
+          fi
+          git config user.name "high-loft-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "$CHECKPOINT_DIR"
+          if git diff --cached --quiet; then
+            echo "No new recap checkpoints to persist."
+            exit 0
+          fi
+          git commit -m "Checkpoint AI recap generation for SGT $LATEST"
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
@@ -176,6 +203,7 @@ jobs:
           cp engine/site-high-loft/index.html production/index.html
           mkdir -p production/recaps production/.automation
           cp engine/site-high-loft/recaps/*.html production/recaps/
+          rm -rf "production/.automation/ai-checkpoints/recap/${{ steps.change.outputs.latest }}"
           printf '%s\n' '${{ steps.change.outputs.latest }}' > production/.automation/last-published-event.txt
 
       - name: Commit production publication
@@ -257,6 +285,7 @@ jobs:
           echo "Production published: ${{ steps.publish.outputs.published }}"
           echo "Primary AI model: gpt-5.4-mini-2026-03-17"
           echo "Emergency fallback: gpt-5.6-luna"
+          echo "Recap AI: resumable validated batches of 6 with persisted checkpoints"
           echo "Renderer: scalable large-field UI"
           echo "Target branch: main"
           echo "Historical tournament recaps are frozen and not regenerated."
