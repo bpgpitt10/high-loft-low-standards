@@ -1,0 +1,34 @@
+name: One-time scouting header search homepage patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/scouting-header-search-patch.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Patch homepage
+        run: python tools/patch_scouting_header_search.py
+      - name: Validate homepage
+        run: |
+          grep -q 'class="player-search scouting-player-search"' index.html
+          grep -q 'placeholder="Search player…"' index.html
+          ! grep -q '<span>Find a player</span>' index.html
+          ! grep -q 'The numbers change. The tendencies linger.' index.html
+      - name: Publish homepage UI update
+        run: |
+          git config user.name "high-loft-ui-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Move scouting search into section header"
+          git push origin HEAD:main
