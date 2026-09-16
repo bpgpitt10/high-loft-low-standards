@@ -1,3 +1,4 @@
+# retry with real-input validation
 name: One-time published recap search header patch
 
 on:
@@ -22,13 +23,13 @@ jobs:
       - name: Validate recap search headers
         run: |
           python -m py_compile tools/patch_recap_search_headers.py
-          grep -R -q 'data-carnage-search' recaps
-          grep -R -q 'data-round-player-search' recaps
+          grep -R -q '<input[^>]*data-carnage-search' recaps
+          grep -R -q '<input[^>]*data-round-player-search' recaps
           grep -R -q 'recap-header-search-runtime' recaps
       - name: Publish recap UI update
         run: |
           git config user.name "high-loft-ui-bot"
           git config user.email "actions@users.noreply.github.com"
           git add recaps/
-          git commit -m "Add player search to tournament recap sections"
+          git commit -m "Move player search into tournament section headers"
           git push origin HEAD:main
