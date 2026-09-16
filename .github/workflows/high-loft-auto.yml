@@ -108,7 +108,7 @@ jobs:
       - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
-        run: python src/render_high_loft_safe.py --production-root ../production --output site-high-loft
+        run: python src/render_high_loft_large_field.py --production-root ../production --output site-high-loft
 
       - name: Validate High Loft build before publication
         if: steps.change.outputs.rebuild == 'true'
@@ -140,11 +140,19 @@ jobs:
           assert history['defaultScope'] == str((config.get('history') or {}).get('defaultScope', history['defaultScope']))
 
           landing = (site / 'index.html').read_text()
-          for required in ('assets/site.css', 'assets/landing-v2.css', 'League Snapshot', 'Scouting files', 'Last 5', 'Last 10', 'Last 20', 'Tournament archive'):
+          for required in (
+              'assets/site.css', 'assets/landing-v2.css', 'League Snapshot', 'Scouting files',
+              'Last 5', 'Last 10', 'Last 20', 'Tournament archive', 'data-profile-search',
+              'data-profile-more', 'data-season-scroll-note', 'data-archive-more'
+          ):
               assert required.lower() in landing.lower(), f'Missing landing requirement: {required}'
 
           recap = recap_files[0].read_text()
-          for required in ('assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"', 'Carnage Board', 'Player by player', 'State of the league'):
+          for required in (
+              'assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"',
+              'Carnage Board', 'Player by player', 'State of the league', 'data-round-player-search',
+              'data-round-player-more', 'data-carnage-more'
+          ):
               assert required.lower() in recap.lower(), f'Missing recap requirement: {required}'
 
           historical = [
@@ -249,5 +257,6 @@ jobs:
           echo "Production published: ${{ steps.publish.outputs.published }}"
           echo "Primary AI model: gpt-5.4-mini-2026-03-17"
           echo "Emergency fallback: gpt-5.6-luna"
+          echo "Renderer: scalable large-field UI"
           echo "Target branch: main"
           echo "Historical tournament recaps are frozen and not regenerated."
