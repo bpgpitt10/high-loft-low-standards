@@ -43,8 +43,12 @@ JS = r'''
 '''
 
 
+def has_search_input(html: str, data_attr: str) -> bool:
+    return bool(re.search(rf'<input[^>]*\b{re.escape(data_attr)}\b', html))
+
+
 def add_header_search(html: str, section_class: str, data_attr: str) -> str:
-    if data_attr in html:
+    if has_search_input(html, data_attr):
         return html
     pattern = re.compile(
         rf'(<section class="section {section_class}"[^>]*><div class="wrap"><div class="sectionhead marked)(">)(.*?)(<p class="sectionlead">.*?</p>)(</div>)',
@@ -80,11 +84,23 @@ def remove_old_directory_rows(html: str) -> str:
     return html
 
 
+def assert_header_clean(html: str, section_class: str, data_attr: str) -> None:
+    assert has_search_input(html, data_attr), f'Missing real {data_attr} input'
+    section = re.search(
+        rf'<section class="section {section_class}".*?(?=<div class="hole-grid"|<div class="recap-players)',
+        html,
+        flags=re.S,
+    )
+    assert section, f'Missing {section_class} header block'
+    assert '<p class="sectionlead">' not in section.group(0), f'Stale right-side tagline in {section_class}'
+
+
 changed = []
 for path in sorted(Path('recaps').glob('*.html')):
     html = path.read_text()
     if 'carnage-section' not in html or 'player-section' not in html:
         continue
+    original = html
     html = remove_old_directory_rows(html)
     html = add_header_search(html, 'carnage-section', 'data-carnage-search')
     html = add_header_search(html, 'player-section', 'data-round-player-search')
@@ -92,18 +108,18 @@ for path in sorted(Path('recaps').glob('*.html')):
         html = html.replace('</head>', CSS + '</head>', 1)
     if 'id="recap-header-search-runtime"' not in html:
         html = html.replace('</body>', JS + '</body>', 1)
-    path.write_text(html)
-    changed.append(path.name)
-
-if not changed:
-    raise SystemExit('No recap pages were patched')
+    if html != original:
+        path.write_text(html)
+        changed.append(path.name)
 
 for path in sorted(Path('recaps').glob('*.html')):
     html = path.read_text()
     if 'carnage-section' not in html or 'player-section' not in html:
         continue
-    assert 'data-carnage-search' in html, path
-    assert 'data-round-player-search' in html, path
+    assert_header_clean(html, 'carnage-section', 'data-carnage-search')
+    assert_header_clean(html, 'player-section', 'data-round-player-search')
     assert html.count('recap-search-head') >= 2, path
 
+if not changed:
+    raise SystemExit('No recap pages needed a patch')
 print(f'Patched {len(changed)} recap pages: ' + ', '.join(changed))
