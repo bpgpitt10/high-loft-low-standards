@@ -34,12 +34,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Render branch preview
-        working-directory: engine
+      - name: Apply large-field layer to current production HTML
         run: |
-          python src/render_high_loft_large_field.py \
-            --production-root ../production \
-            --output ../preview
+          mkdir -p preview/recaps
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('engine/src').resolve()))
+          import render_high_loft_large_field as ui
+
+          index = Path('production/index.html').read_text()
+          recap = Path('production/recaps/week-1-trosper-golf-club.html').read_text()
+          Path('preview/index.html').write_text(ui.large_field_landing(index))
+          Path('preview/recaps/week-1-trosper-golf-club.html').write_text(ui.large_field_recap(recap))
+          print('Applied large-field layer to current production HTML')
+          PY
 
       - name: Static assertions
         run: |
