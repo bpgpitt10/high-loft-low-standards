@@ -1,4 +1,4 @@
-# Trigger one-time archive patch
+# Trigger one-time archive patch against current scalable UI
 name: One-time archive progressive reveal patch
 
 on:
@@ -24,22 +24,35 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text()
-          old = "const PROFILE_PAGE_SIZE=12;\nconst ARCHIVE_INITIAL=24;\nlet profileScope=null, profileLimit=PROFILE_PAGE_SIZE, profileQuery='', archiveExpanded=false;"
-          new = "const PROFILE_PAGE_SIZE=12;\nconst ARCHIVE_INITIAL=6;\nconst ARCHIVE_PAGE_SIZE=10;\nlet profileScope=null, profileLimit=PROFILE_PAGE_SIZE, profileQuery='', archiveLimit=ARCHIVE_INITIAL;"
+          old = "  const ARCHIVE_INITIAL=24;\n  const SEASON_BOARD_VISIBLE=15;\n  let profileVisible=PROFILE_PAGE_SIZE;\n  let archiveExpanded=false;"
+          new = "  const ARCHIVE_INITIAL=6;\n  const ARCHIVE_PAGE_SIZE=10;\n  const SEASON_BOARD_VISIBLE=15;\n  let profileVisible=PROFILE_PAGE_SIZE;\n  let archiveVisible=ARCHIVE_INITIAL;"
           if old not in s:
-              raise SystemExit('Archive constants/state target not found')
+              raise SystemExit('Current archive constants/state target not found')
           s = s.replace(old, new, 1)
 
-          old = "function applyArchive(){const events=[...document.querySelectorAll('#events .event')];const tools=document.querySelector('[data-archive-tools]');const more=document.querySelector('[data-archive-more]');if(!tools||!more)return;const large=events.length>ARCHIVE_INITIAL;tools.hidden=!large;events.forEach((card,i)=>{card.hidden=large&&!archiveExpanded&&i>=ARCHIVE_INITIAL;});more.textContent=archiveExpanded?'Show newest only':`Show older tournaments · ${Math.max(0,events.length-ARCHIVE_INITIAL)} more`; }"
-          new = "function applyArchive(){const events=[...document.querySelectorAll('#events .event')];const tools=document.querySelector('[data-archive-tools]');const more=document.querySelector('[data-archive-more]');if(!tools||!more)return;const large=events.length>ARCHIVE_INITIAL;tools.hidden=!large;const visible=Math.min(archiveLimit,events.length);events.forEach((card,i)=>{card.hidden=large&&i>=visible;});const remaining=Math.max(0,events.length-visible);more.hidden=!large||remaining===0;if(remaining>0){const step=Math.min(ARCHIVE_PAGE_SIZE,remaining);more.textContent=`Show ${step} more tournament${step===1?'':'s'} · ${remaining} remaining`;}}"
+          old = """    const total=cards.length;
+    const large=total>ARCHIVE_INITIAL;
+    footer.hidden=!large;
+    cards.forEach((card,i)=>card.hidden=large&&!archiveExpanded&&i>=ARCHIVE_INITIAL);
+    if(large)button.textContent=archiveExpanded?'Show fewer tournaments':`Show older tournaments · ${total-ARCHIVE_INITIAL} more`;"""
+          new = """    const total=cards.length;
+    const large=total>ARCHIVE_INITIAL;
+    const visible=Math.min(archiveVisible,total);
+    cards.forEach((card,i)=>card.hidden=large&&i>=visible);
+    const remaining=Math.max(0,total-visible);
+    footer.hidden=!large||remaining===0;
+    if(remaining>0){
+      const step=Math.min(ARCHIVE_PAGE_SIZE,remaining);
+      button.textContent='Show '+step+' more tournament'+(step===1?'':'s')+' · '+remaining+' remaining';
+    }"""
           if old not in s:
-              raise SystemExit('Archive applyArchive target not found')
+              raise SystemExit('Current archive body target not found')
           s = s.replace(old, new, 1)
 
-          old = "if(archiveMore){archiveExpanded=!archiveExpanded;applyArchive();if(!archiveExpanded)document.querySelector('#events')?.scrollIntoView({behavior:'smooth',block:'start'});return;}"
-          new = "if(archiveMore){archiveLimit+=ARCHIVE_PAGE_SIZE;applyArchive();return;}"
+          old = "    if(e.target.closest('[data-archive-more]')){archiveExpanded=!archiveExpanded;applyArchive();return;}"
+          new = "    if(e.target.closest('[data-archive-more]')){archiveVisible+=ARCHIVE_PAGE_SIZE;applyArchive();return;}"
           if old not in s:
-              raise SystemExit('Archive click target not found')
+              raise SystemExit('Current archive click target not found')
           s = s.replace(old, new, 1)
           p.write_text(s)
           PY
@@ -47,6 +60,7 @@ jobs:
         run: |
           grep -q 'ARCHIVE_INITIAL=6' index.html
           grep -q 'ARCHIVE_PAGE_SIZE=10' index.html
+          grep -q 'archiveVisible+=ARCHIVE_PAGE_SIZE' index.html
           git config user.name "high-loft-ui-bot"
           git config user.email "actions@users.noreply.github.com"
           git add index.html
