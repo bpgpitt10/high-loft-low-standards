@@ -1,3 +1,4 @@
+# Branch-only validation workflow for scalable recap/landing UI.
 name: Large-field UI branch test
 
 on:
@@ -78,7 +79,6 @@ jobs:
             el.dispatchEvent(new window.Event(type, {bubbles:true}));
           }
 
-          // Landing page: current data already has >12 scouting profiles.
           const landingHtml = fs.readFileSync('preview/index.html','utf8');
           const landing = new JSDOM(landingHtml,{runScripts:'outside-only',url:'https://example.test/'});
           evalInline(landing);
@@ -93,7 +93,6 @@ jobs:
             fire(landing.window, search, 'input');
             if (visible(cards).length !== 1) throw new Error(`Profile search expected one result, got ${visible(cards).length}`);
 
-            // Recap page: inflate the current nine-player field to 45 before scripts execute.
             const recapHtml = fs.readFileSync('preview/recaps/week-1-trosper-golf-club.html','utf8');
             const recap = new JSDOM(recapHtml,{runScripts:'outside-only',url:'https://example.test/recap'});
             const rd = recap.window.document;
