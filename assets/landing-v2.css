@@ -60,3 +60,6 @@
 @media(max-width:1050px){.scouting-head{flex-direction:column}.scouting-meta{max-width:none;justify-content:flex-start}}
 @media(max-width:820px){.latest-intro{align-items:flex-start;flex-direction:column}.landing-page #latest{padding-top:38px}.season-board-head{align-items:flex-start;flex-direction:column}.scouting-head{flex-direction:column}.scouting-meta{flex-direction:column;gap:12px;max-width:none}.landing-page .scouting-card .chips{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 @media(max-width:520px){.landing-page .fingerprint{grid-template-columns:50px minmax(0,1fr) 42px!important;gap:9px 8px!important}.landing-page .scouting-card{padding:20px!important}.landing-page .scouting-card .chips{grid-template-columns:repeat(2,1fr)!important}}
+
+/* Mobile scouting search: flex-basis must not become vertical height. */
+@media(max-width:820px){.scouting-head .scouting-player-search{flex:0 0 auto!important;width:100%!important;max-width:none!important;min-width:0!important;align-self:stretch}.scouting-meta{width:100%}}
