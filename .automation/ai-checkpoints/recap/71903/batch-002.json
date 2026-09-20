@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 71903,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "1c5e5ae3cd2b1abe2e2c13a1c48be801ff228a6bc44395daff133ae4ab1e6f6e",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Jakobm90",
+        "commentary": "This one turned into a full-blown yard-sale of a par 3, with the ball living in the rough like it rented the place. The upside was the short game actually showed up enough to keep the number from becoming a full nine-alarm disaster."
+      },
+      {
+        "name": "Leroy4522",
+        "commentary": "That’s a brutal little bogey machine: rough, rough, fairway, green, done. When the rescue shot is the only thing resembling a plan, you’re already negotiating with the hole instead of beating it."
+      },
+      {
+        "name": "IUDoc92",
+        "commentary": "A bogey hole built on the kind of putting that makes everybody stare at the cup like it owes them money. Two whacks from long range just to get to the neighborhood, then another couple to finally stop the bleeding."
+      },
+      {
+        "name": "MashedBROtato",
+        "commentary": "This one was death by a thousand tiny misses, the classic rough-and-rerough hostage situation. The putt finally went in, but not before the hole made him earn every stupid inch of it."
+      }
+    ],
+    "players": [
+      {
+        "name": "MashedBROtato",
+        "tagline": "The irons showed up, the tee ball filed a complaint, and the putter mostly kept the peace.",
+        "body": "A weirdly survivable round for a guy who spent way too much of it playing from the weeds. MashedBROtato’s approach play was the only thing keeping this from turning into a total clown show, and the score managed to stay in the event picture because he at least didn’t completely surrender on the greens. The problem was obvious: the driver was a disaster, the short game didn’t exactly stage a rescue mission, and the card had enough blowups to make the good stretches feel borrowed. He’s still posting mixed bags in this league—strong enough around the flag to matter, but volatile enough off the tee to keep the ceiling from opening up."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "The tee ball kept walking into traffic and the rest of the bag showed up with a shrug.",
+        "body": "This was a grindy, messy loop where nothing from tee to green wanted to cooperate and the putter was left trying to mop up the mess. Leroy4522’s scoring was held together far more by putts than by anything upstream, which is usually a warning label, not a foundation. The worst of it lived in the long-game collapse: repeated misses off the tee, flat approach play, and enough short-game leakage to make every bogey feel earned. Over the full run of recent starts, this is still the same profile—plenty of damage outside the scoring clubs, with just enough scrambling and putting to keep it from becoming a total implosion."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "A pile of fairways and somehow still a full-on bogey parade. Brutal efficiency.",
+        "body": "This was a classic case of the scorecard refusing to reward the obvious stuff. IUDoc92 hit enough fairways to make the round look civilized for a minute, but the rest of the bag spent the day turning decent starts into extra strokes, especially when the putter turned into a local crime scene with four three-putts. The ball-striking was better in flashes than the number suggests, but the combination of mediocre proximity, leaky short game, and the long-range putting pain never let the round breathe. The history here is pretty loud: he’s been volatile for a while, and this looked like the same old mixed bag with the worst parts showing up at the wrong time."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "The driver and irons were out back starting fires while the short game tried to sandbag the damage.",
+        "body": "Jakobm90’s round was the kind of catastrophe that starts early, gets worse fast, and never really finds the brakes. The ball-striking was the problem all day: tee shots wandered, approaches were a mess, and the round spent way too much time being patched together from rough and junk. The one encouraging thing is that the short game at least showed a pulse, which kept the damage from becoming even more absurd, but that’s like complimenting the life raft after the ship is already gone. With only one prior eligible start, this is still just the latest ugly chapter rather than a trend you can build a whole theory on."
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 71903,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "14a9f75ade5f9cb291fce45d2467e608b101201e30481a64ddf97da090456908",
+  "payload": {
+    "carnage": [
+      {
+        "name": "derekldavis",
+        "commentary": "This was a full-on loop of bad contact and worse recovery. The kind of hole where the ball keeps finding new ways to stay in play just long enough to hurt your feelings again."
+      },
+      {
+        "name": "Dan94",
+        "commentary": "He turned a par 5 into a seven with one long detour through deep rough, then spent the rest of the hole trying to negotiate with gravity. That’s not a miss; that’s a hostage situation."
+      },
+      {
+        "name": "BigTime",
+        "commentary": "The opener was all sideways traffic and half-hearted escape attempts. Nothing says “good start” like needing multiple putts after you’ve already spent the hole standing in the rough like it owes you money."
+      },
+      {
+        "name": "tnboles77",
+        "commentary": "The damage started with a miss that never really left the neighborhood, and the putter couldn’t fully bail it out. Not a disaster, just a reminder that even the best rounds still have one stupid little tax."
+      },
+      {
+        "name": "MattF",
+        "commentary": "This was a tidy miss that didn’t need to become a circus, but the hole still collected its fee. You can survive one crooked tee shot; the game gets bitchy when the second act is also rough."
+      },
+      {
+        "name": "KeithK75",
+        "commentary": "This one was more annoyance than catastrophe: solid position, decent look, and then a couple putts to nowhere. The hole never got wild, just stubborn enough to steal a stroke anyway."
+      }
+    ],
+    "players": [
+      {
+        "name": "tnboles77",
+        "tagline": "The only guy who can keep a round alive while the tee game files for bankruptcy.",
+        "body": "He won the NET race by seven, and the gross card still looked plenty rude at first glance: the tee game leaked, but everything else showed up dressed for work. The story is the short game and putting rescue act — 4.27 SGT around the greens and 3.4 on the greens, which is how you patch over a tee-to-green day that wasn’t exactly sparkling. He still popped off a clean stretch with the birdie looks on 3, 7, and 11, and even the worst hole was just a bogey-ish mess instead of a collapse. Last time out he was already hanging around the front, so this is less a fluke than a player who keeps dragging ugly tee days across the finish line with his hands."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "Hit it so well the only real crime was letting one hole turn into a stupid science project.",
+        "body": "He was the gross winner and still finished second in NET, which is what happens when the ball-striking is basically bullying the course but one hole decides to act personal. The underlying stuff was filthy: approach play was the engine, tee-to-green was massive, and the card had enough birdies and an eagle to make the one seven on 3 feel more like an interruption than a theme. That hole was the mess — deep rough, more deep rough, then a long rescue just to get back to the surface. With nine starts of this in the bank, the profile is sturdy: this is a dude who usually wins by hitting irons like he’s got a grudge."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "The irons were cooking; the putter showed up with a cease-and-desist.",
+        "body": "He landed third in NET and basically rode approach play like a stolen motorcycle. The raw number that matters most is the approach SGT: 9.02, which was doing the heavy lifting while the putter tried to turn every good week into a negotiation. Three putts showed up like unwanted guests, and the opener was the perfect preview — plenty of recovery golf, a decent look, then way too many putts to finish the job. This isn’t a mystery round; it’s a classic split personality. Over two prior starts the profile was already volatile, and this one just confirmed he can absolutely flush irons while the flatstick acts like it’s on strike."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "The round was solid, then the putter got cute and started borrowing strokes.",
+        "body": "He finished right behind the front-runners in both competitions because almost everything was doing its job. The tee-to-green number was strong, the approach work was sharp, and short game SGT was especially loud — this was the kind of round built on keeping ugly moments from becoming disasters. The only real sin was the occasional missed conversion, which kept it from sniffing the top spot even though the gross side was good enough to hang near the front. With nine prior starts, this fits the longer pattern: dependable tee-to-green, plenty of playable rounds, and just enough putting noise to keep him from making the thing boring."
+      },
+      {
+        "name": "MattF",
+        "tagline": "A bunch of good swings wearing a fake mustache over the one part that kept flaking out.",
+        "body": "He finished fifth in NET and third gross, which is pretty much the signature of a round that had real meat on it but also a couple of self-inflicted bruises. The ball-striking was more than good enough to matter — strong approach work, plenty of birdie looks, and even two eagles on the card — but the putting checked in with a minus sign and started stealing the shine. The worst-hole note was mild compared to the upside, which is kind of the problem: he had enough quality to score, and just enough leaks to make the score look busier than it needed to. With only one prior start, the takeaway is simple: there’s obviously firepower here, but the putter is still deciding whether it’s a teammate or a saboteur."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "This round tried to qualify as golf and mostly failed the background check.",
+        "body": "He ended up last in NET and the gross card was a bloodbath, which matches the SGT profile: tee-to-green got absolutely cooked, and the short game didn’t do nearly enough damage control to save it. There were a couple of brief bright spots — a birdie here, a little recovery there — but the round was defined by repeated misses, extra swings, and the kind of holes that keep adding strokes like they’re on commission. The nightmare on 15 was the cleanest summary: concrete, rough, green, rough, repeat, then finally a putt just to stop the bleeding. With no prior profile, this is just the raw scan: one round, one giant pile of evidence that the driver and the wedges both need a meeting."
+      }
+    ]
+  }
+}
