@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "batchSize": 6,
+  "windowCount": 2,
+  "newBatches": 6,
+  "reusedBatches": 0,
+  "windows": [
+    {
+      "windowKey": "window-10-767a8cdada4d",
+      "scopes": [
+        "all",
+        "10",
+        "20"
+      ],
+      "eventIds": [
+        71903,
+        70248,
+        66943,
+        56937,
+        55704,
+        54741,
+        53622,
+        52877,
+        51974,
+        50704
+      ],
+      "players": 15,
+      "batchCount": 3,
+      "reusedBatches": 0,
+      "newBatches": 3,
+      "complete": true
+    },
+    {
+      "windowKey": "window-5-b640629241c9",
+      "scopes": [
+        "5"
+      ],
+      "eventIds": [
+        71903,
+        70248,
+        66943,
+        56937,
+        55704
+      ],
+      "players": 13,
+      "batchCount": 3,
+      "reusedBatches": 0,
+      "newBatches": 3,
+      "complete": true
+    }
+  ],
+  "complete": true
+}
