@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-10-102dc9b56f19",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "63aef53b03e12489630f4ccf19c0f546b27194035590058e260e9e9725d6ac9e",
+  "payload": {
+    "profiles": [
+      {
+        "name": "BigTime",
+        "tagline": "APPROACH GOLF WITH A BROKEN Putt Button",
+        "profile": "When the irons are cooking, this dude can bully a card without needing much help from the rest of the bag. The problem is the flatstick keeps showing up like it’s on a lunch break and the tee game occasionally forgets to clock in, so the whole operation gets weird in a hurry. The good news: the ceiling is real, and the short game has bailed him out enough to keep the swing from turning into a full-on crime scene. It’s volatile, but it’s dangerous volatile."
+      },
+      {
+        "name": "DREADFUL",
+        "tagline": "DOUBLE-BOGEY FARM WITH SURPRISE SAND RESCUES",
+        "profile": "This file reads like a guy who can find the hazard from anywhere, then occasionally talk himself out of a total implosion with a little short-game duct tape. The scoring is held together by hope, scraps, and the occasional decent save, because the tee ball and approach play spend a lot of time trying to ruin the day before the putter even gets a vote. There are flashes where the net card looks respectable, but the underlying golf is usually kicking in the door with a crowbar. Messy, loud, and very committed to extra strokes."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "SHORT-GAME SURGERY, LONG-GAME MURDER SCENE",
+        "profile": "This is the kind of player who can look almost functional on the scorecard while the actual golf is on fire in the background. The short game has to keep performing emergency medicine because the tee ball and approach work keep dragging the whole thing into the ditch. Every so often the irons show a pulse and the net result gets friendly, but the profile is still a migraine: too many crooked holes, too many big-number opportunities, not enough clean escape routes. It’s survival golf with a bad temper."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "DRIVER WHIFFS, SHORT GAME SWINGS A GUN",
+        "profile": "The identity here is pretty simple: the long game can get absolutely mugged, and then the scrambling game shows up like it’s trying to win the fight alone. There’s enough pop to make you think the tee ball might behave, then the approach numbers wander off and leave the whole round looking like a brawl in a gravel lot. The recent file has some genuine upside, but it’s the kind that comes wrapped in chaos and way too many bogeys. A talented mess, basically."
+      },
+      {
+        "name": "MashedBROtato",
+        "tagline": "ONE PART BIRDIE, TWO PARTS SELF-OWN",
+        "profile": "This bag has enough firepower to make you lean in, then enough dumb chaos to make you sit back down. The occasional eagle and the odd hot stretch show there’s a legit scoring pulse in there, but the ball-striking keeps taking random vacations and the short game doesn’t always clean up the mess. Put simply, this is the golf version of a guy who hits one gorgeous shot, then immediately files a complaint with the turf. When it’s on, it’s nasty; when it’s off, it’s a full buffet of bogeys and double bogeys."
+      },
+      {
+        "name": "graycrum",
+        "tagline": "SCRAMBLE FIRST, ASK QUESTIONS NEVER",
+        "profile": "Two starts isn’t a huge file, but the shape is already pretty obvious: when the short game shows up, this player can keep the round from going sideways even if the long game is being annoying. The irons are still the part of the machine that looks most likely to blow a gasket, so the whole profile is a little split-brained and not exactly trustworthy yet. There’s enough save-the-butt golf here to suggest something useful, but it needs a lot more evidence before anybody starts framing it."
+      }
+    ]
+  }
+}

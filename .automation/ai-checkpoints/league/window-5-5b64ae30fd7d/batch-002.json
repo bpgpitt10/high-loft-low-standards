@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-5-5b64ae30fd7d",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "0f23184ae6d2190bafc17d01f7008155e2f28d0bf5556f2cda299610a9367ef2",
+  "payload": {
+    "profiles": [
+      {
+        "name": "DREADFUL",
+        "tagline": "PUTTING ON A GAS MASK",
+        "profile": "This one’s a full-body equipment failure with a couple of weirdly useful patches. The long game keeps leaking oil, the wedges are basically a hate crime, and the flatstick hasn’t exactly shown up to save the day either. Still, there’s enough ball-striking and short-game whiplash here to avoid calling it dead flat doom after just two looks. The profile is volatile: one day it’s a survivable mess, the next day the scorecard looks like it fell down a stairwell."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "MASSIVE APPROACH, CHAOTIC AFTERCARE",
+        "profile": "The irons can absolutely throw a dart, but the rest of the bag keeps leaving fingerprints on the crime scene. There’s a real pattern here: approach play gives this guy a chance, then the tee ball and short game show up dressed like saboteurs. On his good windows he can hang around the top end of the sheet, but the bad stuff gets loud fast and the double-bogey bleed is never far away. It’s playable golf with a side order of self-inflicted drama."
+      },
+      {
+        "name": "CRANK",
+        "tagline": "TEE BALL FOR SALE, IRONS FOR RENT",
+        "profile": "The first look says this bag is built like a prank: the driver is a disaster, but the irons were doing enough to keep the whole thing from flatlining. One round is not a gospel, but the shape is already obvious—wreck the tee shot, then try to punch a lunch-ticket approach back into the frame. That’s not a plan so much as a hostage negotiation. If the driver ever joins the meeting, this gets interesting real fast."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "HIT IT A MILE, FIND THE MEDIC",
+        "profile": "This is the classic big-reach, big-bill setup: plenty of ceiling off the tee, but the card keeps getting mugged by the iron play. There’s enough short-game rescue talent to occasionally fake competence, which is why the good rounds can look sneaky respectable before the wheels come off again. The volatile part is obvious: when the driver and approach numbers both go sideways, the whole operation turns into a range session with scorekeeping. Still, there’s enough pop here to keep the ceiling annoying."
+      },
+      {
+        "name": "MashedBROtato",
+        "tagline": "BROKEN DRIVER, MILDLY ANGRY PUTTER",
+        "profile": "This file is a full buffet of almost-helpful golf and then some absolutely rotten timing. The scoring has enough juice to sneak a decent gross look now and then, but the tee ball and approach work keep wandering into traffic and setting the whole round on fire. There’s some rescue ability, some birdie flicker, and just enough chaos to make the card feel like it’s arguing with itself. When this goes sideways, it does it with enthusiasm."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "FAIRWAYS? THOSE ARE A RUMOR",
+        "profile": "This is brick-boot golf: the tee ball is dragging the whole operation behind the shed, and the rest of the bag isn’t doing enough CPR to matter. The short game has been getting hammered, which is a rough way to live when the approach play is already starting from a ditch. There’s no mystery here—when the driver is this ugly, the scorecard stops being a scorecard and starts becoming evidence. The only consistent thing is how quickly this thing goes off the rails."
+      }
+    ]
+  }
+}

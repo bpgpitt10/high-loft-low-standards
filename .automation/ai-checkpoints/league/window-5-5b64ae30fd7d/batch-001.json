@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-5-5b64ae30fd7d",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "3305ce2161522620edc23a1392e659e302edddfd22df62a5ed1818053a5e425e",
+  "payload": {
+    "profiles": [
+      {
+        "name": "MattF",
+        "tagline": "PUTTER WITH A DRIVER LICENSE",
+        "profile": "This is a guy whose scoring gear runs through the flatstick, and when it’s on, the rest of the bag can just stop complaining. The tee ball is plenty loud, but the real damage comes when the putter starts cashing checks and the approach play is good enough to keep him inside the ropes. There’s a little chaos baked in — one week he’s clean, the next he’s flirting with the rocks — but the repeated shape is obvious: if he gives himself a fighting number, he can absolutely mug the field."
+      },
+      {
+        "name": "HamSammich",
+        "tagline": "SURVIVED THE PUTTER; BARELY",
+        "profile": "One appearance, and it was a full buffet of golf nonsense. The short game showed up with a spoon, but everything else mostly face-planted, especially the driver and the putter, which is a brutal combo when you’re trying to keep score instead of just hunting lost balls. The card says he can scramble a little, but the larger impression is a round built on survival, double-bogey smoke, and the kind of putting that makes a guy start staring at the grips like they owe him money."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "TEE-TO-GREEN MENACE, PUTTING OPTIONAL",
+        "profile": "This guy keeps showing up as the full-bag hammer: plenty of pop off the tee, a filthy iron game, and enough short-game and putting support to turn good ball-striking into actual damage. Even the ugly round didn’t really change the script; the tee-to-green base is so stupidly strong that the scoring blowups feel more like the price of doing business than a collapse. When he’s even remotely tidy around the greens, he looks like he’s playing a different hole location than everybody else."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "SCRAMBLE OR DIE",
+        "profile": "This profile is a little chaos goblin with a wedge. The long game has spent the whole window wandering around with its shoes untied, but the short game keeps bailing it out just enough to make the card look less embarrassing than the ball-striking deserves. When the putter gets involved, he can steal a round; when it doesn’t, the bogeys and doubles arrive like they’ve got parking validation. Not pretty, but there’s enough rescue work here to keep him annoyingly alive."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "IRONS DOING ALL THE HEAVY LIFTING",
+        "profile": "This is an iron-first assassin who keeps turning pure approach play into absurdly good looks. The tee ball is solid enough, the short game is not a liability, and the putter usually does just enough to avoid wasting the hard work, which is why the gross picture keeps looking nastier than the net one. He can absolutely carry a round when the irons are dialed, but there’s also a little “why are we making this harder?” energy when the scoring still leaves room for cleanup."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "APPROACH GOD, PUTTING CRIME SCENE",
+        "profile": "The ball-striking is real; the putting is the part that keeps kicking the table over. He keeps generating enough approach heat to hang around the front of the board, but the flatstick has a bad habit of turning solid work into a very annoying amount of waste. There’s also some volatility baked in off the tee, which means the whole operation can look better or uglier than it should depending on whether the irons are doing the rescue work that day. Basically: winning numbers trapped in a mildly haunted putter."
+      }
+    ]
+  }
+}
