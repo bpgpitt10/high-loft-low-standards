@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 74009,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "076c5e449dd68510a14ff2f054407edd2d3822085b89777b901c6188388b491c",
+  "payload": {
+    "carnage": [
+      {
+        "name": "KeithK75",
+        "commentary": "Welcome to the three-putt rodeo. He had the green in regulation and still somehow turned it into a full-contact marathon where the ball kept leaving the putter like it owed him money."
+      },
+      {
+        "name": "tnboles77",
+        "commentary": "That was a bunker tour with a side of damage control. Fourteen different ways to be trapped, then the putter added a couple bonus laps just to make sure nobody got comfortable."
+      },
+      {
+        "name": "BigTime",
+        "commentary": "This one was a full hard-reset on the 18th: pinestraw, rough, more rough, then finally some sort of landing zone. That’s not a golf hole, that’s a search warrant."
+      },
+      {
+        "name": "Jakobm90",
+        "commentary": "The 14th was pure chaos dressed up as a par 3. Once the tee ball missed, the rest was just a slow-motion argument with every bad lie on the property."
+      },
+      {
+        "name": "Dan94",
+        "commentary": "The ugly part here was less one giant blow-up and more a death by a thousand awkward relocations. On 13, the ball kept finding fresh trouble instead of a clean escape hatch."
+      },
+      {
+        "name": "MattF",
+        "commentary": "A bogey on 18 after all that clean work is annoying, but not exactly a crime scene. He still got the ball up there in regulation-like fashion and just failed to cash the easy one."
+      }
+    ],
+    "players": [
+      {
+        "name": "MattF",
+        "tagline": "The putter carried the bag like it had rent due.",
+        "body": "MattF won the net side by hanging around the top of the mess and letting the rest of the field self-destruct a little harder. The raw numbers are loud: 8 fairways, 10 greens, and a hefty SGT total powered mostly by tee work and putting, which is a nice way of saying the driver and flatstick did the adulting while the middle of the bag mostly behaved. The round still had some smoke, especially the opening stretch and that clean finish on 18, but the scoring kept getting ground down into bogeys instead of a real birdie run. Compared with the last couple starts, this looks less volatile than the old wreckage and more like a solid, if slightly clunky, top-end round."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "Approach game showed up; the putter filed an absence request.",
+        "body": "BigTime brought enough tee-to-green juice to win the gross side in a track-meet ugly kind of way, but the putter made damn sure nobody called it easy. The irons were the story, with strong approach SGT carrying a round that was clearly better than the scoreboard grime suggests, while the short game also quietly helped clean up the bad lies. Still, three three-putts is a lot of self-sabotage for a guy who was otherwise hitting the ball well enough to control the round. The stretch from the middle of the card through the 18th showed both sides of it: plenty of useful shots, but enough wobble on the greens to keep the final number from looking like a stroll."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "The short game rescued a round the tee ball tried to bury.",
+        "body": "Jakobm90’s net podium came out of sheer survival golf. The tee numbers were ugly, and the profile says it all: this round was a fight from the jump, with the driver donating too many extra problems and the score being held together by short game work and a few decent saves around the green. That’s the twist here—he wasn’t clean, he was stubborn, and stubborn got him back into the mix. The 14th and 16th show the whole movie: one hole where the trouble kept multiplying, another where the putter and recovery shots had to do all the rescuing. Against his earlier starts, this still looks volatile, but at least the rescue crew showed up."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "Elite ball-striking, with one putting hole that tried to eat the leaderboard.",
+        "body": "KeithK75 was the gross winner because the tee and approach play were straight-up nasty in the good way. He led the pack in the underlying striking work, and the profile backs it up: big tee-to-green SGT, a pile of greens, and a lot of control that made the rest of the field look like they were drafting instructions from a cereal box. The catch is that the net side still got dinged by the kind of scorecard weirdness that makes everyone spit out a laugh, especially the 8th, where a short putt turned into a full-blown geometry experiment. That’s the ongoing Keith experience: the ceiling is high, the raw golf is real, and every so often the putter decides to make the round look possessed."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "Solid tee ball, then the wedges and putter took turns being petty.",
+        "body": "Dan94’s round was respectable on the ball-striking side and annoying everywhere else. The driver was doing enough to keep him in play, the irons were useful, and the SGT picture says he had real tee-to-green value, but the card never turned that into anything clean because the finishing gear kept leaking strokes. One bogey-heavy hole in the middle of the card summed it up: lots of movement, no real breakthrough, just constant little repairs. With ten prior starts, this is a familiar shape now—more evidence of a player who can build a decent round and still find ways to leave money on the table when the scoring clubs get moody."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "Every bunker on the course got a turn in the spotlight.",
+        "body": "tnboles77 spent the day building a round out of sand, rough, and increasingly desperate putts. The tee and approach numbers were basically neutral, which is not enough when the card is bleeding from the short game side and the putter is coughing up four three-putts like it’s trying to help the opposition. He did salvage a little value around the greens, but the bad holes were too sticky to ignore, especially the one where the ball just kept ricocheting from one bad lie to another before finally getting on the green. The recent history says there’s a path to better stuff here, but this one was mostly a reminder that the margins get ugly fast when the bunkers become home base."
+      }
+    ]
+  }
+}
