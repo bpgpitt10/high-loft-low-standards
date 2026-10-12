@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-12-c19f71951aae",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "7c4fbb0de55dec913026ce1cb4ed56ff3e5a4f105bc71f4d3dda652e35974c97",
+  "payload": {
+    "profiles": [
+      {
+        "name": "graycrum",
+        "tagline": "SHORT GAME WITH A SIDE OF CHAOS",
+        "profile": "This dude can absolutely rescue a round with the wedges, then immediately hand the driver a bucket of nonsense and hope nobody notices. The pattern is pretty clear: when the short game is bailing him out, he can hang around, but the approach play is the gremlin in the room. There’s enough tee-to-green juice to suggest real upside, yet the whole thing still feels like a knife fight between his touch and his long-game decision-making. Fun to watch if you enjoy gambling with your own scorecard."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "TEE BALLS INVENTED TO KEEP HIM HUMBLE",
+        "profile": "This file is a full-time argument between the tee shot and literally everything that comes after it. The big swing can show up, but the irons keep wandering off like they’ve got somewhere better to be, and the misses are usually expensive enough to turn a normal hole into a tax audit. He’s survived enough ugly golf to keep posting decent outcomes, which is the weird part. The profile is basically: try not to blink during the approach shot, because that’s where the round usually sets itself on fire."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "SAND WEDGE, MEET LIFE SUPPORT",
+        "profile": "This is emergency-room golf: plenty of traffic off the tee, very little clean contact, and then just enough scrambling chaos to keep the whole thing from flatlining. The long game has been rough enough that the scorecard starts looking like it got mugged, but there’s still enough fight in the scoring clubs to stop it from becoming a total hostage situation. He’s the kind of player who can make par look illegal and bogey look expensive. Not pretty, but there’s at least some stubborn life in there."
+      }
+    ]
+  }
+}

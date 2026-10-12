@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-10-e41bba8cfc97",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "d42251cc183ee1bfd8947faf60be676a579596f0bc08536117912f0506a91078",
+  "payload": {
+    "profiles": [
+      {
+        "name": "derekldavis",
+        "tagline": "LEFT-HAND TURN WITH A SIDE OF CHAOS",
+        "profile": "This is the kind of golf that keeps a scorecard in witness protection: one event he can ping it around enough to survive, the next it’s a full-on donation drive into the weeds. The tee ball has a little bite, but the whole operation still leans hard on not bleeding extra shots when the approach play goes sideways. When he’s cleaner, he can hang in the upper part of the board; when the irons go missing, the round turns into a scavenger hunt for bogeys and worse. Not pretty, but there’s just enough pop to keep the mess interesting."
+      },
+      {
+        "name": "graycrum",
+        "tagline": "SHORT GAME HELD THE BODY BAGS CLOSED",
+        "profile": "One appearance, and it already looks like a guy whose wedges showed up with a broom and a prayer while the irons filed a complaint. The ball can move, the green-hitting was there, and the touch game actually bailed him out a bit, but the whole round still leaked hard enough through approach play to wreck the vibe. He can scramble well enough to avoid a total detonation, which is nice, because the rest of the bag was busy setting money on fire. This is survival golf with a couple of useful tools and one very loud weak spot."
+      },
+      {
+        "name": "TEV_11",
+        "tagline": "APPROACH SHOT WAR CRIMES",
+        "profile": "This bag brought a hammer, then spent the afternoon missing the house. The tee ball had some life and the short game at least didn’t completely quit, but the approach play was so violent it basically turned the round into a hostage situation. When you’re making no birdies and still taking this many extra swings, the math gets ugly fast. There’s enough speed in the driver to imagine a better version of this player, but right now the irons are acting like they’ve got a personal grudge against the flag sticks."
+      }
+    ]
+  }
+}

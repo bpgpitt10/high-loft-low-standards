@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-10-e41bba8cfc97",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "fa4bf6f3d21757fbe010103e36a6ce449d5f08c75601a28529c8bd82e6d4aeae",
+  "payload": {
+    "profiles": [
+      {
+        "name": "MattF",
+        "tagline": "PUTTER’S LITTLE CRIME WAVE",
+        "profile": "MattF keeps showing the same annoying thing for everyone else: if the ball is anywhere near the hole, the round can get mugged. The long game is steady enough, but the real story is a guy who can survive ordinary ball-striking and then absolutely bully a score with the flat stick and just enough short-game cleanup. There’s some wobble in the tee-to-green stuff, but the scoring has teeth. When the putts are falling, the rest of the card gets to act like it was part of the plan all along."
+      },
+      {
+        "name": "CRANK",
+        "tagline": "SHORT GAME IN A KNIFE FIGHT",
+        "profile": "CRANK is basically a rolling emergency room: the tee game keeps showing up with a concussion, and somehow the short game keeps dragging the body across the finish line. That’s the identity here — ugly off the tee, messy from distance, but stubborn enough around the greens to keep turning disasters into results. The profile is volatile as hell, which is part of the charm and part of the pain. If he ever stops playing survival golf for a minute, the whole file changes fast."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "BOMBS, BIRDIES, AND THE OCCASIONAL TRAIN WRECK",
+        "profile": "Dan94 is the kind of golfer who can bully a course and still leave the back door open for a little drama. The tee game is loud, the approach work is filthy, and when the putter cooperates this thing looks way too easy. But there’s enough self-inflicted weirdness in the card — especially the rounds where the scoring gets shaggy — that it never feels fully civilized. He’s got the best kind of problem: the engine is ridiculous, and the only real question is whether the round gets to stay on the rails long enough to cash it in."
+      },
+      {
+        "name": "HamSammich",
+        "tagline": "MISERY WITH A PUTTING PATCH",
+        "profile": "HamSammich is a full-contact negotiation between bad ball-striking and just enough putting to keep the cops away. The putter is the one club that keeps paying rent, but the rest of the bag spends way too much time setting fire to that goodwill. There’s enough short-game life in here to occasionally fake respectability, yet the whole thing still lives close to double-bogey weather. This is not tidy golf; it’s scrape, claw, and hope the scorecard doesn’t file a complaint."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "CAN HE HIT THE THING? YES. CAN HE MISS IT LOUD? ALSO YES.",
+        "profile": "KeithK75 lives in that beautiful/annoying lane where the ceiling is absurd and the floor still has a trapdoor. The ball-striking can absolutely bully a course, and when the driver and irons are locked, the rounds look like somebody stole the manual from the rest of the field. But the file also has enough volatility baked in that you never get to relax — a little loose here, a little chaos there, and suddenly the card looks less like a masterpiece and more like a bar tab with rangefinder data. Still, the upside is real and loud."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "THREE-PUTT COUNTRY, WITH OCCASIONAL WEATHER EVENTS",
+        "profile": "BigTime is a brutal little museum of what happens when the tee ball and approach game keep trading the lead while the short game and putting light the place on fire. There’s enough raw distance and some decent ball-striking pop to hint at something better, but the scoring keeps getting kneecapped by the ugly stuff around the greens and on the greens. It’s the same joke every time: drive it, hit it, then donate strokes like it’s a charity drive. When the cleanup work is merely average, the whole card looks way less cursed."
+      }
+    ]
+  }
+}
