@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 76248,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "7d7cb761b49abedd96bcb0c440a53bbbd22aec8d76b9ee689ce70fa652cdfa36",
+  "payload": {
+    "carnage": [
+      {
+        "name": "tnboles77",
+        "commentary": "Ten on a par 3 is pure anti-golf theater. Somewhere between the opening mess and the final wrecking ball, that hole turned into a public service announcement about why big numbers happen when the putter gets involved in a crime spree."
+      },
+      {
+        "name": "MashedBROtato",
+        "commentary": "Six on a par 3 is a brutal little tax bill. Not a full-blown implosion, just the kind of tidy disaster that says the hole never let him exhale and then politely took another stroke anyway."
+      },
+      {
+        "name": "derekldavis",
+        "commentary": "Six on a par 3 to start the day is how you let the course know you brought none of the sugar and all of the nonsense. Arcadia Bluffs immediately got the memo and kept the receipt."
+      }
+    ],
+    "players": [
+      {
+        "name": "MashedBROtato",
+        "tagline": "The tee ball showed up, the rest of the bag called in sick.",
+        "body": "This was a classic MashedBROtato round: enough ball-striking to keep the corpse from floating, enough short-game leakage to make the score look like it had been attacked with a pipe wrench. He still got home in better net shape than his gross line suggests, but the round was dragged around by the ugly stuff between the tee shot and the putter, not the driver. The one bright spot was the iron work, which at least gave him a few looks and a couple of usable holes, but the price tag was too many bogeys, a double, and the kind of around-the-green pain that turns a decent starting point into a slog. At this point the profile is pretty established: better than the early-round train wrecks, still perfectly capable of making a par 3 feel like a hostile takeover."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "A full-on tee-to-green bar fight with a couple of makeups that never quite mattered.",
+        "body": "derekldavis played the kind of round that makes the scorecard look like it lost a fight with a lawnmower. The approach play and tee-to-green numbers were the big problem, and the lack of birdies meant there was never a counterpunch waiting to soften the damage. He did at least survive with a few notable stress-relief holes later in the round, but the early par-3 scar tissue and a pair of ugly doubles kept this one from ever finding a pulse. After only a couple prior starts, the signal is still cautious, but the shape is clear enough: when the ball-striking goes sideways, the rest of the round doesn’t have the firepower to cover for it."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "Every third hole had a fresh idea and none of them were good.",
+        "body": "tnboles77 still managed to stay near the top of the net pile, but this was a wildly messy version of his game trying to pass as respectable. The short game actually did some work for once and the approach stats were still better than the score would like to admit, yet the putter kept staging little coups with four three-putts and a giant number on the par 3 that blew a hole in the card. That’s the funny part: the better categories weren’t enough because the round kept donating strokes in ugly bursts. With three prior starts, the profile is getting real enough to call volatile-but-dangerous; when the putting goes from helpful to homicidal, the whole operation gets shaky fast."
+      }
+    ]
+  }
+}
