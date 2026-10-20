@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 77745,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "6b321a4a4c5623a5662459991f86b90438191faece71abb92f5d83cf1d6084ee",
+  "payload": {
+    "carnage": [
+      {
+        "name": "MashedBROtato",
+        "commentary": "That’s the kind of opener that makes the scorecard look like it got mugged in the parking lot. An eight on the first hole is a brutal way to introduce yourself, especially when the rest of the round already had enough nonsense queued up behind it."
+      },
+      {
+        "name": "tnboles77",
+        "commentary": "Three-hole disaster class. You can survive a bad swing; it gets a lot harder when the hole starts collecting extra shots like it’s building a ransom note."
+      },
+      {
+        "name": "derekldavis",
+        "commentary": "An eight on a par 5 is always rude, but this one came with bonus pain: the hole still counted against him on net even after the adjustment. That’s not a hiccup, that’s the round letting him know who’s boss."
+      }
+    ],
+    "players": [
+      {
+        "name": "derekldavis",
+        "tagline": "The tee ball was in witness protection and the irons joined the conspiracy.",
+        "body": "This was a familiar kind of mess for derekldavis: decent enough net survival, absolutely feral gross damage. He landed seventh on net and ninth gross, which tells you the round was mostly about staying upright while the card tried to kick his shins in. The long game never got off the couch, and the approach numbers were ugly enough to explain why he kept bailing himself out with the putter more than the rest of the bag wanted. He did scramble a few respectable net birdies on the card, but the three doubles-plus and the pair of late triple-feeling holes meant the damage kept leaking out anyway. His last three starts now look like the same movie with different bad lighting: around the same neighborhood on the net board, with the gross result consistently getting dragged behind the truck."
+      },
+      {
+        "name": "MashedBROtato",
+        "tagline": "The putter showed up, the rest of the bag was busy pretending to be a different golfer.",
+        "body": "MashedBROtato was one of the few dudes who could look at Shaftesbury Glen and say, fine, I’ll bring a little structure to this dumpster fire. Net and gross both came out usable, and the round was actually built on a real pulse: six greens, two sand saves, no three-putts, and a putter that mostly stopped the bleeding instead of starting new fires. The ugly part was front-loaded with that opening eight, because of course it was, but the rest of the card had enough competent chunks to keep it from turning into a total hostage situation. Across a dozen prior starts, this is still basically the same profile: enough tee-and-putter pop to win stretches, but also enough random violence to keep the gross card from ever looking clean for very long."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "The fairways showed up; the approach play apparently took the day off without notice.",
+        "body": "tnboles77 won the battle against the tee box and then immediately lost the paperwork on everything after that. Six fairways sounds civilized, but only two greens and no birdies is how a round turns into a long, dull hostage video: plenty of positioning, not enough finishing. The short game actually tried to rescue him and the putter wasn’t a total disaster, but when you’re missing that many greens, the rest of the scorecard starts looking like a tax audit. The three-hole wreckage early in the round set the tone, and the double-bogey count made sure there was no sneaky escape route. After four prior starts, the mixed profile is pretty clear: he can find enough structure to avoid total collapse, but the irons still decide too many rounds for him."
+      }
+    ]
+  }
+}

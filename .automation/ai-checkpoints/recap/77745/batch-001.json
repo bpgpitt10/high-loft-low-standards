@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 77745,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "5a1ba20f479a58a073615a2f52bb9514edad2c204df908607d83640cfd5fd825",
+  "payload": {
+    "carnage": [
+      {
+        "name": "IUDoc92",
+        "commentary": "That’s a straight-up opening-hole mugging: seven on a par 4 and the card never really stops bleeding after that. The back nine rescue act was real, but starting with a triple is how you volunteer for pain."
+      },
+      {
+        "name": "Leroy4522",
+        "commentary": "Same deal: a seven to start and suddenly the round is chasing you instead of the other way around. He never found the big rebound hole, so the damage just sat there and looked smug."
+      },
+      {
+        "name": "MattF",
+        "commentary": "The third hole bite was ugly enough to matter because it came before the round could settle down. When a par 4 turns into a six that early, the rest of the card spends the day doing damage control."
+      },
+      {
+        "name": "Jakobm90",
+        "commentary": "A seven on the par 5 fifth is the kind of hole that turns a winnable card into a math problem. He had some recovery shots later, but the putter and the penalty-free chaos tax both got paid."
+      },
+      {
+        "name": "KeithK75",
+        "commentary": "Even the winner had one nasty little hiccup: a bogey on the sixth was his worst hole. That’s less “meltdown” and more “briefly reminded the field he’s human.”"
+      },
+      {
+        "name": "Dan94",
+        "commentary": "The first hole cough-up was the only real blemish that stood out, and it still only cost him a bogey. When your worst hole is a five on a par 4, that’s a pretty clean way to keep the wheels on."
+      }
+    ],
+    "players": [
+      {
+        "name": "KeithK75",
+        "tagline": "The putter filed a complaint and still couldn’t dent the card.",
+        "body": "KeithK75 grabbed the net win and the gross win by being the least interested guy in the room in making this course a problem. The raw ball-striking was the story: he peppered greens, kept the tee ball in the game, and turned the round into a clean birdie parade with only one bogey to spoil the postcard. The stats back it up hard, especially the iron work and the absurdly tidy short game around the greens. This is also the kind of performance that looks very much like his normal nonsense now: strong trend, multiple prior wins, and another round where the “how did he do that?” answer is basically “all of it.”"
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "Started like a dumpster fire and spent the rest of the round haggling with it.",
+        "body": "IUDoc92 took runner-up net by surviving the kind of opening that usually sends a card straight into the ditch. The driver was short all day, but the weird part is he still found enough fairways and enough recovery golf to keep the whole thing from turning into a full-body collapse. The ugly number is the three three-putts, which is basically the putter doing a little side hustle as a wrecking ball. His profile is still mixed-to-volatile, but this was at least a cleaner net result than the gross chaos would suggest, and it nudges him toward the “can hang around if the short game doesn’t actively sabotage him” bucket."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "Struck it like a man trying to win a bar bet with a 7-iron.",
+        "body": "Dan94 was the other guy breathing down the winner’s neck, and this one was built on a very loud tee ball and a very serviceable save game. He pounded it off the tee, clipped irons close, and kept the card from getting weird with no doubles and no three-putts. The price was that he didn’t quite separate himself with the flat stick, so the round stayed in the “very good” lane instead of becoming a proper raid. After a mixed recent stretch, this fits the pattern: when the driver and wedges cooperate, he can absolutely post, but he’s still not handing out free elegance points."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "One fairway hit sounds like a typo until the card confirms it.",
+        "body": "Jakobm90 finished mid-pack net and the underlying story is exactly what the numbers scream: the short game kept him from flatlining, but the driver and putting were basically tag-teaming the sabotage. One fairway hit is a brutal way to live, and the three three-putts made sure every good hole had a little sidecar of nonsense attached. He did pop a couple of nice scoring holes, so this wasn’t pure chaos, but the round never stopped feeling fragile. With only a handful of prior starts, the profile is still early, but the evidence so far says he can manufacture enough damage control to stay relevant even when the tee ball is kicking him in the shins."
+      },
+      {
+        "name": "MattF",
+        "tagline": "The irons showed up; the double bogey energy did too.",
+        "body": "MattF’s net result was dragged around by volatility more than by total collapse, which is fitting because the card had both useful birdie work and enough double-bogey nonsense to keep it annoying. The approach play wasn’t the sharp version we’ve seen before, but he still found enough greens and made enough putts to stay in the hunt. The problem holes were the problem: a couple of ugly bursts that cost him real ground, including the third-hole double that set the tone. This guy has shown enough good stuff over the last few stops to call him a live wire rather than a full mess, but the round also said the same thing it always does: when the big misses show up, they show up loud."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "Zero birdies. That’s not a round, that’s a hostage situation.",
+        "body": "Leroy4522 got buried early and never found a scoring gear, which is how you end up with a net card that looks much uglier than the occasional decent tee ball should allow. He was fine enough off the tee relative to his own profile, but the irons went missing and the putter never provided the kind of bailout you need when you’re already leaking bogeys. No birdies is the loudest sentence in the stat sheet, and the trio of doubles made sure the round stayed heavy. His longer history says this isn’t new territory, but it does keep reinforcing the same ugly thesis: if the approach play isn’t showing up, the rest of the bag isn’t strong enough to fake it."
+      }
+    ]
+  }
+}
