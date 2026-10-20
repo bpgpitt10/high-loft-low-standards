@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-10-c980747c4301",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "6fbbbdfeb87cc96e053ce42bc194969c95288acbb2ead2fdd6762f46ea4ea6f1",
+  "payload": {
+    "profiles": [
+      {
+        "name": "MattF",
+        "tagline": "PUTTER WITH A GRUDGE",
+        "profile": "This dude keeps finding ways to score without looking remotely polite about it. The driver is basically a weather report: some weeks it’s steady, some weeks it’s throwing punches, but the important part is he keeps the ball in enough playable spots to let the rest of the bag do the dirty work. When the irons and wedges show up, the whole thing gets sneaky annoying for everybody else. When they don’t, it turns into a very expensive argument with doubles and missed chances. Still, the window says he’s reliably in the mix, which is golf’s version of being a professional pest."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "FULL-BAG HEAT CHECK",
+        "profile": "This profile reads like a guy who can absolutely smoke you, then randomly make you hate the scorecard for no good reason. The tee game and approach work together like a menace when they’re both awake, and that’s why he keeps hanging around the top even when the short game gets weird and the occasional extra blow-up sneaks in. The driver can go nuclear, the irons can be filthy, and then the round still tries to wander into a ditch just to keep things interesting. He’s the kind of golfer who looks inevitable until golf remembers it’s a shambling disaster."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "THE GREEN-FINDER TAX AUDIT",
+        "profile": "This guy is basically a fairway-and-iron accountant who occasionally signs off on some beautiful nonsense. The approach play is the engine, and when the rest of the bag isn’t actively sabotaging him, he looks like he’s solving golf instead of playing it. But there’s a little volatility baked in: some rounds the short game and putter are just along for the ride, and some rounds he’s suddenly tossing in enough birdies to make everybody else feel dumb. The overall file says steady menace with a side of chaos, which is a hell of a combo if you enjoy ruining someone’s Saturday."
+      },
+      {
+        "name": "CRANK",
+        "tagline": "SHORT GAME AGAINST THE WORLD",
+        "profile": "This is the rare bag that can look cooked from tee to green and still claw its way back into the conversation by chipping like a lunatic. The short game is doing a lot of the heavy lifting here, because the long stuff is often punching the ticket to trouble before the round even gets going. There are flashes where the rest of it cooperates just enough to let the scrambling matter, but the profile is still pretty volatile and weird in all the usual CRANK ways. He can survive on damage control for a while; he just can’t keep asking the wedge to rescue the whole damn operation forever."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "PUTTING FIRE WITH A SHOVEL",
+        "profile": "This file is a mess in the same way a busted slot machine is a mess: loud, expensive, and occasionally promising until the math shows up. The tee game and approach are usually just fine, but the short game and putter keep stepping on rakes and turning decent positions into scorecard stupidity. That means the ball-striking can look serviceable while the total result still leaks away in the slop. There are enough flashes to keep him in the field, but the window says the scoring clubs are committing crimes way too often. Golf like this doesn’t need a critic; it needs a search party."
+      },
+      {
+        "name": "HamSammich",
+        "tagline": "DOUBLE-BOGEY DEPENDENCY PROGRAM",
+        "profile": "This one is golf with the volume knob stuck on ‘why are we doing this.’ The driver and irons can both wander, which leaves a lot of work for the short game and putter, and even they can only cover so many sins before the round starts eating itself. The profile has enough scrambling and putter life to keep things from becoming a total wreck every time, but the big-picture story is still too much scramble, too little clean golf, and way too many chances for a crooked number to kick down the door. It’s survival mode wearing golf shoes."
+      }
+    ]
+  }
+}

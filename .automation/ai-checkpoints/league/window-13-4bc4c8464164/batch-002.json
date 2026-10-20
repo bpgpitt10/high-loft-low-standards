@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-13-4bc4c8464164",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "3bdf2eb7e534b4397c2132ef9ce36664bafca7349c320a3c2e86e9f230f1c515",
+  "payload": {
+    "profiles": [
+      {
+        "name": "DREADFUL",
+        "tagline": "POSSIBLY IN A FIGHT WITH THE SHORT GAME",
+        "profile": "This is the kind of bag that can bully a tee box for five minutes and still walk off muttering at the scorecard. The pattern is pretty clear: there are flashes where the long clubs show up, but the rest of the operation keeps stepping on the rake, especially once the wedges and putter get involved. Even the better ball-striking rounds still tend to end with a pile of doubles and a bunch of “how did that happen?” energy. The upside is real enough to tease you; the downside is the house always seems to win by attrition."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "BALL-STRIKING WITH A SIDE OF SELF-IMMOLATION",
+        "profile": "This profile reads like a guy who can absolutely find the neighborhood, then immediately start setting fire to it. The tee-to-green stuff has enough punch to win a round when the scoring gods are feeling charitable, but the short game and putter keep showing up like unpaid interns. When it’s on, there’s legit damage in the bag; when it slips, the whole operation turns into a full-body search party for bogeys and doubles. It’s volatile golf, not delicate golf, and the ceiling is way higher than the floor ever wants to admit."
+      },
+      {
+        "name": "TEV_11",
+        "tagline": "DRIVER HOT, APPROACHES ANARCHY",
+        "profile": "This one is basically a two-act play: the driver shows up with attitude, then the irons wander off and leave the plot behind. There’s enough pop off the tee to make you think a breakthrough is coming, and the short game can bail him out just enough to keep the lie alive. But the approach play has been so loud in the wrong direction that it keeps turning promising starts into survival exercises. You can see the ingredients for a nice round; you can also see the smoke coming off the middle of the bag."
+      },
+      {
+        "name": "Jakobm90",
+        "tagline": "BOGEY MACHINE WITH OCCASIONAL WEATHER EVENTS",
+        "profile": "This bag can absolutely launch it when the mood hits, but the rest of the game keeps acting like it has a union contract against consistency. The big stick has real bite, and there are moments where the scoring looks playable, but the approach/around-the-green combo keeps dragging the whole thing back into the swamp. One round it’s a neat little scrape-it-out job; the next it’s a demolition derby with a scorecard. The upside is that there’s enough length to threaten holes. The downside is that the penalty for a miss is usually somewhere between annoying and catastrophic."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "PUTTER SURVIVES, EVERYTHING ELSE RENTS",
+        "profile": "This is a classic “keep it in play and pray for a few clutch swings” profile. The results have enough pop to matter, but the recurring issue is that the scoring chances don’t get converted cleanly enough to stop the round from leaking away. When the ball is striking well enough, he can absolutely post a number; when it isn’t, the whole thing gets dragged into grind mode and the margin disappears fast. There’s no pretty lie here — just a player who can make you sweat, then suddenly look annoyingly competent for a stretch."
+      },
+      {
+        "name": "MashedBROtato",
+        "tagline": "ONE WEEK A HERO, NEXT WEEK A GREASE FIRE",
+        "profile": "This file is pure chaos in a golf shirt. The tee game has enough teeth to create real danger, and there are plenty of stretches where the round looks like it could turn into a smash-and-grab. But the rest of the bag keeps dropping anvils at the worst possible time, so the good stuff never fully gets to cash the check. He can win ugly, he can lose uglier, and the whole operation lives right on the line between “dangerous” and “what the hell was that?”"
+      }
+    ]
+  }
+}
