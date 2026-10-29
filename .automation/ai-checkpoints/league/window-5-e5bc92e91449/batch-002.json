@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-5-e5bc92e91449",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "0c1e189dca45318dc11463e087a7ff12c47faef2af626ba1eb074a14be87580c",
+  "payload": {
+    "profiles": [
+      {
+        "name": "Jakobm90",
+        "tagline": "DRIVER OF CHAOS, PUTTER OF COMEDY",
+        "profile": "This is the kind of bag that can look dangerous for nine holes and then trip over its own shoelaces on the back stretch. The driver has shown some teeth, but the whole operation keeps getting kneecapped by a nasty approach-to-green problem and a short game that leaks blood whenever the course asks a real question. There’s enough ball-striking in here to tease a good round, but the card keeps getting mugged by bogeys and doubles like it owes somebody money."
+      },
+      {
+        "name": "MashedBROtato",
+        "tagline": "BOGEYS GOT A SIDE HUSTLE HERE",
+        "profile": "This profile is peak simulator golf nonsense: enough good shots to make you think the fuse is lit, then a random cluster of doubles to remind you who’s driving the cart. The iron game and putting have flashed real usefulness in places, which is why the ceiling keeps showing up, but the floor is still a little trapdoor-shaped. When it’s on, it can absolutely hunt birdies; when it’s off, it starts handing out extra strokes like party favors. Fun player, mildly dangerous, occasionally self-destructive."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "THE SHORT GAME IS IN WITNESS PROTECTION",
+        "profile": "This one lives in that ugly neighborhood where the tee ball is merely fine and the rest of the bag keeps ringing the alarm bell. The trouble starts when the approach work goes sideways and the putter can’t clean up the mess, so the whole round turns into a slow-motion brick fight. There are flashes of competence off the tee and enough fairways to fake hope, but the scoring game keeps dragging the cart into the ditch. It’s not chaos in one department; it’s coordinated vandalism."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "FAIRWAYS FOR DAYS, NOTHING ELSE ON THE MENU",
+        "profile": "This is a very specific flavor of suffering: plenty of straight-ish tee shots, not much payoff, and a whole lot of bogeys collecting rent. The driver can keep the ball in play, sure, but the rest of the bag doesn’t cash that check often enough, so the round turns into a parade of missed chances and awkward recovery work. There’s some useful touch around the greens buried in there, but the scoring never really gets off the ground. It’s the golf equivalent of bringing a ladder and still needing a rope."
+      }
+    ]
+  }
+}

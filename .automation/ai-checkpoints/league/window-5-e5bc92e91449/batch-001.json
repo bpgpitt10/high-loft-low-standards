@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-5-e5bc92e91449",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "e77a16bf279ccb08a47e3dee9792b1659b64a54b1e92b9e143ebe420b81f6460",
+  "payload": {
+    "profiles": [
+      {
+        "name": "BigTime",
+        "tagline": "TOUR ISSUE: DRIVER GOOD, MESS LIMITER BROKEN",
+        "profile": "BigTime keeps showing up like the tee ball has receipts and the rest of the bag is trying to hide from the manager. The big stick is real enough, and the irons have been doing enough damage to keep him in the top-tier mix, but the round can still wobble the second the putting lane starts feeling like a cruel joke. This is the profile of a player who can absolutely bully a course for 12 holes, then occasionally hand the back nine a stupid little opening and call it character development."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "FULL BAG, ZERO APOLOGIES",
+        "profile": "Dan94 is playing like a guy who can win with either scorecard, which is annoying for everybody else and mildly insulting to physics. The gross results keep saying the ball-striking is legit, and the net side has been right there often enough that the margin for error feels thin, not accidental. When he’s on, the rounds look clean and almost effortless; when he’s not, it’s because the cards get a little loose around the edges and the course gets a vote. Very sturdy. Still somehow capable of making it weird."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "THE PUTTER DOESN’T OWN THE FRANCHISE, BUT IT TALKS A LOT",
+        "profile": "KeithK75 is the kind of player who can look totally ordinary in one stretch and then hit you with a round that makes the rest of the field check their math. The tee-to-green stuff has enough juice to keep the ceiling scary, but the scoring pattern is a little moody: there’s plenty of good golf in there, and also enough random leakage to remind everyone this isn’t a machine, it’s a dude with a club. When the short game and putter stop freelancing, he becomes a problem fast. Until then, it’s charming chaos with a very usable punch line."
+      },
+      {
+        "name": "MattF",
+        "tagline": "BIRDIES? SURE. BASIC SURVIVAL? SOMETIMES",
+        "profile": "MattF is golf in a bar fight: flashes of competence, then somebody trips over a rake. The good stuff is obviously there, because the ball can travel and the putter can absolutely cash a check when the round is cooperating, but the shape of the scoring says he’s always one loose stretch away from turning a tidy card into a crime scene. The weird part is that he can still steal a round when the scraps fall right, which makes him dangerous and irritating in equal measure. The ceiling is respectable. The floor is where the stupid lives."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "CHEMISTRY EXPERIMENT GONE SIDEWAYS",
+        "profile": "IUDoc92 is the kind of profile that makes the rest of the field squint and ask, “how is this thing still alive?” The ball doesn’t go far, the greens are a grind, and the scorecard has a habit of collecting bogeys like they’re loyalty points. But there’s enough occasional resistance in the short game and enough stubborn survival to keep the whole operation from flatlining completely. It’s a volatile file: some holes are rescue missions, others are just archaeology. Either way, the swing has no interest in subtlety."
+      },
+      {
+        "name": "tnboles77",
+        "tagline": "GREENS? WHAT GREENS?",
+        "profile": "tnboles77 is living proof that you can keep a round technically on life support while absolutely beating up the grass around the target. The big issue is obvious: the approach to the green has been too often a hostage situation, and when the irons go sideways, the putter gets asked to do emergency surgery with a butter knife. There is just enough short-game resistance to keep the profile from being pure disaster, but the scoring comes with too much drag to call it tidy. If this one ever finds a clean iron window, everybody else is suddenly in trouble."
+      }
+    ]
+  }
+}

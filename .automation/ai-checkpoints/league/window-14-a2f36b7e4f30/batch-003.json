@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-14-a2f36b7e4f30",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "b31c9221c471666b9031ab4dfb74bcb5c00557eb5881cadf73b88b0d348441de",
+  "payload": {
+    "profiles": [
+      {
+        "name": "graycrum",
+        "tagline": "SHORT GAME WITH A SIDE OF CHAOS",
+        "profile": "This guy’s golf is basically a rescue mission that keeps getting interrupted by a couple of bad ideas. The short game is the loudest voice in the room, and when it’s cooking he can absolutely steal a round, but the approach play keeps wandering off like it forgot the meeting. That mix makes him weirdly dangerous: not clean, not stable, but annoying as hell to finish behind when the wedges get hot. Three starts, and the identity is already clear — if the irons behave even a little, he can make the whole thing look sneakily competent."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "DRIVER WRITES CHECKS, IRONS BOUNCE THEM",
+        "profile": "Leroy’s whole file is a long, grim argument between a respectable tee game and an approach game that keeps setting fire to the scorecard. The pattern is pretty obvious: when the ball is in play, he can hang around; when the irons start spraying, the round turns into a bogey parade with bonus double-bogey tax. There’s enough short-game and putting to keep him from fully face-planting every week, but the middle of the bag is doing the damage. Fourteen starts in, this is still a volatile profile: enough structure to survive, not enough iron quality to stop the bleeding."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "GREENS IN REGULATION? COUNTER-OFFENSIVE NEEDED",
+        "profile": "Derek’s golf has the kind of energy that makes you check whether the target is actually the right sport. The ball flight can be useful enough to keep him alive, but the scoring chances are too sparse and the putter isn’t showing up as a serial bailout artist. When the irons go missing, he’s left trying to scrape together pars with duct tape and vibes, and that’s usually a losing hobby. The file says strong trend, and it’s a pretty blunt one: he’s been hanging around the middle of the pack more by stubbornness than by any one part of the game taking over."
+      }
+    ]
+  }
+}
