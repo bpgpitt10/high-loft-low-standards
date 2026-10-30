@@ -28,6 +28,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
+      - name: Refresh High Loft deterministic history exactly like production
+        working-directory: engine
+        run: python src/process_tour.py
       - name: Parse production workflow YAML
         run: |
           python -m pip install pyyaml
@@ -85,4 +90,4 @@ jobs:
               assert needle in s,needle
           print('WORKFLOW QUEUE STRUCTURE PASSED')
           PY
-# trigger
+# trigger live history
