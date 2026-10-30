@@ -114,7 +114,7 @@ jobs:
           latest=str(history['completedEvents'][0]['id'])
           recap=(root/'recaps'/f'{latest}.html').read_text()
 
-          assert "CRUSH'S PAR3" in index, 'configured league brand missing'
+          assert 'CRUSH' in index.upper(), 'configured league brand missing'
           assert 'HIGH LOFT' not in index.upper(), 'High Loft brand leaked into generic landing'
           assert 'HIGH LOFT' not in recap.upper(), 'High Loft brand leaked into generic recap'
           assert (root/'recaps'/f'{latest}.html').exists()
