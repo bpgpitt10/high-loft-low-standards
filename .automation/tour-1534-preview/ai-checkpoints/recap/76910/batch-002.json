@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 76910,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "4f66eb58841208cfff9e355d362eddfdfdb9a5a2e2b4bbecd309a5d37aad4642",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Greg3434",
+        "commentary": "Pulled a 6 on a par 3, which is the kind of math that ruins a card in a hurry. That’s a bogey-double-ish faceplant with no shot trace to soften the blow."
+      },
+      {
+        "name": "Codylt93",
+        "commentary": "Made a 6 on a par 3 and called it a day. No shot-by-shot rescue mission here, just a fat number and a bunch of sad scoreboard energy."
+      },
+      {
+        "name": "Dannyboy288",
+        "commentary": "A 5 on a par 3 is exactly the sort of little disaster that turns a decent-looking round into sludge. The scorecard gives you the ugly part and leaves the rest to imagination."
+      },
+      {
+        "name": "Marty_R_Golf",
+        "commentary": "Got nicked for a 4 on a par 3, then handed one back on net. That’s not a blow-up, but it is the kind of hole that says the putter/approach combo wasn’t fully cooperating."
+      },
+      {
+        "name": "Phillips74",
+        "commentary": "A 4 on a par 3, with the net version still leaking a shot. Not catastrophic, just the sort of sloppy little bleeding that stacks up fast when the card already needs help."
+      },
+      {
+        "name": "frthomas2",
+        "commentary": "Opened with a clean 3 on a par 3, so the carnage police never really got the call. The worst hole is technically spotless, which is rude to the rest of the field."
+      }
+    ],
+    "players": [
+      {
+        "name": "Marty_R_Golf",
+        "tagline": "Birdies showed up, then the card started acting like it had a grudge.",
+        "body": "Net 7 was the league work, even if the gross card landed at 11th and a flat E. The whole day was built on elite approach work and a hot flatstick: +5.31 SG approach, +1.94 putting, and a total +7.93 after going +5.99 tee to green. He hit 11 greens, kept the proximity at 21.2 feet, and never coughed up a 3-putt, which is how you survive a round that still had two bogeys and a couple of holes that tried to get stupid. The worst hole was the par-3 3rd, where a 4 gross and 5 net handed back a shot, but the rest of the card had enough juice to stay afloat. This is also a weirdly familiar shape: after one prior round he now sits with average net finish of 3.0 and average gross finish of 12.0, and the profile is already obvious—his scoring lives or dies on putter heat and short-game damage control, because the raw tee game is basically just a bystander."
+      },
+      {
+        "name": "frthomas2",
+        "tagline": "Gross golf was spitting fire; net golf still found a way to be annoying.",
+        "body": "This was a split personality round in the funniest possible way: gross runner-up at 2nd, but the net card somehow drifted to 8th at +4. The raw ball striking was the story, because +9.20 approach and +10.87 tee to green are stupid numbers, backed by 14 GIR and 17.5-foot proximity. He only made 57 feet of putts, which is the kind of dead-putter output that lets the rest of the card keep a grudge, and the final total was still +10.93 even with a quiet +0.06 putting. The card was clean on mistakes, though—no bogeys, no doubles, and the worst hole was basically a shrug at the opening par 3, which didn’t even give up a net shot. With only one prior start, the profile is still tiny, but the contrast is clear: he can absolutely flush it tee to green, and if the putter shows even a pulse later, the net results are going to get nasty for everyone else."
+      },
+      {
+        "name": "Dannyboy288",
+        "tagline": "A nice little pile of almosts wrapped around one big dumb par-3 tax.",
+        "body": "Net 9 and gross 27th is the kind of score split that screams “some decent golf hiding inside a mess.” The numbers say there was at least some help from the top end of the bag and the putter, with +1.69 approach, +1.19 putting, and 10 greens hit, but the rest of the card bled like a busted hose: -0.95 short game, 32 putts, one 3-putt, five bogeys, and a double. The worst hole was the par-3 12th, where a 5 gross and 5 net turned into the round’s ugliest moment. With no prior starts in the file, there’s no trend to sell here, just a first look at a round that could not stop handing shots back. The one silver lining is the card wasn’t a total zero-fest—there was a birdie and a couple of under-par net holes—but the floor was still too low to let the decent stuff matter."
+      },
+      {
+        "name": "Codylt93",
+        "tagline": "This card was a full-blown crime scene with a putter left at the scene.",
+        "body": "Net 10 is the only reason this didn’t become a total embarrassment parade, because the gross score at 43rd and +20 was brutal even by simulator-golf standards. The SG line is a disaster buffet: -5.51 approach, -2.52 short game, -4.05 putting, and -12.07 total. He hit just 1 green, made no birdies, stacked up 9 bogeys, 4 doubles-plus, and somehow still needed 35 putts. The worst hole was the par-3 14th, where a 6 gross and 5 net was the loudest scream on a card full of noise. This is also not a random one-off; after a prior appearance that already leaned ugly, the profile now says the ball is not being saved by anything—approach is leaking, the short game isn’t patching it, and the putter is not bailing anyone out. The only thing that remotely worked was one sand save, which is basically a smoke alarm in a house fire."
+      },
+      {
+        "name": "Greg3434",
+        "tagline": "Hit plenty of greens, then treated the cup like it owed him money.",
+        "body": "Net 11 and gross 30th is a rough exchange rate, especially when the underlying ball striking was not the actual problem. He posted +2.35 approach and hit 13 greens, but the putter went sideways at -2.54 and the card exploded into 43 putts and six 3-putts. That is how you turn a passable tee-to-green day into a scorecard full of regret. The worst hole was the par-3 4th, where a 6 gross and 6 net was the loudest crater on the page, and there was another ugly 5 on the 14th to keep the bleeding going. This is the first profile-eligible look, so there’s no trend to hide behind, but the shape is obvious: the irons got him chances, and then the putter absolutely mugged him. Five birdies are nice; six 3-putts are not. That's a hell of a trade."
+      },
+      {
+        "name": "Phillips74",
+        "tagline": "A little short-game scrap and a lot of all-around mediocrity.",
+        "body": "Net 12 with a gross finish of 32nd is not pretty, but it also wasn’t a total wipeout. The short game actually tried to carry some water at +1.59, and he rescued 4 of 6 from the sand, but everything else was too soft to matter: -0.06 approach, -0.61 putting, just 5 greens, and 8 bogeys to drag the card down. The worst hole was the par-3 4th, where a 4 gross and 3 net still counts as a blemish because it leaked a shot net even without a catastrophic number. There’s only one prior start in the file, and it was a worse net result, so the useful takeaway is pretty simple: this round was a modest net improvement, but the tee-to-green ceiling is still way too low to get cute about it. The ball didn’t exactly cooperate, and the putter wasn’t sharp enough to erase the mess. One birdie in the whole thing is a brutal little accent mark."
+      }
+    ]
+  }
+}

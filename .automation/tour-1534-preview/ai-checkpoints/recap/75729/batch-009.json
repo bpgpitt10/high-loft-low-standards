@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 75729,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "1699715d86aa69dd8cf6c20b872da74db4bf0ee31d8908b700813ae3f8aefbfc",
+  "payload": {
+    "carnage": [
+      {
+        "name": "DPFSGJ99",
+        "commentary": "16 turned into a full-blown tax bill: a 10, with seven over par on a par 3 and no shot-by-shot rescue on the card."
+      },
+      {
+        "name": "VlakatafakatA",
+        "commentary": "6 gave up the usual simulator-golf nonsense: a 6 on a par 3, three over, and the scorecard doesn’t even bother with a shot list to explain the mess."
+      }
+    ],
+    "players": [
+      {
+        "name": "DPFSGJ99",
+        "tagline": "A glorious disaster with a putter and a shovel for a short game.",
+        "body": "DPFSGJ99 got buried in the net race, finishing 49th net and 50th gross while carding +23 net and +30 gross. The damage was everywhere: -27.5 total strokes gained, with the short game taking the biggest beating at -15.84 and putting another -5.77, which is how you turn a round into a landfill. The card backs it up with 34 putts, five 3-putts, zero fairways hit, and only 5 greens in regulation, so yeah, there was not much salvaging this thing. The blow-up sequence was ugly even by simulator standards: hole 13 went for 7, hole 15 went for 7, and hole 16 was the monster crater at 10 on a par 3, a full seven over with no shot detail to romanticize it. The one tiny bright spot was a couple of par-3 pokes that landed inside the margin, but they were just speed bumps in a round that never found a pulse."
+      },
+      {
+        "name": "VlakatafakatA",
+        "tagline": "A lot of putts holed just to keep this from becoming a full train wreck.",
+        "body": "VlakatafakatA was right behind in the net pileup, 50th net and 47th gross, with +25 net and +15 gross. The raw golf was still rough but a touch less radioactive than the card result suggests: -13.5 total strokes gained, led by -10.31 tee to green and -7.48 around the greens, while the putting was also a drag at -3.2. The stats say this one was a weird mix of damage and survival: 6 greens in regulation, 33 putts, five 3-putts, and 110 feet of putts made, which is basically the golf equivalent of bailing water with a teaspoon while the hull’s already cracked. He did have a couple of clean par-3 looks early with deuces on holes 2 and 4, but the wheels came off on the par-3s at 6, 10, and 14, each making 6 or worse in net terms and leaving the round with too much smoke and not enough fire. No prior event history to build a trend from, just one very ugly baseline of what happens when the ball-striking and the save shots both decide to ghost."
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 75729,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "3e6b3c3a7fefe47113168f0fde669bff239c8b552fa4fc2f304caee041650733",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Jonaitor",
+        "commentary": "He made double on the par 3 and that was the whole crime scene: a 6 with no shot-by-shot escape hatch to blame, just a straight-up blowup hole."
+      },
+      {
+        "name": "Dave303",
+        "commentary": "Another par 3 turned into a 6, and with no shot sequence listed it still reads like a full-on yard sale at the worst possible spot."
+      },
+      {
+        "name": "ZonaEJ_83",
+        "commentary": "18 bit back with a 5 that netted out to a 6, so even the last hole wasn’t interested in letting him walk off clean."
+      },
+      {
+        "name": "bogeymanBill",
+        "commentary": "The par 3 at 2 took him to 5, and the card also shows it as his worst hole, which is usually code for some ugly little detour nobody wants to replay."
+      },
+      {
+        "name": "MD_Golfs",
+        "commentary": "He found a 5 on the par 3 at 11 and the net made it a 6, which is a fun way to say the hole ate the whole lunch."
+      },
+      {
+        "name": "Friendboy",
+        "commentary": "The opener was a 4 on a par 3, so the round started by leaking a shot right out of the gate and never really stopped asking questions."
+      }
+    ],
+    "players": [
+      {
+        "name": "Friendboy",
+        "tagline": "Great at finding the rough and even better at leaving it there.",
+        "body": "Friendboy hung around the top half of the gross board with a 21st-place gross finish, but the net math shoved him way down to 43rd at +10. The split says there was some actual golf in there: +3.99 in short game and +3.55 tee to green are both solid, and 11 GIR with 14.4-foot proximity is not hopeless mush. But the rest was leaky enough to sink the ship — -1.06 putting, 27 putts, only 4 birdies, and 3 bogeys with no double-bogey rescue on the card. The worst hole was the opening par 3, where he opened with a 4 and immediately donated a shot to the course, and that set the tone. With zero prior starts, this is just the round: some short-game competence, enough raw mistakes to make the net score ugly."
+      },
+      {
+        "name": "bogeymanBill",
+        "tagline": "A nice little mix of solid numbers and random self-sabotage.",
+        "body": "bogeymanBill landed 34th gross and 44th net, with the net board pinning him at +10. The raw stuff wasn’t completely cooked: he was +0.89 short game, only slightly negative in putting at -0.19, and he made 74 feet of putts, which is at least proof the flat stick wasn’t totally in the trunk. But the approach side got mauled at -1.20, and the card says 2 three-putts plus 5 bogeys and a double, which is how you turn a not-awful tee-to-green day into a gross score that still fails to hold water. He only hit 9 GIR, and the proximity number is fine at 11.4 feet, but the approach quality didn’t cash the check often enough. The worst hole was the par 3 at 2, where he made a 5, and that’s the kind of stupid little leak that keeps the round from ever settling down."
+      },
+      {
+        "name": "Jonaitor",
+        "tagline": "Birdies showed up just often enough to disguise the car wreck behind them.",
+        "body": "Jonaitor finished 38th gross and 45th net, with the net side landing at +13, and the profile is basically a tug-of-war between decent putting and messy ball-striking. He posted +1.06 putting and only 24 putts, so the flat stick did plenty of cleanup, but the tee-to-green number was -2.21 and the short game cratered at -1.58. That tracks with the stats: 10 GIR isn’t terrible, but the 26.1-foot proximity is rough, and 0/3 in sand means the scrambling didn’t patch the leaks. He still managed 4 birdies and 4 bogeys, so there was enough good stuff to keep the card from fully collapsing. Then the worst hole at 6 showed up as a 6 on a par 3 and slapped the whole round back into reality. With zero prior starts, this is just the full ugly-and-fine combo platter in one round."
+      },
+      {
+        "name": "Dave303",
+        "tagline": "A brick factory with a couple of lucky windows open.",
+        "body": "Dave303 was dead last gross at 48th and 46th net at +14, which is about as subtle as a demolition derby. The SGT split is brutal: -2.60 approach and -9.31 short game, with -11.91 tee to green overall, so yeah, the ball didn’t exactly behave. He only hit 4 GIR, had 4 double bogeys or worse, and still somehow made 69 feet of putts, which is the sort of stat line that says he did at least locate the cup a few times before the rest of the round lit itself on fire. The worst holes were a pair of par 3s that both turned into 6s, and the one at 3 is the headline crime scene. He also had 5 bogeys and a single three-putt, so it wasn’t just one giant blowup — it was a slow-motion grind of bad contact and worse exits. Zero prior starts, so there’s no trend to hide behind: this was just a straight-up rough round."
+      },
+      {
+        "name": "ZonaEJ_83",
+        "tagline": "Mostly tidy until the back nine came in and kicked the door off.",
+        "body": "ZonaEJ_83 posted the cleanest gross finish in this batch at 31st, but the net side still shoved him to 47th at +19, which tells you the scorecard was not generous. The underlying numbers are actually playable: +0.44 tee to green, +0.19 approach, and +0.25 short game are all slightly positive, and he only had 3 bogeys with a single double while making 23 putts and avoiding any three-putt nonsense. The problem is that the birdie count never showed up in a useful way — just 4 birdies, and the GIR total only got to 7, so the good stuff was too thin to matter. The worst hole came at 18, where a 5 on the final par 3 turned into a 6 net and made sure the round ended with a thud instead of a rescue. With zero prior starts, this is just one weirdly mixed round: some decent SG, not nearly enough scoring."
+      },
+      {
+        "name": "MD_Golfs",
+        "tagline": "The putter tried to save it while everything else kept setting matches.",
+        "body": "MD_Golfs finished 36th gross and 48th net at +20, which is the kind of split that says the scorecard found plenty of ways to hurt him. The putter did some heavy lifting at +1.56, and 126 feet of putts made is the loudest number on the page, but everything around it was a mess: -0.56 approach, -1.49 short game, and -2.06 tee to green. He did hit 12 GIR, but the proximity number was still 25.6 feet, which means a lot of those greens were basically polite visits. Add in 29 putts, 3 bogeys, a double, and 1 double-bogey-or-worse, and the round stops pretending to be tidy. The worst hole was 11, where a par 3 became a 5 and the net score climbed to 6, because of course the round needed one more stupid number. With zero prior starts, there’s no pattern here yet — just one card where the putter fought the rest of the bag and lost the war."
+      }
+    ]
+  }
+}

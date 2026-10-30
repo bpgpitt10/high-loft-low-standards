@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-3-1a8d901c76cf",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "99633df9df1172978e08c2af07f5f6d7c6e3f86aae5794c7809b83571ec95092",
+  "payload": {
+    "profiles": [
+      {
+        "name": "frthomas2",
+        "tagline": "SHORT-GAME MURDER MYSTERY",
+        "profile": "The iron game is trying to carry the whole bag while the wedge play keeps showing up in a fake mustache. When it clicks, this is a legit birdie-and-eagle outfit; when it doesn’t, the scoring gets weird fast because the putter and approach can only do so much while the chipping is actively starting fights with the card. The identity here is clear: plenty of engine, volatile middle, and a short game that can either save the day or set the clubhouse on fire."
+      },
+      {
+        "name": "Wardus",
+        "tagline": "PUTTER WITH A SIDE HUSTLE",
+        "profile": "This is a guy who usually survives by making enough putts to hide the fact that the tee shot is basically on witness protection. The short game and putting are the whole personality, and when those two are hot, he can hang around without doing anything especially pretty. But the ball-striking leaves the scoring in a constant state of suspense, because the greens-in-regulation number is so light that every round feels like a small hostage negotiation with the wedge game."
+      },
+      {
+        "name": "DrSchnoz23",
+        "tagline": "WEDGE BAND-AID GOLF",
+        "profile": "One look at the file and you can tell this round was held together with short-game tape and a prayer. The irons didn’t exactly bully the course, but the touch game did enough to keep the blood loss manageable, and the putter was basically neutral instead of a full-on crime scene. That’s the whole vibe right now: not a lot of clean tee-to-green authority, but enough around-the-green competence to keep the score from turning into a complete dumpster fire."
+      },
+      {
+        "name": "JeremyH",
+        "tagline": "SCRAMBLE MERCHANT, NO QUESTIONS",
+        "profile": "This is rescue-golf with a pulse: the approach play was off, but the short game and putter bailed the whole thing out like a couple of overcaffeinated linemen. The weird part is the card never really got ugly because the misses were covered up before they turned into a full mess. That’s a useful identity, even if it’s not glamorous—when the wedges are that loud, the swing can be a little crooked and the round still leaves intact."
+      },
+      {
+        "name": "titogreenbrough",
+        "tagline": "BOGEY FARMER WITH A HOT WEDGE",
+        "profile": "The striking thing here is that the bag is good enough to create chances, then the putter shows up wearing clown shoes. The approach and short game are giving this player plenty of looks, which makes the high bogey count feel even more rude and unnecessary. This is not a total collapse profile; it’s more of a maddening almost-competent one, where enough good golf exists to make you think something decent is brewing before the scoring card faceplants again."
+      },
+      {
+        "name": "Factor_Golf",
+        "tagline": "GROSS GOLF WAR CRIME UNIT",
+        "profile": "This file is not subtle: the golf is getting dragged through a hedge from tee to green and then buried in the backyard. The ball-striking is so rough that even the occasional decent net result feels like the rules are being negotiated by a drunk attorney. There’s very little cushioning anywhere—iron play, short game, and putting have all taken turns with the shovel—so the only mystery is which part of the bag will commit the next felony."
+      }
+    ]
+  }
+}

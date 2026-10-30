@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-3-1a8d901c76cf",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "fd43bb8056912a33a07ceea3b2ddd767ba8aad574f6c96060f19103fd5f22151",
+  "payload": {
+    "profiles": [
+      {
+        "name": "krcarmel",
+        "tagline": "SHORT GAME IN THE WOODS",
+        "profile": "One look at this card and you can tell the wedges were swinging a blunt object. The tee ball wasn’t the disaster; it was everything after that, with the short game doing the real damage and the putter basically filing a complaint instead of helping. The scorecard had enough bogeys to make the pencil sweat, and the greens were found often enough to tease competence before the scrambling turned into a hostage situation. This is the kind of round that reminds everyone simulator golf can absolutely mug you in broad daylight."
+      },
+      {
+        "name": "MD_Golfs",
+        "tagline": "BIRDIE FACTORY, NET TAXED",
+        "profile": "This is the weirdly dangerous profile of a guy who can absolutely play golf and still get kneecapped by the format. The ball-striking showed up, the putter helped, and the gross side looked like somebody who knows where the middle of the clubface lives. But the net card keeps dragging the whole thing back to earth like it’s got an anchor tied to it. That mix says there’s real scoring in here, but the league window has not been kind to whatever’s happening on the net side."
+      },
+      {
+        "name": "Bobbyb",
+        "tagline": "APPROACH SHOT WAR CRIMES",
+        "profile": "The issue here was never subtle: the iron game showed up dressed like it hated everybody. The rest of the card is just supporting cast around that disaster, with enough bogeys and doubles to keep the round from ever finding a floor. There’s a little short-game life in there, which is nice, but when the approach play is that far off, you’re basically trying to save a house that’s already on fire. Not a mystery profile. Just a guy getting mugged by his own second shot."
+      },
+      {
+        "name": "MsMJFig",
+        "tagline": "PUTTING WITH A BLUNT INSTRUMENT",
+        "profile": "This was a full-body collapse, but the putter deserves the mugshot. Nothing in the file ever really got rolling, and the green work was so rough it made the rest of the bag look optimistic by comparison. When you’re stacking that many bogeys and doubles, the whole round turns into a scavenger hunt for one decent hole, and this one never found it. Sometimes golf hands you a bad day; sometimes it hands you a shovel and asks you to keep digging."
+      },
+      {
+        "name": "itchy",
+        "tagline": "DOUBLE-BOGEY MACHINE NOISE",
+        "profile": "The funny part is that this card has just enough decent-looking pieces to be insulting. The ball wasn’t completely lost, but the short game and approach kept taking turns driving it into the ditch, and the doubles showed up like they had a reservation. Even with a few birdies in the mix, the round never stopped bleeding. This is the kind of profile where you can see the outline of a playable round and then watch it get mugged in the parking lot."
+      },
+      {
+        "name": "Dave303",
+        "tagline": "GREENSIDE SELF-DESTRUCTION TOUR",
+        "profile": "This one was brutal in a very specific way: the short game absolutely torched the rest of the card. The tee ball didn’t do any favors, but the real crime scene was around the greens, where every recovery looked like it came with an extra penalty attached. There were enough birdies to prove the round wasn’t completely dead, which almost makes it worse. It’s the classic simulator-golf special: hit a few decent shots, then spend the rest of the day inventing new ways to lose strokes."
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 75729,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "395721089bd3bd79cb2caf957211cf5372067770bb4ee5640ef4138c88758f27",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Bravos99",
+        "commentary": "The damage came on 15: a 7 at par 3, turning into an 8 net and a lovely little crater in the card."
+      },
+      {
+        "name": "patman",
+        "commentary": "Hole 1 set the tone like a clown car: 6 on a par 3, 6 net, and the round never stopped smelling like burnt rubber."
+      },
+      {
+        "name": "Bourbon_n_Birdies",
+        "commentary": "The bad one was 2, where a 4 on the par 3 was the only blemish worth circling in red ink."
+      },
+      {
+        "name": "jamescripps06",
+        "commentary": "The mess started right away on 1, a 4 on the par 3 that put the round on the back foot before the scorecard had warmed up."
+      },
+      {
+        "name": "AdamBailey25",
+        "commentary": "Hole 4 was the ugliest swing: 4 on the par 3, and the card started leaking from there."
+      },
+      {
+        "name": "BangingBalls",
+        "commentary": "Even the worst hole was barely a scuff: 3 on 2, which still counted as a net bogey because this card lived in the weird gross/net split universe."
+      }
+    ],
+    "players": [
+      {
+        "name": "Bourbon_n_Birdies",
+        "tagline": "The ball-striking brought the juice; the scorecard still wandered around with its shoes untied.",
+        "body": "Bourbon_n_Birdies was the net runner-up at +6, but the gross card was way sharper at -6, and the split tells the whole story: this was a strong golf round that got sandbagged by the format, not by the swing. The ball-striking was doing the heavy lifting with +5.55 approach and +7.23 tee-to-green, plus 15 greens in regulation and birdies on 7 holes. The short game and putter weren’t dead weight either, with +1.68 around the greens and a basically neutral +0.27 putting line, so this wasn’t one of those “great tee game, bad hands” disasters. The only real wobble was the hole-2 par 3 bogey, and after that the card still had enough clean work to keep the gross number respectable. With 0 prior starts, there’s no trend to pretend exists yet, but this is a pretty loud first read: real approach juice, real scoring, and a net result that just didn’t cash the way the raw golf did."
+      },
+      {
+        "name": "jamescripps06",
+        "tagline": "A round held together with duct tape, missed greens, and a putter that mostly showed up to collect a paycheck.",
+        "body": "jamescripps06 landed at +6 net and +1 gross, which is basically a card that spent the day in survival mode and never really got out of it. The raw numbers back that up: -1.17 approach, -0.71 putting, and only 10 greens in regulation, with four bogeys and just three birdies to keep things from getting uglier. The short game was the only mildly friendly part of the bag at +0.53, but even that couldn’t rescue the round from the combo of 28 putts and an ugly lack of scoring chances converted. The worst hole was 1, where the par 3 opened with a bogey and set the tone early, and the other bogey dents on 2 and 4 kept the card stuck in neutral. With zero prior starts, this is just the current read: messy tee-to-green, shaky putter, and enough damage to leave the net result stuck way back in the pack."
+      },
+      {
+        "name": "AdamBailey25",
+        "tagline": "Four three-putts. That’s not putting, that’s performance art with a scorecard.",
+        "body": "AdamBailey25 finished at +6 net and +2 gross, and the gross score was held hostage by a putter that absolutely torched the place in the wrong direction. The approach play was actually decent at +1.53, and 14 greens is a solid enough base, but the rest of the card kept dropping dumb little anvils: -1.10 short game, -0.92 putting, 34 putts, and a brutal four 3-putts. That’s how you turn a round with enough greens into one that still bleeds bogeys like a busted faucet. The worst hole was 4, a bogey on the par 3, and there were other bogey hits on 6 and 11 to keep the round from ever stabilizing. With 0 prior starts, there’s no trend call to make, but the first impression is pretty clear: the tee-to-green work was passable, and the flatstick was an absolute wrecking ball."
+      },
+      {
+        "name": "Bravos99",
+        "tagline": "The putter showed up hot; the rest of the bag mostly held the drinks.",
+        "body": "Bravos99 was +6 net but only -1 gross, which is the kind of split that says the raw golf was playing better than the math, but the league format still made it expensive. The headline number is the putter: +2.41 putting, 23 total putts, and zero 3-putts. That’s some clean work. The short game chipped in too at +0.47, and the approach play was only slightly negative at -0.38, so this wasn’t a full-body collapse. The card did have a big bruise on 15, where a 7 on a par 3 turned into the worst hole of the round, but the rest of the scoring was sturdy enough to keep the gross number in the red with six birdies and just one bogey. With 0 prior starts, this is just one data point, but it’s a useful one: when the putter is cooking, the rest of the game can be messy and still produce a very playable score."
+      },
+      {
+        "name": "patman",
+        "tagline": "A five-putt parade with two double bogeys attached. Real economy of misery.",
+        "body": "patman finished at +7 net and +7 gross, and the card was basically a hostage situation from the first hole. The putting was a disaster at -3.86, and the stat sheet makes it ugly fast: 31 putts, five 3-putts, and two double bogeys. That’s how you build a round that never gets off the floor. There was some mild life elsewhere — 10 greens in regulation, +0.22 short game, and a couple of birdies on 7 and 9 — but the approach was still negative at -0.86, so there wasn’t enough structure to offset the putting carnage. Hole 1 was the worst one, a 6 on the par 3 that opened the round with a faceplant, and the bogey train kept rolling with heavy damage on 2 and 4. With 0 prior starts, no trend talk is fair yet, but this first look is simple: the short game was trying to help, and the putter kept kicking it in the shins."
+      },
+      {
+        "name": "BangingBalls",
+        "tagline": "Gross golf was loud as hell; net golf showed up wearing work boots and stomped the vibe.",
+        "body": "BangingBalls was the weirdest stat line in the batch: +7 net but -11 gross, which is exactly what happens when you absolutely roast the course and still get dragged back by the format. The raw golf was filthy good: +5.45 approach, +1.95 short game, +1.82 putting, 14 greens in regulation, 21 putts, zero 3-putts, and 11 birdies with no bogeys or doubles. That is a blistering scorecard on its own. But the net side stayed stuck at +7, and the biggest net blemish was hole 2, where a 3 on the par 3 still played as a net bogey. Even the “worst” hole barely counts as damage in gross terms, which tells you how much the net conditions were doing the heavy lifting against him. With 0 prior starts, there’s no history to lean on, but the evidence is obvious: this was elite gross scoring that got kneecapped by the net setup."
+      }
+    ]
+  }
+}

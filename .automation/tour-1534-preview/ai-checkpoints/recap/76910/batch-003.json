@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 76910,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "f544b81df8041962abe213fc47f6f39a259770b93933d885a34e6d404d210c43",
+  "payload": {
+    "carnage": [
+      {
+        "name": "ILGolfMan",
+        "commentary": "The damage came on 7, where the par-3 turned into a bogey-plus parade: 5 gross, 6 net, and the kind of missed-up-and-down that eats a card for breakfast."
+      },
+      {
+        "name": "EbelKinebel",
+        "commentary": "Hole 9 was the ugliest stamp on the card: 5 gross, 5 net on a par 3, just a straight-up double-bogey-shaped faceplant."
+      },
+      {
+        "name": "GeTGolf",
+        "commentary": "At 2, the card cracked early with 4 gross and 4 net on a par 3, a clean little bogey that set the tone for the round."
+      },
+      {
+        "name": "TakeitlowGolf29",
+        "commentary": "The first hole came out of the gate sideways: 4 gross, 4 net on a par 3, which is a lovely way to start by bleeding a shot immediately."
+      },
+      {
+        "name": "AdamBailey25",
+        "commentary": "Hole 3 brought the worst of it, with 4 gross and 5 net on a par 3 after the net math turned a bogey into a full extra kick in the teeth."
+      },
+      {
+        "name": "mcalla452",
+        "commentary": "The first hole was the early leak: 4 gross, 4 net on a par 3, which is exactly how you start when the card wants to be dumb right away."
+      }
+    ],
+    "players": [
+      {
+        "name": "ILGolfMan",
+        "tagline": "Gross champ, net got mugged by the math and a random double-bogey grenade.",
+        "body": "ILGolfMan absolutely cooked the raw side of this thing, taking gross first at -3, but the net card was a different dumpster fire at +7 and 13th. The ball-striking was real: +8.51 approach, +10.3 tee to green, and 14 GIR with proximity at 17.2 feet. That should have been a clean day, but the putter didn’t fully cash it in with 29 putts, one 3-putt, and just 86 feet of putts made. The killer was the lone double bogey plus on a card that otherwise had zero bogeys, which is how you shoot your way out of a good round on a par-3 setup. He’s now two-for-two in completed looks with a mixed profile: last time the net result was strong and the short game carried; this time the tee-to-green was louder, but the net finish got dragged down by one ugly hole."
+      },
+      {
+        "name": "GeTGolf",
+        "tagline": "Gave up a couple dumb par-3 shots and still showed up with a real tee-to-green pulse.",
+        "body": "GeTGolf landed 14th net at +7 and 5th gross at -2, which is the exact sort of split that says the swing showed up but the scorecard still had some garbage on it. The good stuff was pretty crisp: +6.49 approach, +3.01 putting, 12 GIR, no 3-putts, and 106 feet of putts made. The ugly part is that the round still bled three bogeys, and the worst hole was a 4 gross / 4 net on the par 3 at 2, with another bogey at 6 and another at 13. That’s enough to keep a decent ball-striking day from becoming a real net push. With only one prior completed appearance, the profile is still early, but this was a better tee-to-green showing than the prior event and the putter kept him from face-planting harder."
+      },
+      {
+        "name": "TakeitlowGolf29",
+        "tagline": "Kept the putter hot enough to survive the missed greens circus.",
+        "body": "TakeitlowGolf29 finished 15th net at +7 and 10th gross at even, and the split tells the story: not enough greens, enough putter. He only hit 5 GIR, but he still posted +4.27 putting, 23 putts, zero 3-putts, and 104 feet of putts made, which is a nice little rescue mission when the approach game is only +2.16. The short game also did its part at +1.5, and the sand work was quietly clean at 3-for-4. The bad holes were all par-3 noise: a 4 at the opener, then more bogey-ish drag at 7 and 16. Prior history says this guy can do better than the net number suggests, because the last completed run was much stronger in both net and gross, so this one reads more like a missed opportunity than a collapse."
+      },
+      {
+        "name": "mcalla452",
+        "tagline": "Hit enough greens to tease hope, then turned the putter into a black hole.",
+        "body": "mcalla452 finished 16th net at +7 and somehow 31st gross at +7, which is a brutal reminder that hitting greens doesn’t automatically mean you can make a score. The raw tee-to-green number was fine at +5.43, with +5.5 approach and 12 GIR, but the putter absolutely torched the round in reverse: -4.51 putting, 37 putts, two 3-putts, and only 46 feet of putts made. That’s how you turn a passable ball-striking day into a card full of bogeys, and seven of them showed up to make sure everybody noticed. The worst hole was the opening par 3, 4 gross and 4 net, and from there the card never really stopped leaking. Compared with the prior completed event, the ball-striking actually improved, but the scoring got worse because the flat stick was a total liability instead of a support system."
+      },
+      {
+        "name": "EbelKinebel",
+        "tagline": "Made birdies, then immediately found the trap door and fell through it.",
+        "body": "EbelKinebel ended up 17th net at +7 and 24th gross at +4, which is a pretty weird card: enough birdies to look alive, enough doubles to keep the whole thing from going anywhere. The approach play was decent at +3.92 and the putter was positive at +2.5, but the short game got nuked for -2.5 and the sand game was a full 0-for-4 disaster. He still found five birdies, but they got swallowed by five bogeys and two doubles, with the worst of it coming at 9 where the par 3 became a 5 gross and 5 net. With no prior completed starts, there’s no trend to hang a whole story on yet, but this round was volatile as hell: some real shot-making, a few clean putts, and then enough junk around the greens to keep the score from looking like the talent should’ve."
+      },
+      {
+        "name": "AdamBailey25",
+        "tagline": "Approach wasn’t terrible, but the rest of the bag was basically a polite robbery.",
+        "body": "AdamBailey25 also landed at +7 net, good for 18th, with a gross line of +4 and 25th. The shape of the round was pretty obvious: +3.35 approach and +3.86 tee to green were decent enough to keep things moving, but the scoring never got off the ground because the card was packed with bogeys and the putter was only barely neutral at +0.07. Eight GIR is workable, but 28 putts, one 3-putt, and just two birdies is how you end up staring at a scorecard that feels heavier than it should. The worst hole was the par-3 third, where a 4 gross became a 5 net, and there were more little leaks at 7 and 11. Compared with the prior completed start, this was a step forward in overall efficiency, but not nearly enough to turn the round into something dangerous on the net side."
+      }
+    ]
+  }
+}

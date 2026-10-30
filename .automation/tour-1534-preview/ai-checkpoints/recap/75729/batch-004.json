@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 75729,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "b9ce03ff4b538ab0ddde7631ad08c0c85ddd49112923748e9b432af1910c8617",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Joebat",
+        "commentary": "The disasterclass hit on the 2nd: eight gross on a par 3, two net strokes worse than par, and the wheels kept wobbling with another six on the 4th and a 6 on the 17th. Four double-bogey-or-worse holes is how you turn a card into a cautionary tale."
+      },
+      {
+        "name": "Phillips74",
+        "commentary": "The 16th ate him alive: seven gross on a par 3, four over par, and that was the day’s ugliest crater. When you pair that with a 32-putt round and two three-putts, the flatstick was basically running a protection racket."
+      },
+      {
+        "name": "JeremyH",
+        "commentary": "The 6th was the worst of it: five gross on a par 3, two over, and his only double-bogey-or-worse blemish on the card. Not a full meltdown, but that hole was a clean little faceplant."
+      },
+      {
+        "name": "gbburn",
+        "commentary": "The 17th was the ugly one: five gross, one over par, and the round’s worst swing of the knife. He survived with just one double-bogey-or-worse, but the putter still showed up dressed for a protest."
+      },
+      {
+        "name": "BobNoWay",
+        "commentary": "The 8th was the damage hole: five gross on a par 3, two over, and it stood out in a mostly middling card. One double-bogey-or-worse hole, four bogeys, and a putter that didn’t exactly go on a rescue mission."
+      },
+      {
+        "name": "ILGolfMan",
+        "commentary": "The opening hole was the low point, which is to say the low point was a par. That’s how clean the card was: no worse than three anywhere, and the worst hole still wasn’t a blemish."
+      }
+    ],
+    "players": [
+      {
+        "name": "JeremyH",
+        "tagline": "Made the card look better than the tee sheet deserved.",
+        "body": "JeremyH finished 19th net at +2 and was 16th gross at -3, which tells the whole story: the raw golf was good enough to win a bunch of small fights, but not enough to keep the net card from hanging around the wrong neighborhood. The swing profile was built on rescue work, not fireworks — +4.41 short game and +2.59 putting carried a +5.50 total even with approach at -1.51, so the round was basically a short-game bail-out operation. He made 11 GIR, rolled it in 25 putts, and avoided three-putts entirely, but the one double-bogey-or-worse hole on the 6th was the leak in the bucket. The upside was real, though: two birdies and a couple of under-par par 3s on the card showed enough to keep this from being a total scramble-fest, and with zero prior starts there’s no trend story yet — just one round where the wedges and putter dragged the rest of the bag across the finish line."
+      },
+      {
+        "name": "ILGolfMan",
+        "tagline": "The card was stupid clean; the net just refused to care.",
+        "body": "ILGolfMan got smoked by net math at +2 for 20th, but the gross card was filthy in the good way: 4th overall at -9. That split is absurd and it came from a full-on assault on the scoring holes, with +1.64 approach, +6.03 short game, +2.83 putting, and a ridiculous +10.50 total. He made 9 birdies, posted 11 GIR, got home in 19 putts, and never tripped over a three-putt or a bogey, which is exactly how you shoot a number that should’ve caused damage all over the place. The only “worst” hole was the opener at par, which tells you how antiseptic this card was; even the roughest patch never actually got rough. With zero prior starts, there’s no trend to sell yet, but this was the cleanest raw performance in the batch by a mile and the net result is the kind of cruel simulator nonsense that keeps the league funny."
+      },
+      {
+        "name": "Joebat",
+        "tagline": "A scorecard held together with duct tape and bad decisions.",
+        "body": "Joebat somehow cashed a +3 net while posting a brutal 49th gross at +23, which is less a golf round than a hostage situation. The strokes-gained line is a full-body collapse: -4.74 approach, -7.79 short game, -8.98 putting, and -21.50 total, with the damage showing up everywhere except a couple of isolated bright spots. He managed only 5 GIR, 33 putts, four three-putts, and four double-bogey-or-worse holes, so the card spent most of the day on fire. The 2nd was the headliner disaster — eight gross on a par 3 — and the 4th and 17th both turned into sixes, so the round kept finding new ways to get worse. He did bang in two birdies and even posted a couple of under-par par 3s, which is the golfing equivalent of yelling “I’m fine” while the cart is smoking. With no prior starts, there’s no history hook here; just one savage reminder that a couple of good holes don’t balance out a dumpster full of blowups."
+      },
+      {
+        "name": "BobNoWay",
+        "tagline": "Scraped together a card that never fully fell apart, which is almost worse.",
+        "body": "BobNoWay finished 22nd net at +3 and 39th gross at +3, a perfectly mediocre double-feature that was somehow both survivable and annoying. The underlying numbers are basically flat-to-negative: -0.25 approach, -0.03 short game, -1.22 putting, and -1.50 total, so this was not a round where any one department saved the day. He did find 11 GIR and kept the three-putt count to one, but 31 putts, four bogeys, and a double-bogey-or-worse hole kept the card heavy. The 8th was the ugliest stumble at five gross on a par 3, and the rest of the scoring was mostly a slow drip of meh rather than a full collapse. There were a couple of birdies tucked in there, but the scorecard never got enough momentum to matter. With zero prior starts, there’s no pattern to pin this on; it’s just a round where the ball struck enough greens to tease competence and then the putter politely declined to finish the job."
+      },
+      {
+        "name": "gbburn",
+        "tagline": "Almost competent, which in this room counts as a tease.",
+        "body": "gbburn landed 23rd net at +3 and 30th gross at +1, so the raw card was a little better than the net result but still not nearly clean enough to make noise. The good news is the tee-to-green piece wasn’t a total mess — +0.53 approach, +1.98 short game, and +2.51 tee to green — but the -2.01 putting shoved the whole thing backward into a barely-positive +0.5 total. He only made 7 GIR, but the putter at least kept the putts to 24, and the round avoided three-putt carnage entirely. The weak spot was the 17th, where a five gross turned into the card’s worst hole, and the rest of the blemishes were more scattered than catastrophic. Three birdies helped keep the gross score from getting uglier, but the mix of low birdie count and a couple of doubles kept the net from ever getting interesting. With no prior starts, this is just a baseline round: some competent shotmaking, not enough finishing, and a putter that didn’t fully tank it but absolutely didn’t save it either."
+      },
+      {
+        "name": "Phillips74",
+        "tagline": "Found the greens, then used the putter like a shovel.",
+        "body": "Phillips74 finished 24th net at +3 and 40th gross at +4, and the split says the ball-striking showed up while the scoring clubs mugged the rest of the card. The approach work was the bright spot at +2.19, and he actually hit 12 GIR, but the rest of the profile was ugly enough to waste that advantage: -2.69 short game, -2.00 putting, and -2.50 total. Thirty-two putts, two three-putts, and only three birdies is how a round that looks vaguely playable on paper turns into a slog. The 16th was the punchline from hell — seven gross on a par 3 — and the opening stretch also leaked a couple of extra shots before the round settled into survival mode. He did avoid any double-bogey-or-worse holes outside that one crater, which is the tiniest possible consolation prize. With zero prior starts, there’s no trend line yet, but this was a pretty clean example of good approach numbers getting mugged by bad conversion around the greens and on the greens."
+      }
+    ]
+  }
+}
