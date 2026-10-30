@@ -1,0 +1,179 @@
+name: Publish Tour 1534 live preview
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-tour-1534-preview.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: tour-1534-live-preview
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out current Pages repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: production
+          fetch-depth: 0
+
+      - name: Check out shared recap engine
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: main
+          path: engine
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install engine dependencies
+        run: python -m pip install -r engine/requirements.txt
+
+      - name: Discover Tour 1534 and build isolated deterministic history
+        working-directory: engine
+        run: |
+          python src/process_tour.py             --config configs/tour-1534.json             --data-root data/leagues/tour-1534
+
+      - name: Require existing OpenAI key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY is missing." && exit 1)
+
+      - name: Generate full rolling league copy and all scouting profiles
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.4-mini-2026-03-17
+          OPENAI_FALLBACK_MODEL: gpt-5.6-luna
+          OPENAI_TRANSIENT_ATTEMPTS: "6"
+          OPENAI_REQUEST_TIMEOUT_SECONDS: "120"
+        run: |
+          python src/run_batched_league_copy.py data/leagues/tour-1534/history.json             --output data/leagues/tour-1534/league-copy.json             --facts-output data/leagues/tour-1534/league-facts.json             --checkpoint-dir ../production/.automation/tour-1534-preview/ai-checkpoints/league             --batch-size 6
+
+      - name: Generate every completed Tour 1534 recap oldest-first
+        working-directory: engine
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.4-mini-2026-03-17
+          OPENAI_FALLBACK_MODEL: gpt-5.6-luna
+          OPENAI_TRANSIENT_ATTEMPTS: "6"
+          OPENAI_REQUEST_TIMEOUT_SECONDS: "120"
+        run: |
+          set -euo pipefail
+          mkdir -p data/leagues/tour-1534/copy data/leagues/tour-1534/facts
+          EVENT_IDS=$(python - <<'PY'
+          import json
+          h=json.load(open('data/leagues/tour-1534/history.json'))
+          print(' '.join(str(e['id']) for e in reversed(h['completedEvents'])))
+          PY
+          )
+          echo "Completed event queue: $EVENT_IDS"
+          for EVENT_ID in $EVENT_IDS; do
+            echo "Generating full recap for Tour 1534 event $EVENT_ID"
+            python src/run_batched_recap.py "data/leagues/tour-1534/analysis/$EVENT_ID.json"               --history data/leagues/tour-1534/history.json               --config configs/tour-1534.json               --output "data/leagues/tour-1534/copy/$EVENT_ID.json"               --facts-output "data/leagues/tour-1534/facts/$EVENT_ID.json"               --checkpoint-dir ../production/.automation/tour-1534-preview/ai-checkpoints/recap               --batch-size 6
+          done
+
+      - name: Persist validated AI checkpoints if generation fails
+        if: failure()
+        working-directory: production
+        run: |
+          if [ ! -d ".automation/tour-1534-preview/ai-checkpoints" ]; then
+            exit 0
+          fi
+          git config user.name "sgt-recap-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add .automation/tour-1534-preview/ai-checkpoints
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Checkpoint Tour 1534 preview generation"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Render full Tour 1534 site
+        working-directory: engine
+        run: |
+          python src/render_site.py             --config configs/tour-1534.json             --data-root data/leagues/tour-1534             --output site-tour-1534
+
+      - name: Validate complete live preview
+        working-directory: engine
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data=Path('data/leagues/tour-1534')
+          site=Path('site-tour-1534')
+          h=json.loads((data/'history.json').read_text())
+          league_copy=json.loads((data/'league-copy.json').read_text())
+          completed=h['completedEvents']
+          assert len(completed) >= 3, f"Expected at least 3 completed events, got {len(completed)}"
+          assert len(h['scopes']['all']['players']) >= 70, "Expected large-field player history"
+          assert len(league_copy['scopes']['all']['profiles']) == len(h['scopes']['all']['players'])
+
+          index=(site/'index.html').read_text()
+          assert 'CRUSH' in index.upper()
+          assert 'HIGH LOFT' not in index.upper()
+          for marker in ('data-profile-search','data-profile-more','data-season-scroll-note','Tournament archive'):
+              assert marker.lower() in index.lower(), marker
+
+          recap_files=list((site/'recaps').glob('*.html'))
+          assert len(recap_files) == len(completed), (len(recap_files), len(completed))
+
+          for event in completed:
+              eid=int(event['id'])
+              analysis=json.loads((data/'analysis'/f'{eid}.json').read_text())
+              copy=json.loads((data/'copy'/f'{eid}.json').read_text())
+              finishers=[p for p in analysis['players'] if p.get('completed')]
+              assert len(copy['players']) == len(finishers), f"{eid}: player copy mismatch"
+              assert len(copy['carnage']) == len(finishers), f"{eid}: carnage copy mismatch"
+              recap=(site/'recaps'/f'{eid}.html').read_text()
+              assert 'HIGH LOFT' not in recap.upper(), f"{eid}: High Loft leak"
+              for marker in ('Carnage Board','Player by player','data-carnage-search','data-round-player-search','data-player-more'):
+                  assert marker.lower() in recap.lower(), f"{eid}: {marker}"
+
+          print('TOUR 1534 FULL LIVE PREVIEW VALIDATION PASSED')
+          print('Completed events:', [int(e['id']) for e in completed])
+          print('All-data players:', len(h['scopes']['all']['players']))
+          print('Recap pages:', len(recap_files))
+          PY
+
+      - name: Publish Tour 1534 under existing Pages host
+        working-directory: production
+        run: |
+          set -euo pipefail
+          rm -rf tour-1534
+          mkdir -p tour-1534
+          cp -R ../engine/site-tour-1534/. tour-1534/
+          rm -rf .automation/tour-1534-preview/ai-checkpoints
+
+          git config user.name "sgt-recap-auto-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add tour-1534 .automation/tour-1534-preview
+          if git diff --cached --quiet; then
+            echo "No preview changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish full Tour 1534 live preview"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Summary
+        run: |
+          echo "Tour 1534 full preview published."
+          echo "OpenAI model: gpt-5.4-mini-2026-03-17"
+          echo "Discord: intentionally disabled"
+          echo "URL: https://bpgpitt10.github.io/high-loft-low-standards/tour-1534/"
