@@ -49,28 +49,36 @@ jobs:
         working-directory: engine
         run: python src/process_tour.py
 
-      - name: Decide whether AI/site rebuild is needed
+      - name: Plan missing completed-event publication queue
         id: change
         env:
           FORCE_REBUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.force_rebuild || false }}
         run: |
-          LATEST=$(python - <<'PY'
-          import json
+          python engine/src/event_queue.py plan engine/data/history.json \
+            --state production/.automation/published-events.json \
+            --legacy-marker production/.automation/last-published-event.txt \
+            --write-state \
+            --output engine/data/publish-plan.json
+
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
           from pathlib import Path
-          h = json.loads(Path('engine/data/history.json').read_text())
-          print(h['completedEvents'][0]['id'])
+
+          plan = json.loads(Path('engine/data/publish-plan.json').read_text())
+          missing = [int(x) for x in plan['missingEventIdsOldestFirst']]
+          latest = int(plan['latestCompletedEventId'])
+          force = os.environ.get('FORCE_REBUILD','false').lower() == 'true'
+          targets = missing[:] if missing else ([latest] if force else [])
+
+          print(f"latest={latest}")
+          print("missing=" + " ".join(str(x) for x in missing))
+          print("targets=" + " ".join(str(x) for x in targets))
+          print(f"queue_length={len(missing)}")
+          print("rebuild=" + ("true" if targets else "false"))
           PY
-          )
-          PREVIOUS=$(git -C production show origin/main:.automation/last-published-event.txt 2>/dev/null || true)
-          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
-          echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
-          if [ "$FORCE_REBUILD" = "true" ] || [ "$LATEST" != "$PREVIOUS" ]; then
-            echo "rebuild=true" >> "$GITHUB_OUTPUT"
-            echo "Rebuild required: latest=$LATEST previous=$PREVIOUS force=$FORCE_REBUILD"
-          else
-            echo "rebuild=false" >> "$GITHUB_OUTPUT"
-            echo "No newly completed tournament. Nothing to publish."
-          fi
+
+          echo "Publication plan:"
+          cat engine/data/publish-plan.json
 
       - name: Require OpenAI API key only when rebuilding
         if: steps.change.outputs.rebuild == 'true'
@@ -118,7 +126,7 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
-      - name: Write latest tournament recap with as-of-event history
+      - name: Write queued tournament recaps with as-of-event history
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
         env:
@@ -127,21 +135,25 @@ jobs:
           OPENAI_FALLBACK_MODEL: gpt-5.6-luna
           OPENAI_TRANSIENT_ATTEMPTS: "6"
           OPENAI_REQUEST_TIMEOUT_SECONDS: "120"
-          LATEST: ${{ steps.change.outputs.latest }}
+          TARGETS: ${{ steps.change.outputs.targets }}
         run: |
-          python src/run_batched_high_loft_recap.py "data/analysis/${LATEST}.json" \
-            --output "data/copy/${LATEST}.json" \
-            --facts-output "data/facts/${LATEST}.json" \
-            --checkpoint-dir "../production/.automation/ai-checkpoints/recap" \
-            --batch-size 6
+          set -euo pipefail
+          for EVENT_ID in $TARGETS; do
+            echo "Generating queued recap for SGT $EVENT_ID"
+            python src/run_batched_high_loft_recap.py "data/analysis/${EVENT_ID}.json" \
+              --output "data/copy/${EVENT_ID}.json" \
+              --facts-output "data/facts/${EVENT_ID}.json" \
+              --checkpoint-dir "../production/.automation/ai-checkpoints/recap" \
+              --batch-size 6
+          done
 
       - name: Persist validated recap AI checkpoints
         if: always() && steps.change.outputs.rebuild == 'true'
         working-directory: production
         env:
-          LATEST: ${{ steps.change.outputs.latest }}
+          TARGETS: ${{ steps.change.outputs.targets }}
         run: |
-          CHECKPOINT_DIR=".automation/ai-checkpoints/recap/$LATEST"
+          CHECKPOINT_DIR=".automation/ai-checkpoints/recap"
           if [ ! -d "$CHECKPOINT_DIR" ]; then
             echo "No validated recap checkpoints to persist."
             exit 0
@@ -153,20 +165,31 @@ jobs:
             echo "No new recap checkpoints to persist."
             exit 0
           fi
-          git commit -m "Checkpoint AI recap generation for SGT $LATEST"
+          git commit -m "Checkpoint AI recap generation for queued SGT events: $TARGETS"
           git pull --rebase origin main
           git push origin HEAD:main
 
       - name: Render High Loft production design
         if: steps.change.outputs.rebuild == 'true'
         working-directory: engine
-        run: python src/render_high_loft_large_field.py --production-root ../production --output site-high-loft
+        env:
+          TARGETS: ${{ steps.change.outputs.targets }}
+        run: |
+          set -euo pipefail
+          ARGS=()
+          for EVENT_ID in $TARGETS; do
+            ARGS+=(--recap-event-id "$EVENT_ID")
+          done
+          python src/render_high_loft_large_field.py --production-root ../production --output site-high-loft "${ARGS[@]}"
 
       - name: Validate High Loft build before publication
         if: steps.change.outputs.rebuild == 'true'
+        env:
+          TARGETS: ${{ steps.change.outputs.targets }}
         run: |
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
 
           root = Path('engine')
@@ -175,10 +198,11 @@ jobs:
           history = json.loads((root / 'data/history.json').read_text())
           config = json.loads((root / 'config.json').read_text())
           latest = int(history['completedEvents'][0]['id'])
+          targets = [int(x) for x in os.environ['TARGETS'].split()]
 
           assert (site / 'index.html').exists(), 'Missing landing page'
           recap_files = list((site / 'recaps').glob('*.html'))
-          assert len(recap_files) == 1, f'High Loft renderer must create only the latest recap, got {len(recap_files)}'
+          assert len(recap_files) == len(targets), f'Expected {len(targets)} queued recaps, got {len(recap_files)}'
 
           excluded = {int(x) for x in ((config.get('history') or {}).get('excludeEventIds') or [])}
           completed_ids = {int(e['id']) for e in history.get('completedEvents', [])}
@@ -199,13 +223,14 @@ jobs:
           ):
               assert required.lower() in landing.lower(), f'Missing landing requirement: {required}'
 
-          recap = recap_files[0].read_text()
-          for required in (
-              'assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"',
-              'Carnage Board', 'Player by player', 'State of the league', 'data-round-player-search',
-              'data-round-player-more', 'data-carnage-more'
-          ):
-              assert required.lower() in recap.lower(), f'Missing recap requirement: {required}'
+          for recap_file in recap_files:
+              recap = recap_file.read_text()
+              for required in (
+                  'assets/recap-v2.css', 'Tournament leaderboard', 'data-board="net"', 'data-board="gross"',
+                  'Carnage Board', 'Player by player', 'State of the league', 'data-round-player-search',
+                  'data-round-player-more', 'data-carnage-more'
+              ):
+                  assert required.lower() in recap.lower(), f'{recap_file.name}: missing recap requirement: {required}'
 
           historical = [
               'bay-hill.html', 'tpc-sawgrass.html', 'alpine-valley.html', 'tobacco-road-major.html',
@@ -222,20 +247,34 @@ jobs:
           print('Profile-eligible events:', len(eligible_ids))
           PY
 
-      - name: Apply validated landing page and latest recap only
+      - name: Apply validated landing page and queued recaps
         if: steps.change.outputs.rebuild == 'true'
+        env:
+          TARGETS: ${{ steps.change.outputs.targets }}
+          MISSING: ${{ steps.change.outputs.missing }}
+          LATEST: ${{ steps.change.outputs.latest }}
         run: |
+          set -euo pipefail
           cp engine/site-high-loft/index.html production/index.html
           mkdir -p production/recaps production/.automation
           cp engine/site-high-loft/recaps/*.html production/recaps/
           rm -rf "production/.automation/ai-checkpoints/league"
-          rm -rf "production/.automation/ai-checkpoints/recap/${{ steps.change.outputs.latest }}"
-          printf '%s\n' '${{ steps.change.outputs.latest }}' > production/.automation/last-published-event.txt
+          for EVENT_ID in $TARGETS; do
+            rm -rf "production/.automation/ai-checkpoints/recap/$EVENT_ID"
+          done
+          for EVENT_ID in $MISSING; do
+            python engine/src/event_queue.py mark engine/data/history.json \
+              --state production/.automation/published-events.json \
+              --event "$EVENT_ID" >/dev/null
+          done
+          printf '%s\n' "$LATEST" > production/.automation/last-published-event.txt
 
       - name: Commit production publication
         id: publish
         if: steps.change.outputs.rebuild == 'true'
         working-directory: production
+        env:
+          TARGETS: ${{ steps.change.outputs.targets }}
         run: |
           git config user.name "high-loft-auto-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -245,15 +284,15 @@ jobs:
             echo "Validated build produced no file changes."
             exit 0
           fi
-          git commit -m "Automated High Loft site update for SGT ${{ steps.change.outputs.latest }}"
+          git commit -m "Automated High Loft site update for queued SGT events: $TARGETS"
           git push origin HEAD:main
           echo "published=true" >> "$GITHUB_OUTPUT"
 
-      - name: Post new tournament recap to Discord
-        if: steps.publish.outputs.published == 'true' && steps.change.outputs.latest != steps.change.outputs.previous && steps.change.outputs.latest != '59463'
+      - name: Post newly published tournament recaps to Discord
+        if: steps.publish.outputs.published == 'true' && steps.change.outputs.missing != ''
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          LATEST: ${{ steps.change.outputs.latest }}
+          NEW_EVENTS: ${{ steps.change.outputs.missing }}
         working-directory: engine
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ]; then
@@ -269,44 +308,56 @@ jobs:
           import urllib.request
           from pathlib import Path
 
-          latest = int(os.environ['LATEST'])
           webhook = os.environ['DISCORD_WEBHOOK_URL']
+          new_events = [int(x) for x in os.environ['NEW_EVENTS'].split()]
           history = json.loads(Path('data/history.json').read_text())
           cfg = json.loads(Path('config.json').read_text())
-          event = next(e for e in history['completedEvents'] if int(e['id']) == latest)
-          mapped = ((cfg.get('site') or {}).get('recapSlugs') or {}).get(str(latest))
-          slug = mapped or re.sub(r'[^a-z0-9]+', '-', (event.get('tourName') or event.get('name') or f'event-{latest}').lower()).strip('-')
-          recap_url = f'https://bpgpitt10.github.io/high-loft-low-standards/recaps/{slug}.html'
+          by_id = {int(e['id']): e for e in history['completedEvents']}
+          total_posts = 0
 
-          cmd = [
-              'python', 'src/build_discord_payload.py',
-              f'data/analysis/{latest}.json',
-              f'data/copy/{latest}.json',
-              '--raw', f'data/work/tournaments/{latest}.json',
-              '--recap-url', recap_url,
-              '--output', 'data/discord-payload.json',
-          ]
-          subprocess.run(cmd, check=True)
-          payload = json.loads(Path('data/discord-payload.json').read_text())
-          messages = payload['messages']
+          for event_id in new_events:
+              if event_id == 59463:
+                  print(f"Skipping Discord for configured special event {event_id}")
+                  continue
+              event = by_id[event_id]
+              mapped = ((cfg.get('site') or {}).get('recapSlugs') or {}).get(str(event_id))
+              slug = mapped or re.sub(r'[^a-z0-9]+', '-', (event.get('tourName') or event.get('name') or f'event-{event_id}').lower()).strip('-')
+              recap_url = f'https://bpgpitt10.github.io/high-loft-low-standards/recaps/{slug}.html'
 
-          for message in messages:
-              body = json.dumps({'content': message}).encode('utf-8')
-              req = urllib.request.Request(
-                  webhook,
-                  data=body,
-                  headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'},
-              )
-              with urllib.request.urlopen(req, timeout=20) as response:
-                  if response.status not in (200, 204):
-                      raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
-          print(f"Posted {len(messages)} Heckler post(s); character counts={payload.get('characterCounts')}")
+              cmd = [
+                  'python', 'src/build_discord_payload.py',
+                  f'data/analysis/{event_id}.json',
+                  f'data/copy/{event_id}.json',
+                  '--recap-url', recap_url,
+                  '--output', 'data/discord-payload.json',
+              ]
+              raw = Path(f'data/work/tournaments/{event_id}.json')
+              if raw.exists():
+                  cmd.extend(['--raw', str(raw)])
+              subprocess.run(cmd, check=True)
+              payload = json.loads(Path('data/discord-payload.json').read_text())
+
+              for message in payload['messages']:
+                  body = json.dumps({'content': message}).encode('utf-8')
+                  req = urllib.request.Request(
+                      webhook,
+                      data=body,
+                      headers={'Content-Type': 'application/json', 'User-Agent': 'high-loft-auto-bot'},
+                  )
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      if response.status not in (200, 204):
+                          raise RuntimeError(f'Discord webhook returned HTTP {response.status}')
+                  total_posts += 1
+              print(f"Posted Discord recap for SGT {event_id}; character counts={payload.get('characterCounts')}")
+
+          print(f"Posted {total_posts} total Discord message(s) across {len(new_events)} newly published event(s)")
           PY
 
       - name: Summary
         run: |
           echo "Latest SGT event: ${{ steps.change.outputs.latest }}"
-          echo "Previously published: ${{ steps.change.outputs.previous }}"
+          echo "Missing publication queue: ${{ steps.change.outputs.missing }}"
+          echo "Recap targets this run: ${{ steps.change.outputs.targets }}"
           echo "Rebuilt: ${{ steps.change.outputs.rebuild }}"
           echo "Production published: ${{ steps.publish.outputs.published }}"
           echo "Primary AI model: gpt-5.4-mini-2026-03-17"
