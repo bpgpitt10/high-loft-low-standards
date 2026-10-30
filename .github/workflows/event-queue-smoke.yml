@@ -1,0 +1,87 @@
+name: Event queue publisher smoke
+
+on:
+  push:
+    branches:
+      - event-queue-publisher-v1
+    paths:
+      - ".github/workflows/event-queue-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out production queue branch
+        uses: actions/checkout@v4
+        with:
+          ref: event-queue-publisher-v1
+          path: production
+      - name: Check out engine onboarding branch
+        uses: actions/checkout@v4
+        with:
+          repository: bpgpitt10/sgt-recap-engine-lab
+          ref: generic-onboarding-v1
+          path: engine
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Parse production workflow YAML
+        run: |
+          python -m pip install pyyaml
+          python - <<'PY'
+          import yaml
+          from pathlib import Path
+          p=Path('production/.github/workflows/high-loft-auto.yml')
+          data=yaml.safe_load(p.read_text())
+          assert data and 'jobs' in data
+          print('YAML PARSE PASSED')
+          PY
+      - name: Verify current published-state queue is empty
+        run: |
+          python engine/src/event_queue.py plan engine/data/history.json \
+            --state production/.automation/published-events.json \
+            --legacy-marker production/.automation/last-published-event.txt \
+            --output /tmp/plan.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/plan.json'))
+          assert p['latestCompletedEventId']==79136,p
+          assert p['queueLength']==0,p
+          assert p['missingEventIdsOldestFirst']==[],p
+          print('CURRENT QUEUE EMPTY PASSED')
+          PY
+      - name: Simulate one unpublished latest event
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src=json.loads(Path('production/.automation/published-events.json').read_text())
+          src['publishedEventIds']=[x for x in src['publishedEventIds'] if int(x)!=79136]
+          Path('/tmp/state.json').write_text(json.dumps(src))
+          PY
+          python engine/src/event_queue.py plan engine/data/history.json --state /tmp/state.json --output /tmp/missing.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/missing.json'))
+          assert p['missingEventIdsOldestFirst']==[79136],p
+          assert p['queueLength']==1,p
+          print('ONE-MISSING-EVENT QUEUE PASSED')
+          PY
+      - name: Verify workflow contains transactional queue steps
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('production/.github/workflows/high-loft-auto.yml').read_text()
+          for needle in (
+              'Plan missing completed-event publication queue',
+              'Write queued tournament recaps with as-of-event history',
+              'Apply validated landing page and queued recaps',
+              'published-events.json',
+              'Post newly published tournament recaps to Discord',
+          ):
+              assert needle in s,needle
+          print('WORKFLOW QUEUE STRUCTURE PASSED')
+          PY
