@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-10-30eb0b94b199",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "6c53ac8c4fd90640c803b297ea79b0a410459a640dd99687ec4ea2c52943d161",
+  "payload": {
+    "profiles": [
+      {
+        "name": "derekldavis",
+        "tagline": "DRIVER STARTS BILLS IT CAN'T PAY",
+        "profile": "This guy lives in the beautiful mess between a decent ball flight and a scorecard that catches fire anyway. The tee ball keeps showing up with a crowbar and a fake mustache, then the rest of the bag spends the round filing complaints. There’s enough sporadic grit to keep him from completely mailing it in, but the pattern is brutal: too many shots lost off the tee, too many recoveries, not enough clean chances to let the putter matter. He can survive a fight; he just keeps choosing one."
+      }
+    ]
+  }
+}

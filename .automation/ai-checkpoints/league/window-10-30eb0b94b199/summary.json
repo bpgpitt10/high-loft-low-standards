@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "summary",
+  "windowKey": "window-10-30eb0b94b199",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "647f8af4dae4419dcb89b7b7845af24d78df7c315f464aad547dcce0e95ba320",
+  "payload": {
+    "leagueSummary": "NET is a knife fight at the top, with KeithK75, MattF, Dan94, and HamSammich all living in the same neighborhood and nobody running away with the thing. Under the hood, the league is getting bullied by big tee-to-green numbers from the usual suspects, but the wins are being sorted by who can keep the stupid stuff off the card and not turn a good ball-striking week into a putting crime scene. The back half is still a mess of leaks: a few guys can flash one elite piece, but the all-around profiles are mostly held together with duct tape and denial.",
+    "leagueBullets": [
+      "KeithK75 and Dan94 are the cleanest gross engines in the window; when they’re not taking turns launching missiles, everybody else is basically chasing smoke.",
+      "MattF and HamSammich are the reminder that NET doesn’t always care about the prettiest ball-striking page — one can pile up all-around value, the other is surviving on a weirdly functional two-start sample.",
+      "The bottom-end profiles are lopsided in different ways: some can’t hit enough greens, some can’t putt, and a couple can do one thing well enough to keep the wreck from becoming a total fire."
+    ]
+  }
+}
