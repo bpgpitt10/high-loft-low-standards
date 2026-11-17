@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "players-carnage",
+  "tournamentId": 82812,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "d1dcbdc163ee613653bc752241ab5f90c8b992dc55180982cdb7c9619d8f386e",
+  "payload": {
+    "carnage": [
+      {
+        "name": "Leroy4522",
+        "commentary": "That’s a full-on crater. A triple-bogey-sized walk-off to 9 on a par 3 is the kind of hole that turns a round into an apology tour."
+      },
+      {
+        "name": "derekldavis",
+        "commentary": "Eight on a par 3 is not a miss, that’s a subscription service to suffering. The round had already gone off the rails, and this just kicked the tires off it."
+      },
+      {
+        "name": "IUDoc92",
+        "commentary": "Seven on a par 3 with no escape hatch is ugly enough on its own. At that point the hole wasn’t asking for a score, it was demanding a tax return."
+      },
+      {
+        "name": "KeithK75",
+        "commentary": "A bogey on a par 4 is the worst hole? That’s how you know somebody spent the day deleting everyone else from the leaderboard. Brutal for the field, barely a speed bump for him."
+      },
+      {
+        "name": "Dan94",
+        "commentary": "A par-3 bogey can look innocent until you remember the rest of the round was busy making noise. This one was just the smallest dent in a pretty solid wall of tee shots."
+      },
+      {
+        "name": "MattF",
+        "commentary": "Bogeying a par 3 as your worst hole is mostly a flex. The putter and wedges had enough gas to keep this from becoming a sermon."
+      }
+    ],
+    "players": [
+      {
+        "name": "KeithK75",
+        "tagline": "Everybody else brought a shovel; he brought a calculator and a flamethrower.",
+        "body": "This was a demolition job in net and gross, and the scary part is how clean it looked. KeithK75 won the net race by three and still topped gross, with the kind of round that got carried by basically everything: the irons were sharp, the driver was useful instead of decorative, and the putter didn’t sabotage the whole thing. The approach play was the real cheat code here, and the card shows it with a pile of birdies and almost no damage. For a first documented start, that’s not a trend yet — it’s just a guy showing up and taking the whole table apart."
+      },
+      {
+        "name": "IUDoc92",
+        "tagline": "A round held together by irons and duct tape, with the tee ball doing active resistance.",
+        "body": "IUDoc92 finished second in net by surviving a weird one: the tee game was a mess, but the irons and putter dragged the thing back from the brink. The approach numbers were the bright spot, and the scorecard backs that up with a couple of useful birdies and enough recovery work to keep the round from fully combusting. The ugly side was real too — a rough tee day, two three-putts, and that 7 on the par 3 at 16 that looked like the round finally cashing its bad checks. With no prior profile to lean on, this reads as a volatile first look: plenty of ball-striking life, but the driver and short game are still trying to unionize against him."
+      },
+      {
+        "name": "MattF",
+        "tagline": "Solid enough to matter, messy enough to keep everybody suspicious.",
+        "body": "MattF ended up right in the middle of the pack, and that feels about right for a round where the short game and putting carried the water while the irons mostly stayed in the boat. The nice part: no three-putts, decent sand work, and enough wedge/putter support to post a respectable number despite only average iron play. The annoying part: the tee ball was good enough to avoid disaster but not sharp enough to really squeeze the course, which is why the card has a couple of bogey bumps mixed in with the good stuff. For a first profile event, this looks like a balanced round with a crooked ceiling — plenty playable, not exactly terrifying."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "Bombed it around the place, then let the putter wander off and join another group.",
+        "body": "Dan94’s gross round was better than the net result says, and the reason is pretty simple: the driver brought the violence, but the putter didn’t exactly mail in a compliment. The tee game was the headline, with monster distance and enough aggressive ball-striking to keep the gross number respectable, but the flat stick was cold enough to stop it from turning into a clean run. He still managed some birdies and a couple of solid holes, but the card also has too many bogey dents for a round this loud off the tee. With no prior history, this is just one sharp-but-uneven snapshot: big raw tools, some scoring ability, and a putter that treated the scoreboard like a suggestion."
+      },
+      {
+        "name": "Leroy4522",
+        "tagline": "When every part of the bag is leaking, the scorecard starts looking like a crime scene.",
+        "body": "Leroy4522 got absolutely cooked from tee to green, and there’s no sugarcoating it. No fairways, no greens, no birdies, and a pile of doubles later, the round was basically a long-form argument against optimism. The worst part is that the damage wasn’t confined to one club; the tee game was off, the approaches missed, the short game didn’t rescue anything, and the putter couldn’t patch the holes fast enough. The 9 on 16 was the headline disaster, but it was really just the loudest blast in a round already headed for the bottom of the lake. First documented start, and it arrived with a full emergency siren."
+      },
+      {
+        "name": "derekldavis",
+        "tagline": "This one didn’t just leak; it flooded the basement and took the furniture with it.",
+        "body": "derekldavis finished dead last in both net and gross, and the numbers are ugly in a way that’s almost efficient. The driver never gave him a foothold, the approaches were worse, and the result was a round with no greens, no birdies, and a steadily growing pile of damage. Even the better moments were basically stop-loss trades: a few holes that looked merely bad instead of catastrophic before the whole thing caught fire again at 16 with an 8 on a par 3. The only consolation is that there was nowhere for this round to hide. First profile event, and the debut was a full-blown lesson in how fast a card can turn into a hostage situation."
+      }
+    ]
+  }
+}
