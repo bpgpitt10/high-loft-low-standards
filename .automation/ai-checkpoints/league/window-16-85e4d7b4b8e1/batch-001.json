@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "profiles",
+  "windowKey": "window-16-85e4d7b4b8e1",
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "fingerprint": "7ed10f3fa785b1bd21301c6a0661ad6af57ae680e5a962fc47cc2e7f62f323ae",
+  "payload": {
+    "profiles": [
+      {
+        "name": "CRANK",
+        "tagline": "DRIVER RAGE, SCRAMBLE SURVIVAL",
+        "profile": "This dude lives in the land of violent tee shots and weirdly dependable escape acts. The driver keeps handing the rest of the bag a hostage situation, but the short game keeps bailing him out just enough to stay dangerous when the card starts looking ugly. That’s the whole CRANK experience: enough blown-up holes to make you swear, enough scrambling and putting to keep him in the hunt, and just enough upside to remind you he can still steal a week while the big stick is acting like a narc."
+      },
+      {
+        "name": "MattF",
+        "tagline": "TEE BALLS WITH A SIDE OF PUTTING RAID",
+        "profile": "MattF is what happens when a guy decides to bully a course and then casually chip in some extra points on the greens for good measure. He’s got the full damage package: loud off the tee, sharp enough from approach, and the putter has been doing way too much heavy lifting for opponents to breathe easy. When he’s on, it looks less like surviving golf and more like an occupation. The only real insult here is that the rest of the field sometimes gets to watch it happen from behind."
+      },
+      {
+        "name": "KeithK75",
+        "tagline": "APPROACH GOD, CHAOS ENTREPRENEUR",
+        "profile": "KeithK75 is the rare menace who can paint the flagsticks and still make you nervous for the number on the card. The irons are the headline, but the deeper file says he’s perfectly willing to turn a great ball-striking round into a little circus if the wedges or the putter decide to improvise. When he’s rolling, it’s obscene: fairways, greens, and then boom, the field is eating dust. When he’s not, it still usually ends with him somewhere near the top while the rest of the crew is trying to count the bodies."
+      },
+      {
+        "name": "Dan94",
+        "tagline": "HIT IT FAR, FIX IT LATER",
+        "profile": "Dan94 keeps trying to play bully-ball and, annoyingly for everyone else, it mostly works. The tee game gives him the kind of oxygen that lets the rest of the round breathe, and the irons are good enough to keep the pressure on even when the short stuff gets a little greasy. He can absolutely turn a course into a demolition site, but there are also enough crooked moments and extra-count holes in the file to keep this from being clean murder. Basically: huge upside, occasional faceplant, still way too much athlete for the field to enjoy."
+      },
+      {
+        "name": "BigTime",
+        "tagline": "APPROACH MACHINE, PUTTING GREMLIN",
+        "profile": "BigTime’s whole identity is built around iron play so filthy it almost cancels out the rest of the chaos. He gets himself into scoring position like he’s got a cheat code, but the putter and the occasional short-game mess keep the whole thing from becoming a total glass cannon masterpiece. The guy can post a number in a hurry, then immediately make you wonder why the cards still feel like they were signed by a raccoon. When it’s clicking, he’s a problem; when it’s not, he’s still one of those dudes who can survive on ball-striking fumes and vibes."
+      },
+      {
+        "name": "HamSammich",
+        "tagline": "DOUBLE-BOGEY WEATHER REPORT",
+        "profile": "HamSammich plays like every good hole is earned through three bad ideas and a small miracle. There are flashes where the tee ball cooperates and the putter shows up, but the larger body of work is a mess of missed greens, chunky proximity, and enough extra-count holes to make the scorecard look personally offended. He can string together a useful round, sure, but the margin is thin and the self-sabotage is always parked right outside the clubhouse. It’s not pretty golf; it’s survival golf with a hangover."
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "requestedModel": "gpt-5.4-mini-2026-03-17",
+  "batchSize": 6,
+  "windowCount": 3,
+  "newBatches": 8,
+  "reusedBatches": 0,
+  "windows": [
+    {
+      "windowKey": "window-16-85e4d7b4b8e1",
+      "scopes": [
+        "all",
+        "20"
+      ],
+      "eventIds": [
+        66943,
+        56937,
+        55704,
+        54741,
+        53622,
+        52877,
+        51974,
+        50704,
+        82812,
+        80644,
+        79136,
+        77745,
+        76248,
+        74009,
+        71903,
+        70248
+      ],
+      "players": 15,
+      "batchCount": 3,
+      "reusedBatches": 0,
+      "newBatches": 3,
+      "complete": true
+    },
+    {
+      "windowKey": "window-5-1fc4c6295bc7",
+      "scopes": [
+        "5"
+      ],
+      "eventIds": [
+        66943,
+        56937,
+        55704,
+        54741,
+        53622
+      ],
+      "players": 9,
+      "batchCount": 2,
+      "reusedBatches": 0,
+      "newBatches": 2,
+      "complete": true
+    },
+    {
+      "windowKey": "window-10-aa9d676fe7d2",
+      "scopes": [
+        "10"
+      ],
+      "eventIds": [
+        66943,
+        56937,
+        55704,
+        54741,
+        53622,
+        52877,
+        51974,
+        50704,
+        82812,
+        80644
+      ],
+      "players": 14,
+      "batchCount": 3,
+      "reusedBatches": 0,
+      "newBatches": 3,
+      "complete": true
+    }
+  ],
+  "complete": true
+}
