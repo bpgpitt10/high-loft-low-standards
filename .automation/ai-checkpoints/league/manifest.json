@@ -3,8 +3,8 @@
   "requestedModel": "gpt-5.4-mini-2026-03-17",
   "batchSize": 6,
   "windowCount": 3,
-  "newBatches": 8,
-  "reusedBatches": 0,
+  "newBatches": 0,
+  "reusedBatches": 8,
   "windows": [
     {
       "windowKey": "window-16-85e4d7b4b8e1",
@@ -32,8 +32,8 @@
       ],
       "players": 15,
       "batchCount": 3,
-      "reusedBatches": 0,
-      "newBatches": 3,
+      "reusedBatches": 3,
+      "newBatches": 0,
       "complete": true
     },
     {
@@ -50,8 +50,8 @@
       ],
       "players": 9,
       "batchCount": 2,
-      "reusedBatches": 0,
-      "newBatches": 2,
+      "reusedBatches": 2,
+      "newBatches": 0,
       "complete": true
     },
     {
@@ -73,8 +73,8 @@
       ],
       "players": 14,
       "batchCount": 3,
-      "reusedBatches": 0,
-      "newBatches": 3,
+      "reusedBatches": 3,
+      "newBatches": 0,
       "complete": true
     }
   ],
