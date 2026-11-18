@@ -1,6 +1,9 @@
 name: High Loft automated publisher
 
 on:
+  push:
+    paths:
+      - ".github/workflows/high-loft-auto.yml"
   workflow_dispatch:
     inputs:
       force_rebuild:
