@@ -5,8 +5,8 @@
   "batchSize": 6,
   "batchCount": 1,
   "players": 6,
-  "reusedBatches": 0,
-  "newBatches": 1,
+  "reusedBatches": 1,
+  "newBatches": 0,
   "checkpointDir": "/home/runner/work/high-loft-low-standards/high-loft-low-standards/engine/../production/.automation/ai-checkpoints/recap",
   "complete": true
 }
